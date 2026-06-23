@@ -1,0 +1,161 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e8] [cursor=pointer]:
+        - /url: /organizations
+      - link "الإعدادات" [ref=e9] [cursor=pointer]:
+        - /url: /settings
+    - navigation [ref=e10]:
+      - link "لوحة المعلومات" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e13] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "المزيد (قريباً)" [ref=e14] [cursor=pointer]:
+        - /url: /coming-soon
+        - text: المزيد
+        - generic [ref=e15]: (قريباً)
+  - generic [ref=e16]:
+    - banner [ref=e17]:
+      - generic [ref=e18]:
+        - navigation [ref=e19]:
+          - button "الجدول الزمني للرحلة (معاينة)" [disabled] [ref=e20]:
+            - img [ref=e21]
+          - button "لوحة القيم" [disabled] [ref=e24]:
+            - img [ref=e25]
+        - navigation [ref=e28]:
+          - link "الرئيسية" [ref=e29] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e30]: /
+          - link "المؤسسات" [ref=e31] [cursor=pointer]:
+            - /url: /organizations
+          - generic [ref=e32]: /
+          - generic [ref=e33]: ACME Corporation
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - generic [ref=e36]: المؤسسة
+          - combobox "المؤسسة" [ref=e37]:
+            - option "ACME Corporation" [selected]
+            - option "الهيئة العامة للبيانات"
+            - option "مبرة المتميزين"
+        - generic [ref=e38]:
+          - generic [ref=e39]: المرشح
+          - combobox "المرشح" [ref=e40]:
+            - option "اختر مرشحاً" [disabled] [selected]
+            - option "Khalid Al-Ghamdi"
+            - option "Sara Mansour"
+            - option "Omar Abdullah"
+        - generic [ref=e41]:
+          - img [ref=e42]
+          - generic [ref=e44]: الدور
+          - combobox "الدور" [ref=e45]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e46] [cursor=pointer]:
+          - img [ref=e47]
+        - button "المستشار الذكي" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+        - button "الإشعارات" [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+        - button "تسجيل الخروج" [ref=e58] [cursor=pointer]:
+          - img [ref=e59]
+    - main [ref=e62]:
+      - generic [ref=e63]:
+        - generic [ref=e64]:
+          - generic [ref=e65]:
+            - heading "لوحة التحكم" [level=1] [ref=e66]
+            - paragraph [ref=e67]: "ACME Corporation · Technology · مستوى النضج: متطورة"
+          - generic [ref=e68]:
+            - button "عرض المرشحين" [ref=e69] [cursor=pointer]
+            - button "تعديل" [ref=e70] [cursor=pointer]
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - heading "الوظائف الحرجة" [level=3] [ref=e73]
+            - paragraph [ref=e74]: "3"
+          - generic [ref=e75]:
+            - heading "الخلفاء الجاهزون" [level=3] [ref=e76]
+            - paragraph [ref=e77]: "1"
+          - generic [ref=e78]:
+            - heading "متوسط مؤشر الجاهزية" [level=3] [ref=e79]
+            - paragraph [ref=e80]: 71%
+          - generic [ref=e81]:
+            - heading "نتيجة ORLS" [level=3] [ref=e82]
+            - paragraph [ref=e83]: 33%
+          - generic [ref=e84]:
+            - heading "متوسط CRI" [level=3] [ref=e85]
+            - paragraph [ref=e86]: 65%
+          - generic [ref=e87]:
+            - heading "متوسط AEI" [level=3] [ref=e88]
+            - paragraph [ref=e89]: 30%
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - heading "المرشحون" [level=2] [ref=e93]
+            - paragraph [ref=e94]: نظرة عامة على المرشح
+          - generic [ref=e95]:
+            - generic [ref=e96]:
+              - paragraph [ref=e97]: "3"
+              - paragraph [ref=e98]: الإجمالي
+            - generic [ref=e99]:
+              - paragraph [ref=e100]: "3"
+              - paragraph [ref=e101]: النشطون
+            - generic [ref=e102]:
+              - paragraph [ref=e103]: "0"
+              - paragraph [ref=e104]: المختارون
+          - button "إدارة المرشحين" [ref=e105] [cursor=pointer]
+        - generic [ref=e106]:
+          - generic [ref=e107]:
+            - heading "أبرز محاور التحسين" [level=2] [ref=e108]
+            - list [ref=e109]:
+              - listitem [ref=e110]: Strategic Thinking (1 مرشحين)
+              - listitem [ref=e111]: Learning Agility (1 مرشحين)
+          - generic [ref=e112]:
+            - heading "حلقة التعلم المستمر" [level=2] [ref=e113]
+            - list [ref=e114]:
+              - listitem [ref=e115]: يُوصى بتركيز التطوير على Khalid Al-Ghamdi (56% في Chief Technology Officer).
+              - listitem [ref=e116]: يُوصى بتركيز التطوير على Omar Abdullah (70% في Chief Marketing Officer).
+          - generic [ref=e117]:
+            - heading "أحدث الرؤى" [level=2] [ref=e118]
+            - list [ref=e119]:
+              - listitem [ref=e120]: جاهزية Sara Mansour لـ Chief Technology Officer عند 88%.
+              - listitem [ref=e121]: جاهزية Omar Abdullah لـ Chief Marketing Officer عند 70%.
+        - generic [ref=e122]:
+          - generic [ref=e123]:
+            - heading "خطط التعاقب" [level=2] [ref=e124]
+            - button "عرض الكل" [ref=e125] [cursor=pointer]
+          - table [ref=e128]:
+            - rowgroup [ref=e129]:
+              - row "الوظيفة المرشح مؤشر الجاهزية الإجراءات" [ref=e130]:
+                - columnheader "الوظيفة" [ref=e131]
+                - columnheader "المرشح" [ref=e132]
+                - columnheader "مؤشر الجاهزية" [ref=e133]
+                - columnheader "الإجراءات" [ref=e134]
+            - rowgroup [ref=e135]:
+              - row "Chief Technology Officer Sara Mansour 88% عرض الخطة" [ref=e136]:
+                - cell "Chief Technology Officer" [ref=e137]
+                - cell "Sara Mansour" [ref=e138]
+                - cell "88%" [ref=e139]:
+                  - generic [ref=e143]: 88%
+                - cell "عرض الخطة" [ref=e144]:
+                  - button "عرض الخطة" [ref=e145] [cursor=pointer]
+              - row "Chief Marketing Officer Omar Abdullah 70% عرض الخطة" [ref=e146]:
+                - cell "Chief Marketing Officer" [ref=e147]
+                - cell "Omar Abdullah" [ref=e148]
+                - cell "70%" [ref=e149]:
+                  - generic [ref=e153]: 70%
+                - cell "عرض الخطة" [ref=e154]:
+                  - button "عرض الخطة" [ref=e155] [cursor=pointer]
+              - row "VP of Engineering لا يوجد مرشح 0% عرض الخطة" [ref=e156]:
+                - cell "VP of Engineering" [ref=e157]
+                - cell "لا يوجد مرشح" [ref=e158]
+                - cell "0%" [ref=e159]:
+                  - generic [ref=e162]: 0%
+                - cell "عرض الخطة" [ref=e163]:
+                  - button "عرض الخطة" [ref=e164] [cursor=pointer]
