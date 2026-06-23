@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { UserRole } from '../types';
+import { useApp } from '../store/AppContext';
 import { useLanguage } from '../lib/i18n';
 import { LanguageToggle } from '../shell/LanguageToggle';
 
@@ -13,11 +14,17 @@ const ROLES: UserRole[] = [
   'VIEWER',
 ];
 
-// Phase 0: selecting a role routes into the app. Real session seeding (mapping a role
-// to a mock user + scoped landing) is wired in a later phase.
+// Selecting a role logs in as the matching seeded user; Home then routes to the
+// role-appropriate landing.
 export const Login: React.FC = () => {
   const { t } = useLanguage();
+  const { dispatch } = useApp();
   const navigate = useNavigate();
+
+  const enterAs = (role: UserRole) => {
+    dispatch({ type: 'LOGIN', role });
+    navigate('/');
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col">
@@ -32,7 +39,7 @@ export const Login: React.FC = () => {
             <button
               key={role}
               type="button"
-              onClick={() => navigate('/')}
+              onClick={() => enterAs(role)}
               className="rounded-lg border border-gray-800 bg-gray-800/40 px-4 py-6 text-sm font-medium text-gray-200 hover:border-primary-500 hover:text-white transition-colors"
             >
               {t(`role.${role}`)}

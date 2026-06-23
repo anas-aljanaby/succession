@@ -5,6 +5,9 @@ import { useLanguage } from './lib/i18n';
 import { AppShell } from './shell/AppShell';
 import { Login } from './routes/Login';
 import { Home } from './routes/Home';
+import { OrganizationsList } from './routes/OrganizationsList';
+import { OrganizationDashboard } from './routes/OrganizationDashboard';
+import { OrganizationForm } from './routes/OrganizationForm';
 import { ComingSoon } from './routes/ComingSoon';
 import { Placeholder } from './ui/Placeholder';
 
@@ -25,10 +28,10 @@ export const App: React.FC = () => {
           <Route element={<AppShell />}>
             <Route path="/" element={<Home />} />
 
-            <Route path="/organizations" element={<Stub titleKey="nav.organizations" />} />
-            <Route path="/organizations/new" element={<Stub titleKey="nav.organizations" />} />
-            <Route path="/organizations/:orgId" element={<Stub titleKey="nav.dashboard" />} />
-            <Route path="/organizations/:orgId/edit" element={<Stub titleKey="nav.organizations" />} />
+            <Route path="/organizations" element={<OrganizationsList />} />
+            <Route path="/organizations/new" element={<OrganizationForm />} />
+            <Route path="/organizations/:orgId" element={<OrganizationDashboard />} />
+            <Route path="/organizations/:orgId/edit" element={<OrganizationForm />} />
 
             <Route path="/organizations/:orgId/functions" element={<Stub titleKey="nav.functions" />} />
             <Route path="/organizations/:orgId/functions/new" element={<Stub titleKey="nav.functions" />} />
