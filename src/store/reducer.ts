@@ -1,4 +1,11 @@
-import type { AppState, Language, Organization, UserRole } from '../types';
+import type {
+  AppState,
+  Candidate,
+  CriticalFunction,
+  Language,
+  Organization,
+  UserRole,
+} from '../types';
 
 export type Action =
   | { type: 'SET_LANGUAGE'; language: Language }
@@ -6,7 +13,12 @@ export type Action =
   | { type: 'SET_ROLE'; role: UserRole }
   | { type: 'LOGOUT' }
   | { type: 'ADD_ORG'; org: Organization }
-  | { type: 'UPDATE_ORG'; org: Organization };
+  | { type: 'UPDATE_ORG'; org: Organization }
+  | { type: 'ADD_FUNCTION'; fn: CriticalFunction }
+  | { type: 'UPDATE_FUNCTION'; fn: CriticalFunction }
+  | { type: 'DELETE_FUNCTION'; fnId: string }
+  | { type: 'SELECT_SUCCESSOR'; fnId: string; candidateId: string }
+  | { type: 'ADD_CANDIDATE'; candidate: Candidate };
 
 // For the demo, a role maps to a representative seeded user so that scope
 // (organizationId / candidateId) follows the active role.
@@ -35,6 +47,44 @@ export function reducer(state: AppState, action: Action): AppState {
           o.id === action.org.id ? action.org : o
         ),
       };
+    case 'ADD_FUNCTION':
+      return { ...state, functions: [...state.functions, action.fn] };
+    case 'UPDATE_FUNCTION':
+      return {
+        ...state,
+        functions: state.functions.map((fn) =>
+          fn.id === action.fn.id ? action.fn : fn
+        ),
+      };
+    case 'DELETE_FUNCTION':
+      return {
+        ...state,
+        functions: state.functions.filter((fn) => fn.id !== action.fnId),
+        candidates: state.candidates.filter(
+          (candidate) => candidate.criticalFunctionId !== action.fnId
+        ),
+      };
+    case 'SELECT_SUCCESSOR':
+      return {
+        ...state,
+        functions: state.functions.map((fn) =>
+          fn.id === action.fnId
+            ? { ...fn, selectedCandidateId: action.candidateId }
+            : fn
+        ),
+        candidates: state.candidates.map((candidate) => {
+          if (candidate.criticalFunctionId !== action.fnId) return candidate;
+          if (candidate.id === action.candidateId) {
+            return { ...candidate, status: 'selected' };
+          }
+          if (candidate.status === 'selected') {
+            return { ...candidate, status: 'active' };
+          }
+          return candidate;
+        }),
+      };
+    case 'ADD_CANDIDATE':
+      return { ...state, candidates: [...state.candidates, action.candidate] };
     default:
       return state;
   }

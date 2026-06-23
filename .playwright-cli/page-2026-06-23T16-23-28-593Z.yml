@@ -1,0 +1,87 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e8] [cursor=pointer]:
+        - /url: /organizations
+    - navigation [ref=e9]:
+      - link "لوحة المعلومات" [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "التقارير (قريباً)" [ref=e13] [cursor=pointer]:
+        - /url: /coming-soon/reports
+        - text: التقارير
+        - generic [ref=e14]: (قريباً)
+  - generic [ref=e15]:
+    - banner [ref=e16]:
+      - navigation [ref=e17]:
+        - link "الرئيسية" [ref=e18] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e19]: /
+        - link "المؤسسات" [ref=e20] [cursor=pointer]:
+          - /url: /organizations
+        - generic [ref=e21]: /
+        - link "ACME Corporation" [ref=e22] [cursor=pointer]:
+          - /url: /organizations/org-acme
+        - generic [ref=e23]: /
+        - link "الوظائف الحرجة" [ref=e110] [cursor=pointer]:
+          - /url: /organizations/org-acme/functions
+        - generic [ref=e111]: /
+        - generic [ref=e112]: Chief Data Officer
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - generic [ref=e27]: الدور
+          - combobox "الدور" [ref=e28]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e29] [cursor=pointer]
+    - main [ref=e30]:
+      - generic [ref=e113]:
+        - generic [ref=e114]:
+          - generic [ref=e115]:
+            - heading "Chief Data Officer" [level=1] [ref=e116]
+            - paragraph [ref=e117]: ACME Corporation
+          - generic [ref=e118]:
+            - button "إضافة مرشح إلى المجموعة" [ref=e119] [cursor=pointer]
+            - button "تعديل" [ref=e120] [cursor=pointer]
+        - generic [ref=e121]:
+          - generic [ref=e122]: Data
+          - generic [ref=e123]: عالية
+          - generic [ref=e124]: شاغرة
+          - generic [ref=e125]: "الخليفة المختار: لم يتم الاختيار"
+        - generic [ref=e126]:
+          - generic [ref=e127]:
+            - heading "المعايير" [level=2] [ref=e128]
+            - generic [ref=e129]:
+              - generic [ref=e130]:
+                - generic [ref=e131]: Technical Depth
+                - generic [ref=e132]: "الوزن: 3"
+              - generic [ref=e133]:
+                - generic [ref=e134]: Leadership
+                - generic [ref=e135]: "الوزن: 1"
+              - generic [ref=e136]:
+                - generic [ref=e137]: Strategic Thinking
+                - generic [ref=e138]: "الوزن: 1"
+              - generic [ref=e139]:
+                - generic [ref=e140]: Values Alignment
+                - generic [ref=e141]: "الوزن: 1"
+              - generic [ref=e142]:
+                - generic [ref=e143]: Learning Agility
+                - generic [ref=e144]: "الوزن: 1"
+              - generic [ref=e145]:
+                - generic [ref=e146]: Data Governance
+                - generic [ref=e147]: "الوزن: 2"
+          - generic [ref=e148]:
+            - generic [ref=e149]:
+              - heading "مجموعة المرشحين" [level=2] [ref=e150]
+              - generic [ref=e151]: "حجم المجموعة: 0"
+            - paragraph [ref=e152]: لا يوجد مرشحون بعد.

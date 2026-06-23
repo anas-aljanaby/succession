@@ -1,0 +1,81 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: Succession
+    - navigation [ref=e6]:
+      - link "Home" [ref=e66] [cursor=pointer]:
+        - /url: /
+      - link "Organizations" [ref=e67] [cursor=pointer]:
+        - /url: /organizations
+    - navigation [ref=e9]:
+      - link "Dashboard" [ref=e68] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "Critical Functions" [ref=e69] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "Candidates" [ref=e70] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "Reports (soon)" [ref=e71] [cursor=pointer]:
+        - /url: /coming-soon/reports
+        - text: Reports
+        - generic [ref=e14]: (soon)
+  - generic [ref=e15]:
+    - banner [ref=e16]:
+      - navigation [ref=e17]:
+        - link "Home" [ref=e72] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e19]: /
+        - link "Organizations" [ref=e73] [cursor=pointer]:
+          - /url: /organizations
+        - generic [ref=e21]: /
+        - link "ACME Corporation" [ref=e22] [cursor=pointer]:
+          - /url: /organizations/org-acme
+        - generic [ref=e23]: /
+        - generic [ref=e24]: Critical Functions
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - generic [ref=e27]: Role
+          - combobox "Role" [ref=e74]:
+            - option "Consultant" [selected]
+            - option "Organization Admin"
+            - option "HR Manager"
+            - option "Supervisor"
+            - option "Candidate"
+            - option "Viewer"
+        - button "العربية" [active] [ref=e75] [cursor=pointer]
+    - main [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - heading "Critical Functions" [level=1] [ref=e76]
+            - paragraph [ref=e35]: ACME Corporation · Critical functions for this organization.
+          - button "New function" [ref=e77] [cursor=pointer]
+        - generic [ref=e38]:
+          - 'link "Chief Technology Officer Technology Ready High Pool size: 2" [ref=e78] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-cto
+            - generic [ref=e40]:
+              - generic [ref=e41]:
+                - heading "Chief Technology Officer" [level=2] [ref=e42]
+                - paragraph [ref=e43]: Technology
+              - generic [ref=e44]: Ready
+            - generic [ref=e45]:
+              - generic [ref=e46]: High
+              - generic [ref=e47]: "Pool size: 2"
+          - 'link "Chief Marketing Officer Marketing In progress Medium Pool size: 1" [ref=e79] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-cmo
+            - generic [ref=e49]:
+              - generic [ref=e50]:
+                - heading "Chief Marketing Officer" [level=2] [ref=e51]
+                - paragraph [ref=e52]: Marketing
+              - generic [ref=e53]: In progress
+            - generic [ref=e54]:
+              - generic [ref=e55]: Medium
+              - generic [ref=e56]: "Pool size: 1"
+          - 'link "VP of Engineering Technology Vacant High Pool size: 0" [ref=e80] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-vpe
+            - generic [ref=e58]:
+              - generic [ref=e59]:
+                - heading "VP of Engineering" [level=2] [ref=e60]
+                - paragraph [ref=e61]: Technology
+              - generic [ref=e62]: Vacant
+            - generic [ref=e63]:
+              - generic [ref=e64]: High
+              - generic [ref=e65]: "Pool size: 0"

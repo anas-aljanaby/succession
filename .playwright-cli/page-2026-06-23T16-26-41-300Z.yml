@@ -1,0 +1,90 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e8] [cursor=pointer]:
+        - /url: /organizations
+    - navigation [ref=e9]:
+      - link "لوحة المعلومات" [active] [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "التقارير (قريباً)" [ref=e13] [cursor=pointer]:
+        - /url: /coming-soon/reports
+        - text: التقارير
+        - generic [ref=e14]: (قريباً)
+  - generic [ref=e15]:
+    - banner [ref=e16]:
+      - navigation [ref=e17]:
+        - link "الرئيسية" [ref=e18] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e19]: /
+        - link "المؤسسات" [ref=e20] [cursor=pointer]:
+          - /url: /organizations
+        - generic [ref=e21]: /
+        - generic [ref=e281]: ACME Corporation
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - generic [ref=e27]: الدور
+          - combobox "الدور" [ref=e28]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e29] [cursor=pointer]
+    - main [ref=e30]:
+      - generic [ref=e282]:
+        - generic [ref=e283]:
+          - generic [ref=e284]:
+            - heading "ACME Corporation" [level=1] [ref=e285]
+            - paragraph [ref=e286]: "شركات · Technology · متطورة · الجاهزية: 25%"
+          - generic [ref=e287]:
+            - button "عرض المرشحين" [ref=e288] [cursor=pointer]
+            - button "تعديل" [ref=e289] [cursor=pointer]
+        - generic [ref=e290]:
+          - heading "الوظائف الحرجة" [level=2] [ref=e291]
+          - link "عرض الكل" [ref=e292] [cursor=pointer]:
+            - /url: /organizations/org-acme/functions
+        - generic [ref=e293]:
+          - 'link "Chief Technology Officer جاهز Technology عالية المرشحون: 2" [ref=e294] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-cto
+            - generic [ref=e295]:
+              - heading "Chief Technology Officer" [level=3] [ref=e296]
+              - generic [ref=e297]: جاهز
+            - paragraph [ref=e298]: Technology
+            - generic [ref=e299]:
+              - generic [ref=e300]: عالية
+              - generic [ref=e301]: "المرشحون: 2"
+          - 'link "Chief Marketing Officer قيد التنفيذ Marketing متوسطة المرشحون: 1" [ref=e302] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-cmo
+            - generic [ref=e303]:
+              - heading "Chief Marketing Officer" [level=3] [ref=e304]
+              - generic [ref=e305]: قيد التنفيذ
+            - paragraph [ref=e306]: Marketing
+            - generic [ref=e307]:
+              - generic [ref=e308]: متوسطة
+              - generic [ref=e309]: "المرشحون: 1"
+          - 'link "VP of Engineering شاغرة Technology عالية المرشحون: 0" [ref=e310] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-vpe
+            - generic [ref=e311]:
+              - heading "VP of Engineering" [level=3] [ref=e312]
+              - generic [ref=e313]: شاغرة
+            - paragraph [ref=e314]: Technology
+            - generic [ref=e315]:
+              - generic [ref=e316]: عالية
+              - generic [ref=e317]: "المرشحون: 0"
+          - 'link "Data Platform Director قيد التنفيذ Data عالية المرشحون: 1" [ref=e318] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-1782231898221
+            - generic [ref=e319]:
+              - heading "Data Platform Director" [level=3] [ref=e320]
+              - generic [ref=e321]: قيد التنفيذ
+            - paragraph [ref=e322]: Data
+            - generic [ref=e323]:
+              - generic [ref=e324]: عالية
+              - generic [ref=e325]: "المرشحون: 1"

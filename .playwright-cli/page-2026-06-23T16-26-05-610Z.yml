@@ -1,0 +1,91 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e8] [cursor=pointer]:
+        - /url: /organizations
+    - navigation [ref=e9]:
+      - link "لوحة المعلومات" [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "التقارير (قريباً)" [ref=e13] [cursor=pointer]:
+        - /url: /coming-soon/reports
+        - text: التقارير
+        - generic [ref=e14]: (قريباً)
+  - generic [ref=e15]:
+    - banner [ref=e16]:
+      - navigation [ref=e17]:
+        - link "الرئيسية" [ref=e18] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e19]: /
+        - link "المؤسسات" [ref=e20] [cursor=pointer]:
+          - /url: /organizations
+        - generic [ref=e21]: /
+        - link "ACME Corporation" [ref=e22] [cursor=pointer]:
+          - /url: /organizations/org-acme
+        - generic [ref=e23]: /
+        - generic [ref=e236]: الوظائف الحرجة
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - generic [ref=e27]: الدور
+          - combobox "الدور" [ref=e28]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e29] [cursor=pointer]
+    - main [ref=e30]:
+      - generic [ref=e237]:
+        - generic [ref=e238]:
+          - generic [ref=e239]:
+            - heading "الوظائف الحرجة" [level=1] [ref=e240]
+            - paragraph [ref=e241]: ACME Corporation · الوظائف الحرجة في هذه المؤسسة.
+          - button "وظيفة جديدة" [ref=e243] [cursor=pointer]
+        - generic [ref=e244]:
+          - 'link "Chief Technology Officer Technology جاهز عالية حجم المجموعة: 2" [ref=e245] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-cto
+            - generic [ref=e246]:
+              - generic [ref=e247]:
+                - heading "Chief Technology Officer" [level=2] [ref=e248]
+                - paragraph [ref=e249]: Technology
+              - generic [ref=e250]: جاهز
+            - generic [ref=e251]:
+              - generic [ref=e252]: عالية
+              - generic [ref=e253]: "حجم المجموعة: 2"
+          - 'link "Chief Marketing Officer Marketing قيد التنفيذ متوسطة حجم المجموعة: 1" [ref=e254] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-cmo
+            - generic [ref=e255]:
+              - generic [ref=e256]:
+                - heading "Chief Marketing Officer" [level=2] [ref=e257]
+                - paragraph [ref=e258]: Marketing
+              - generic [ref=e259]: قيد التنفيذ
+            - generic [ref=e260]:
+              - generic [ref=e261]: متوسطة
+              - generic [ref=e262]: "حجم المجموعة: 1"
+          - 'link "VP of Engineering Technology شاغرة عالية حجم المجموعة: 0" [ref=e263] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-vpe
+            - generic [ref=e264]:
+              - generic [ref=e265]:
+                - heading "VP of Engineering" [level=2] [ref=e266]
+                - paragraph [ref=e267]: Technology
+              - generic [ref=e268]: شاغرة
+            - generic [ref=e269]:
+              - generic [ref=e270]: عالية
+              - generic [ref=e271]: "حجم المجموعة: 0"
+          - 'link "Data Platform Director Data قيد التنفيذ عالية حجم المجموعة: 1" [ref=e272] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-1782231898221
+            - generic [ref=e273]:
+              - generic [ref=e274]:
+                - heading "Data Platform Director" [level=2] [ref=e275]
+                - paragraph [ref=e276]: Data
+              - generic [ref=e277]: قيد التنفيذ
+            - generic [ref=e278]:
+              - generic [ref=e279]: عالية
+              - generic [ref=e280]: "حجم المجموعة: 1"

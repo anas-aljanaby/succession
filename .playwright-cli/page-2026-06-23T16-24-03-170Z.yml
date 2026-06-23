@@ -1,0 +1,81 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e8] [cursor=pointer]:
+        - /url: /organizations
+    - navigation [ref=e9]:
+      - link "لوحة المعلومات" [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "التقارير (قريباً)" [ref=e13] [cursor=pointer]:
+        - /url: /coming-soon/reports
+        - text: التقارير
+        - generic [ref=e14]: (قريباً)
+  - generic [ref=e15]:
+    - banner [ref=e16]:
+      - navigation [ref=e17]:
+        - link "الرئيسية" [ref=e18] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e19]: /
+        - link "المؤسسات" [ref=e20] [cursor=pointer]:
+          - /url: /organizations
+        - generic [ref=e21]: /
+        - link "ACME Corporation" [ref=e22] [cursor=pointer]:
+          - /url: /organizations/org-acme
+        - generic [ref=e23]: /
+        - generic [ref=e24]: الوظائف الحرجة
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - generic [ref=e27]: الدور
+          - combobox "الدور" [ref=e28]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e29] [cursor=pointer]
+    - main [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - heading "الوظائف الحرجة" [level=1] [ref=e34]
+            - paragraph [ref=e35]: ACME Corporation · الوظائف الحرجة في هذه المؤسسة.
+          - button "وظيفة جديدة" [ref=e37] [cursor=pointer]
+        - generic [ref=e38]:
+          - 'link "Chief Technology Officer Technology جاهز عالية حجم المجموعة: 2" [ref=e39] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-cto
+            - generic [ref=e40]:
+              - generic [ref=e41]:
+                - heading "Chief Technology Officer" [level=2] [ref=e42]
+                - paragraph [ref=e43]: Technology
+              - generic [ref=e44]: جاهز
+            - generic [ref=e45]:
+              - generic [ref=e46]: عالية
+              - generic [ref=e47]: "حجم المجموعة: 2"
+          - 'link "Chief Marketing Officer Marketing قيد التنفيذ متوسطة حجم المجموعة: 1" [ref=e48] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-cmo
+            - generic [ref=e49]:
+              - generic [ref=e50]:
+                - heading "Chief Marketing Officer" [level=2] [ref=e51]
+                - paragraph [ref=e52]: Marketing
+              - generic [ref=e53]: قيد التنفيذ
+            - generic [ref=e54]:
+              - generic [ref=e55]: متوسطة
+              - generic [ref=e56]: "حجم المجموعة: 1"
+          - 'link "VP of Engineering Technology شاغرة عالية حجم المجموعة: 0" [ref=e57] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-vpe
+            - generic [ref=e58]:
+              - generic [ref=e59]:
+                - heading "VP of Engineering" [level=2] [ref=e60]
+                - paragraph [ref=e61]: Technology
+              - generic [ref=e62]: شاغرة
+            - generic [ref=e63]:
+              - generic [ref=e64]: عالية
+              - generic [ref=e65]: "حجم المجموعة: 0"

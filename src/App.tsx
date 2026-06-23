@@ -8,6 +8,9 @@ import { Home } from './routes/Home';
 import { OrganizationsList } from './routes/OrganizationsList';
 import { OrganizationDashboard } from './routes/OrganizationDashboard';
 import { OrganizationForm } from './routes/OrganizationForm';
+import { FunctionsList } from './routes/FunctionsList';
+import { FunctionForm } from './routes/FunctionForm';
+import { FunctionDetail } from './routes/FunctionDetail';
 import { ComingSoon } from './routes/ComingSoon';
 import { Placeholder } from './ui/Placeholder';
 
@@ -33,10 +36,10 @@ export const App: React.FC = () => {
             <Route path="/organizations/:orgId" element={<OrganizationDashboard />} />
             <Route path="/organizations/:orgId/edit" element={<OrganizationForm />} />
 
-            <Route path="/organizations/:orgId/functions" element={<Stub titleKey="nav.functions" />} />
-            <Route path="/organizations/:orgId/functions/new" element={<Stub titleKey="nav.functions" />} />
-            <Route path="/organizations/:orgId/functions/:fnId" element={<Stub titleKey="nav.functions" />} />
-            <Route path="/organizations/:orgId/functions/:fnId/edit" element={<Stub titleKey="nav.functions" />} />
+            <Route path="/organizations/:orgId/functions" element={<FunctionsList />} />
+            <Route path="/organizations/:orgId/functions/new" element={<FunctionForm />} />
+            <Route path="/organizations/:orgId/functions/:fnId" element={<FunctionDetail />} />
+            <Route path="/organizations/:orgId/functions/:fnId/edit" element={<FunctionForm />} />
 
             <Route path="/organizations/:orgId/candidates" element={<Stub titleKey="nav.candidates" />} />
             <Route path="/organizations/:orgId/candidates/:candId" element={<Stub titleKey="nav.candidates" />} />

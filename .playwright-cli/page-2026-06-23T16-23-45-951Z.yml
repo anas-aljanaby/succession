@@ -1,0 +1,132 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e8] [cursor=pointer]:
+        - /url: /organizations
+    - navigation [ref=e9]:
+      - link "لوحة المعلومات" [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "التقارير (قريباً)" [ref=e13] [cursor=pointer]:
+        - /url: /coming-soon/reports
+        - text: التقارير
+        - generic [ref=e14]: (قريباً)
+  - generic [ref=e15]:
+    - banner [ref=e16]:
+      - navigation [ref=e17]:
+        - link "الرئيسية" [ref=e18] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e19]: /
+        - link "المؤسسات" [ref=e20] [cursor=pointer]:
+          - /url: /organizations
+        - generic [ref=e21]: /
+        - link "ACME Corporation" [ref=e22] [cursor=pointer]:
+          - /url: /organizations/org-acme
+        - generic [ref=e23]: /
+        - link "الوظائف الحرجة" [ref=e24] [cursor=pointer]:
+          - /url: /organizations/org-acme/functions
+        - generic [ref=e25]: /
+        - generic [ref=e26]: Chief Technology Officer
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]: الدور
+          - combobox "الدور" [ref=e30]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e31] [cursor=pointer]
+    - main [ref=e32]:
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - generic [ref=e35]:
+            - heading "Chief Technology Officer" [level=1] [ref=e36]
+            - paragraph [ref=e37]: ACME Corporation
+          - generic [ref=e38]:
+            - button "إضافة مرشح إلى المجموعة" [ref=e39] [cursor=pointer]
+            - button "تعديل" [ref=e40] [cursor=pointer]
+        - generic [ref=e41]:
+          - generic [ref=e42]: Technology
+          - generic [ref=e43]: عالية
+          - generic [ref=e44]: جاهز
+          - generic [ref=e45]: "الخليفة المختار: لم يتم الاختيار"
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - heading "المعايير" [level=2] [ref=e48]
+            - generic [ref=e49]:
+              - generic [ref=e50]:
+                - generic [ref=e51]: Competence
+                - generic [ref=e52]: "الوزن: 1"
+              - generic [ref=e53]:
+                - generic [ref=e54]: Leadership
+                - generic [ref=e55]: "الوزن: 1"
+              - generic [ref=e56]:
+                - generic [ref=e57]: Strategic Thinking
+                - generic [ref=e58]: "الوزن: 1"
+              - generic [ref=e59]:
+                - generic [ref=e60]: Values Alignment
+                - generic [ref=e61]: "الوزن: 1"
+              - generic [ref=e62]:
+                - generic [ref=e63]: Learning Agility
+                - generic [ref=e64]: "الوزن: 1"
+          - generic [ref=e65]:
+            - generic [ref=e66]:
+              - heading "مجموعة المرشحين" [level=2] [ref=e67]
+              - generic [ref=e68]: "حجم المجموعة: 2"
+            - table [ref=e70]:
+              - rowgroup [ref=e71]:
+                - row "المرشح المنصب الحالي المنصب المستهدف Competence Leadership Strategic Thinking Values Alignment Learning Agility الجاهزية الحالة" [ref=e72]:
+                  - columnheader "المرشح" [ref=e73]
+                  - columnheader "المنصب الحالي" [ref=e74]
+                  - columnheader "المنصب المستهدف" [ref=e75]
+                  - columnheader "Competence" [ref=e76]
+                  - columnheader "Leadership" [ref=e77]
+                  - columnheader "Strategic Thinking" [ref=e78]
+                  - columnheader "Values Alignment" [ref=e79]
+                  - columnheader "Learning Agility" [ref=e80]
+                  - columnheader "الجاهزية" [ref=e81]
+                  - columnheader "الحالة" [ref=e82]
+                  - columnheader [ref=e83]
+              - rowgroup [ref=e84]:
+                - row "Sara Mansour Engineering Lead Chief Technology Officer 88 90 85 92 86 88% نشطة اختيار خليفة" [ref=e85]:
+                  - cell "Sara Mansour" [ref=e86]:
+                    - link "Sara Mansour" [ref=e87] [cursor=pointer]:
+                      - /url: /organizations/org-acme/candidates/cand-sara
+                  - cell "Engineering Lead" [ref=e88]
+                  - cell "Chief Technology Officer" [ref=e89]
+                  - cell "88" [ref=e90]
+                  - cell "90" [ref=e91]
+                  - cell "85" [ref=e92]
+                  - cell "92" [ref=e93]
+                  - cell "86" [ref=e94]
+                  - cell "88%" [ref=e95]:
+                    - generic [ref=e99]: 88%
+                  - cell "نشطة" [ref=e100]:
+                    - generic [ref=e101]: نشطة
+                  - cell "اختيار خليفة" [ref=e102]:
+                    - button "اختيار خليفة" [ref=e103] [cursor=pointer]
+                - row "Khalid Al-Ghamdi Senior Developer Chief Technology Officer 60 50 45 70 55 56% نشطة اختيار خليفة" [ref=e104]:
+                  - cell "Khalid Al-Ghamdi" [ref=e105]:
+                    - link "Khalid Al-Ghamdi" [ref=e106] [cursor=pointer]:
+                      - /url: /organizations/org-acme/candidates/cand-khalid
+                  - cell "Senior Developer" [ref=e107]
+                  - cell "Chief Technology Officer" [ref=e108]
+                  - cell "60" [ref=e109]
+                  - cell "50" [ref=e110]
+                  - cell "45" [ref=e111]
+                  - cell "70" [ref=e112]
+                  - cell "55" [ref=e113]
+                  - cell "56%" [ref=e114]:
+                    - generic [ref=e118]: 56%
+                  - cell "نشطة" [ref=e119]:
+                    - generic [ref=e120]: نشطة
+                  - cell "اختيار خليفة" [ref=e121]:
+                    - button "اختيار خليفة" [ref=e122] [cursor=pointer]

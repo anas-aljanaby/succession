@@ -1,0 +1,110 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e8] [cursor=pointer]:
+        - /url: /organizations
+    - navigation [ref=e9]:
+      - link "لوحة المعلومات" [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "التقارير (قريباً)" [ref=e13] [cursor=pointer]:
+        - /url: /coming-soon/reports
+        - text: التقارير
+        - generic [ref=e14]: (قريباً)
+  - generic [ref=e15]:
+    - banner [ref=e16]:
+      - navigation [ref=e17]:
+        - link "الرئيسية" [ref=e18] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e19]: /
+        - link "المؤسسات" [ref=e20] [cursor=pointer]:
+          - /url: /organizations
+        - generic [ref=e21]: /
+        - link "ACME Corporation" [ref=e22] [cursor=pointer]:
+          - /url: /organizations/org-acme
+        - generic [ref=e23]: /
+        - generic [ref=e24]: الوظائف الحرجة
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - generic [ref=e27]: الدور
+          - combobox "الدور" [ref=e28]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e29] [cursor=pointer]
+    - main [ref=e30]:
+      - generic [ref=e66]:
+        - generic [ref=e68]:
+          - heading "وظيفة جديدة" [level=1] [ref=e69]
+          - paragraph [ref=e70]: ACME Corporation
+        - generic [ref=e71]:
+          - generic [ref=e73]:
+            - generic [ref=e74]:
+              - generic [ref=e75]: مسمى الوظيفة
+              - textbox "مسمى الوظيفة" [ref=e76]
+            - generic [ref=e77]:
+              - generic [ref=e78]: الإدارة
+              - textbox "الإدارة" [ref=e79]
+            - generic [ref=e80]:
+              - generic [ref=e81]: الأولوية
+              - combobox "الأولوية" [ref=e82]:
+                - option "عالية" [selected]
+                - option "متوسطة"
+                - option "منخفضة"
+          - generic [ref=e83]:
+            - generic [ref=e84]:
+              - heading "محرر المعايير" [level=2] [ref=e85]
+              - button "إضافة معيار" [ref=e86] [cursor=pointer]
+            - generic [ref=e87]:
+              - generic [ref=e88]:
+                - generic [ref=e89]:
+                  - generic [ref=e90]: اسم المعيار
+                  - textbox "اسم المعيار" [ref=e91]: Competence
+                - generic [ref=e92]:
+                  - generic [ref=e93]: الوزن
+                  - spinbutton "الوزن" [ref=e94]: "1"
+                - button "إزالة" [ref=e96] [cursor=pointer]
+              - generic [ref=e97]:
+                - generic [ref=e98]:
+                  - generic [ref=e99]: اسم المعيار
+                  - textbox "اسم المعيار" [ref=e100]: Leadership
+                - generic [ref=e101]:
+                  - generic [ref=e102]: الوزن
+                  - spinbutton "الوزن" [ref=e103]: "1"
+                - button "إزالة" [ref=e105] [cursor=pointer]
+              - generic [ref=e106]:
+                - generic [ref=e107]:
+                  - generic [ref=e108]: اسم المعيار
+                  - textbox "اسم المعيار" [ref=e109]: Strategic Thinking
+                - generic [ref=e110]:
+                  - generic [ref=e111]: الوزن
+                  - spinbutton "الوزن" [ref=e112]: "1"
+                - button "إزالة" [ref=e114] [cursor=pointer]
+              - generic [ref=e115]:
+                - generic [ref=e116]:
+                  - generic [ref=e117]: اسم المعيار
+                  - textbox "اسم المعيار" [ref=e118]: Values Alignment
+                - generic [ref=e119]:
+                  - generic [ref=e120]: الوزن
+                  - spinbutton "الوزن" [ref=e121]: "1"
+                - button "إزالة" [ref=e123] [cursor=pointer]
+              - generic [ref=e124]:
+                - generic [ref=e125]:
+                  - generic [ref=e126]: اسم المعيار
+                  - textbox "اسم المعيار" [ref=e127]: Learning Agility
+                - generic [ref=e128]:
+                  - generic [ref=e129]: الوزن
+                  - spinbutton "الوزن" [ref=e130]: "1"
+                - button "إزالة" [ref=e132] [cursor=pointer]
+          - generic [ref=e133]:
+            - button "حفظ" [ref=e134] [cursor=pointer]
+            - button "إلغاء" [ref=e135] [cursor=pointer]
