@@ -1,6 +1,7 @@
 import React from 'react';
 import type { UserRole } from '../types';
 import { useLanguage } from '../lib/i18n';
+import { SwitchHorizontalIcon } from '@/components/icons/SwitchHorizontalIcon';
 
 const ROLES: UserRole[] = [
   'CONSULTANT',
@@ -19,8 +20,9 @@ interface Props {
 export const RoleSwitcher: React.FC<Props> = ({ activeRole, onRoleChange }) => {
   const { t } = useLanguage();
   return (
-    <label className="flex items-center gap-2 text-sm text-gray-400">
-      <span>{t('topbar.switchRole')}</span>
+    <label className="flex items-center gap-2 text-sm text-gray-400 bg-gray-900/50 p-1 rounded-lg">
+      <SwitchHorizontalIcon />
+      <span className="hidden sm:inline">{t('topbar.switchRole')}</span>
       <select
         value={activeRole}
         onChange={(e) => onRoleChange(e.target.value as UserRole)}

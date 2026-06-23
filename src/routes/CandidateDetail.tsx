@@ -211,7 +211,7 @@ export const CandidateDetail: React.FC = () => {
         </div>
       </Card>
 
-      <Card>
+      <Card id="journey">
         <div className="mb-5 grid gap-3 sm:grid-cols-[minmax(0,1fr)_280px]">
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-400">

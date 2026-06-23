@@ -13,6 +13,7 @@ import { FunctionDetail } from './routes/FunctionDetail';
 import { CandidatesList } from './routes/CandidatesList';
 import { CandidateDetail } from './routes/CandidateDetail';
 import { ComingSoon } from './routes/ComingSoon';
+import { Settings } from './routes/Settings';
 
 export const App: React.FC = () => {
   return (
@@ -37,6 +38,7 @@ export const App: React.FC = () => {
             <Route path="/organizations/:orgId/candidates" element={<CandidatesList />} />
             <Route path="/organizations/:orgId/candidates/:candId" element={<CandidateDetail />} />
 
+            <Route path="/settings" element={<Settings />} />
             <Route path="/coming-soon" element={<ComingSoon />} />
             <Route path="/coming-soon/:feature" element={<ComingSoon />} />
           </Route>

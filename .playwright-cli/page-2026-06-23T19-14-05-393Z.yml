@@ -1,0 +1,247 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e8] [cursor=pointer]:
+        - /url: /organizations
+    - navigation [ref=e9]:
+      - link "لوحة المعلومات" [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "المزيد (قريباً)" [ref=e13] [cursor=pointer]:
+        - /url: /coming-soon
+        - text: المزيد
+        - generic [ref=e14]: (قريباً)
+  - generic [ref=e15]:
+    - banner [ref=e16]:
+      - generic:
+        - navigation [ref=e17]:
+          - button "الجدول الزمني للرحلة (معاينة)" [ref=e18] [cursor=pointer]:
+            - img [ref=e19]
+          - button "لوحة القيم" [ref=e22] [cursor=pointer]:
+            - img [ref=e23]
+        - generic:
+          - navigation:
+            - link "الرئيسية" [ref=e25] [cursor=pointer]:
+              - /url: /
+            - generic [ref=e26]: /
+            - link "المؤسسات":
+              - /url: /organizations
+            - generic [ref=e27]: /
+            - link "ACME Corporation":
+              - /url: /organizations/org-acme
+            - generic [ref=e28]: /
+            - link "المرشحون":
+              - /url: /organizations/org-acme/candidates
+            - generic [ref=e29]: /
+            - generic: Khalid Al-Ghamdi
+          - generic: Khalid Al-Ghamdi
+      - generic [ref=e30]:
+        - button "إدارة المؤسسات" [ref=e31] [cursor=pointer]:
+          - img [ref=e32]
+          - generic [ref=e34]: إدارة المؤسسات
+        - button "لوحة التحكم الشاملة" [ref=e35] [cursor=pointer]:
+          - img [ref=e36]
+          - generic [ref=e41]: لوحة التحكم الشاملة
+        - button "عرض شامل" [ref=e42] [cursor=pointer]:
+          - img [ref=e43]
+          - generic [ref=e45]: عرض شامل
+        - generic [ref=e46]:
+          - generic [ref=e47]: المؤسسة
+          - combobox "المؤسسة" [ref=e48]:
+            - option "ACME Corporation" [selected]
+            - option "الهيئة العامة للبيانات"
+            - option "مبرة المتميزين"
+        - generic [ref=e49]:
+          - generic [ref=e50]: المرشح
+          - combobox "المرشح" [ref=e51]:
+            - option "اختر مرشحاً" [disabled]
+            - option "Khalid Al-Ghamdi" [selected]
+            - option "Sara Mansour"
+            - option "Omar Abdullah"
+        - generic [ref=e52]:
+          - img [ref=e53]
+          - generic [ref=e55]: الدور
+          - combobox "الدور" [ref=e56]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e57] [cursor=pointer]:
+          - img [ref=e58]
+        - button "المستشار الذكي" [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+        - button "الإعدادات" [ref=e64] [cursor=pointer]:
+          - img [ref=e65]
+        - button "الإشعارات" [ref=e69] [cursor=pointer]:
+          - img [ref=e70]
+        - button "تسجيل الخروج" [ref=e73] [cursor=pointer]:
+          - img [ref=e74]
+    - main [ref=e77]:
+      - generic [ref=e78]:
+        - generic [ref=e80]:
+          - heading "Khalid Al-Ghamdi" [level=1] [ref=e81]
+          - paragraph [ref=e82]: ACME Corporation · Chief Technology Officer
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - heading "الملف الشخصي" [level=2] [ref=e85]
+            - generic [ref=e86]:
+              - generic [ref=e87]:
+                - term [ref=e88]: المنصب الحالي
+                - definition [ref=e89]: Senior Developer
+              - generic [ref=e90]:
+                - term [ref=e91]: المنصب المستهدف
+                - definition [ref=e92]: Chief Technology Officer
+              - generic [ref=e93]:
+                - term [ref=e94]: الإدارة
+                - definition [ref=e95]: Technology
+              - generic [ref=e96]:
+                - term [ref=e97]: الحالة
+                - definition [ref=e98]:
+                  - generic [ref=e99]: نشطة
+                  - generic [ref=e100]: جاهز
+          - generic [ref=e101]:
+            - heading "الجاهزية" [level=2] [ref=e102]
+            - generic [ref=e107]: 56%
+            - paragraph [ref=e108]: "حالة الوظيفة: جاهز"
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - heading "الدرجات" [level=2] [ref=e111]
+            - generic [ref=e112]: "المعايير: 5"
+          - generic [ref=e113]:
+            - generic [ref=e114]:
+              - generic [ref=e115]:
+                - heading "Competence" [level=3] [ref=e116]
+                - paragraph [ref=e117]: "الوزن: 1"
+              - generic [ref=e118]:
+                - generic [ref=e119]: الدرجة
+                - spinbutton "الدرجة" [ref=e120]: "60"
+            - generic [ref=e121]:
+              - generic [ref=e122]:
+                - heading "Leadership" [level=3] [ref=e123]
+                - paragraph [ref=e124]: "الوزن: 1"
+              - generic [ref=e125]:
+                - generic [ref=e126]: الدرجة
+                - spinbutton "الدرجة" [ref=e127]: "50"
+            - generic [ref=e128]:
+              - generic [ref=e129]:
+                - heading "Strategic Thinking" [level=3] [ref=e130]
+                - paragraph [ref=e131]: "الوزن: 1"
+              - generic [ref=e132]:
+                - generic [ref=e133]: الدرجة
+                - spinbutton "الدرجة" [ref=e134]: "45"
+            - generic [ref=e135]:
+              - generic [ref=e136]:
+                - heading "Values Alignment" [level=3] [ref=e137]
+                - paragraph [ref=e138]: "الوزن: 1"
+              - generic [ref=e139]:
+                - generic [ref=e140]: الدرجة
+                - spinbutton "الدرجة" [ref=e141]: "70"
+            - generic [ref=e142]:
+              - generic [ref=e143]:
+                - heading "Learning Agility" [level=3] [ref=e144]
+                - paragraph [ref=e145]: "الوزن: 1"
+              - generic [ref=e146]:
+                - generic [ref=e147]: الدرجة
+                - spinbutton "الدرجة" [ref=e148]: "55"
+        - generic [ref=e149]:
+          - generic [ref=e150]:
+            - generic [ref=e151]:
+              - heading "الرحلة" [level=2] [ref=e152]
+              - paragraph [ref=e153]: "التقدم العام: 27%"
+            - generic [ref=e157]: 27%
+          - generic [ref=e158]:
+            - generic [ref=e159]:
+              - generic [ref=e160]:
+                - generic [ref=e161]:
+                  - heading "Assessment & Planning" [level=3] [ref=e162]
+                  - paragraph [ref=e163]: "تقدم المرحلة: 3/3"
+                - generic [ref=e164]: STG1
+              - generic [ref=e168]: 100%
+              - generic [ref=e169]:
+                - generic [ref=e170]:
+                  - 'checkbox "وضع علامة مكتمل: Review the current leadership structure" [checked] [ref=e171]'
+                  - generic [ref=e172]:
+                    - generic [ref=e173]: Review the current leadership structure
+                    - generic [ref=e175]: مكتمل
+                - generic [ref=e176]:
+                  - 'checkbox "وضع علامة مكتمل: Define the target role profile" [checked] [ref=e177]'
+                  - generic [ref=e178]:
+                    - generic [ref=e179]: Define the target role profile
+                    - generic [ref=e181]: مكتمل
+                - generic [ref=e182]:
+                  - 'checkbox "وضع علامة مكتمل: Agree on selection criteria" [checked] [ref=e183]'
+                  - generic [ref=e184]:
+                    - generic [ref=e185]: Agree on selection criteria
+                    - generic [ref=e187]: مكتمل
+            - generic [ref=e188]:
+              - generic [ref=e189]:
+                - generic [ref=e190]:
+                  - heading "Building & Development" [level=3] [ref=e191]
+                  - paragraph [ref=e192]: "تقدم المرحلة: 0/3"
+                - generic [ref=e193]: STG2
+              - generic [ref=e196]: 0%
+              - generic [ref=e197]:
+                - generic [ref=e198]:
+                  - 'checkbox "وضع علامة مكتمل: Run the qualification program" [ref=e199]'
+                  - generic [ref=e200]:
+                    - generic [ref=e201]: Run the qualification program
+                    - generic [ref=e203]: قيد التنفيذ
+                - generic [ref=e204]:
+                  - 'checkbox "وضع علامة مكتمل: Assign a mentor" [ref=e205]'
+                  - generic [ref=e206]:
+                    - generic [ref=e207]: Assign a mentor
+                    - generic [ref=e209]: لم يبدأ
+                - generic [ref=e210]:
+                  - 'checkbox "وضع علامة مكتمل: Track progress against the plan" [ref=e211]'
+                  - generic [ref=e212]:
+                    - generic [ref=e213]: Track progress against the plan
+                    - generic [ref=e215]: لم يبدأ
+            - generic [ref=e216]:
+              - generic [ref=e217]:
+                - generic [ref=e218]:
+                  - heading "Application & Evaluation" [level=3] [ref=e219]
+                  - paragraph [ref=e220]: "تقدم المرحلة: 0/3"
+                - generic [ref=e221]: STG3
+              - generic [ref=e224]: 0%
+              - generic [ref=e225]:
+                - generic [ref=e226]:
+                  - 'checkbox "وضع علامة مكتمل: Lead a stretch assignment" [ref=e227]'
+                  - generic [ref=e228]:
+                    - generic [ref=e229]: Lead a stretch assignment
+                    - generic [ref=e231]: لم يبدأ
+                - generic [ref=e232]:
+                  - 'checkbox "وضع علامة مكتمل: Evaluate development outcomes" [ref=e233]'
+                  - generic [ref=e234]:
+                    - generic [ref=e235]: Evaluate development outcomes
+                    - generic [ref=e237]: لم يبدأ
+                - generic [ref=e238]:
+                  - 'checkbox "وضع علامة مكتمل: Refine the plan" [ref=e239]'
+                  - generic [ref=e240]:
+                    - generic [ref=e241]: Refine the plan
+                    - generic [ref=e243]: لم يبدأ
+            - generic [ref=e244]:
+              - generic [ref=e245]:
+                - generic [ref=e246]:
+                  - heading "Sustainability & Improvement" [level=3] [ref=e247]
+                  - paragraph [ref=e248]: "تقدم المرحلة: 0/2"
+                - generic [ref=e249]: STG4
+              - generic [ref=e252]: 0%
+              - generic [ref=e253]:
+                - generic [ref=e254]:
+                  - 'checkbox "وضع علامة مكتمل: Follow up after transition" [ref=e255]'
+                  - generic [ref=e256]:
+                    - generic [ref=e257]: Follow up after transition
+                    - generic [ref=e259]: لم يبدأ
+                - generic [ref=e260]:
+                  - 'checkbox "وضع علامة مكتمل: Monitor sustained impact" [ref=e261]'
+                  - generic [ref=e262]:
+                    - generic [ref=e263]: Monitor sustained impact
+                    - generic [ref=e265]: لم يبدأ

@@ -49,6 +49,9 @@ export const Sidebar: React.FC = () => {
               {t('nav.myJourney')}
             </NavLink>
           ) : null}
+          <NavLink to="/settings" className={linkClass}>
+            {t('nav.settings')}
+          </NavLink>
         </nav>
       </aside>
     );
@@ -64,6 +67,9 @@ export const Sidebar: React.FC = () => {
         </NavLink>
         <NavLink to="/organizations" className={linkClass}>
           {t('nav.organizations')}
+        </NavLink>
+        <NavLink to="/settings" className={linkClass}>
+          {t('nav.settings')}
         </NavLink>
       </nav>
 
