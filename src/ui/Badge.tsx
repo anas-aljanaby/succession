@@ -1,5 +1,5 @@
 import React from 'react';
-import type { FunctionStatus, Priority } from '../types';
+import type { CandidateStatus, FunctionStatus, Priority } from '../types';
 
 const tone: Record<string, string> = {
   green: 'bg-green-500/15 text-green-300 border-green-500/30',
@@ -24,3 +24,12 @@ export const statusColor = (status: FunctionStatus): keyof typeof tone =>
 
 export const priorityColor = (priority: Priority): keyof typeof tone =>
   priority === 'high' ? 'red' : priority === 'medium' ? 'amber' : 'gray';
+
+export const candidateStatusColor = (status: CandidateStatus): keyof typeof tone =>
+  status === 'selected'
+    ? 'green'
+    : status === 'paused'
+      ? 'amber'
+      : status === 'withdrawn'
+        ? 'red'
+        : 'gray';

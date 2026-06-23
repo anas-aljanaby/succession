@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import type { InstitutionType, Language, Organization } from '../types';
 import { useApp } from '../store/AppContext';
 import { useLanguage } from '../lib/i18n';
+import { can } from '../lib/permissions';
 import { PageHeader } from '../ui/PageHeader';
 import { Button } from '../ui/Button';
 import { Field, TextInput, TextArea, SelectInput } from '../ui/Field';
@@ -17,8 +18,13 @@ export const OrganizationForm: React.FC = () => {
   const { state, dispatch } = useApp();
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const activeRole = state.session.activeRole;
+  const activeUser = state.users.find((user) => user.id === state.session.userId);
 
   const existing = orgId ? state.organizations.find((o) => o.id === orgId) : undefined;
+  const canSubmit = existing
+    ? can(activeRole, 'org.edit', { user: activeUser, orgId: existing.id })
+    : can(activeRole, 'org.create', { user: activeUser });
 
   const [form, setForm] = useState({
     name: existing?.name ?? '',
@@ -35,6 +41,11 @@ export const OrganizationForm: React.FC = () => {
 
   const set = <K extends keyof typeof form>(key: K, value: (typeof form)[K]) =>
     setForm((f) => ({ ...f, [key]: value }));
+
+  if (orgId && !existing) return <Navigate to="/organizations" replace />;
+  if (!canSubmit) {
+    return <Navigate to={existing ? `/organizations/${existing.id}` : '/organizations'} replace />;
+  }
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();

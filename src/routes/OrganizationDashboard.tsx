@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigate, useNavigate, useParams, Link } from 'react-router-dom';
 import { useApp } from '../store/AppContext';
 import { useLanguage } from '../lib/i18n';
+import { can, canAccessOrg, visibleCandidatesForOrg } from '../lib/permissions';
 import { orgReadiness, functionStatusFor, candidatesForFunction } from '../lib/selectors';
 import { PageHeader } from '../ui/PageHeader';
 import { Button } from '../ui/Button';
@@ -13,12 +14,35 @@ export const OrganizationDashboard: React.FC = () => {
   const { state } = useApp();
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const activeRole = state.session.activeRole;
+  const activeUser = state.users.find((user) => user.id === state.session.userId);
+  const ownCandidate = activeUser?.candidateId
+    ? state.candidates.find((candidate) => candidate.id === activeUser.candidateId)
+    : undefined;
 
   const org = state.organizations.find((o) => o.id === orgId);
   if (!org) return <Navigate to="/organizations" replace />;
+  if (activeRole === 'CANDIDATE' && ownCandidate) {
+    return (
+      <Navigate
+        to={`/organizations/${ownCandidate.organizationId}/candidates/${ownCandidate.id}`}
+        replace
+      />
+    );
+  }
+  if (!canAccessOrg(activeRole, { user: activeUser, orgId: org.id })) {
+    return <Navigate to="/organizations" replace />;
+  }
 
   const fns = state.functions.filter((f) => f.organizationId === org.id);
-  const readiness = orgReadiness(org.id, state.functions, state.candidates);
+  const visibleCandidates = visibleCandidatesForOrg(
+    state.candidates,
+    activeRole,
+    activeUser,
+    org.id
+  );
+  const readiness = orgReadiness(org.id, state.functions, visibleCandidates);
+  const canEditOrg = can(activeRole, 'org.edit', { user: activeUser, orgId: org.id });
 
   const meta = [
     `${t(`type.${org.type}`)}`,
@@ -40,9 +64,11 @@ export const OrganizationDashboard: React.FC = () => {
             >
               {t('org.viewCandidates')}
             </Button>
-            <Button onClick={() => navigate(`/organizations/${org.id}/edit`)}>
-              {t('org.edit')}
-            </Button>
+            {canEditOrg ? (
+              <Button onClick={() => navigate(`/organizations/${org.id}/edit`)}>
+                {t('org.edit')}
+              </Button>
+            ) : null}
           </>
         }
       />
@@ -64,8 +90,8 @@ export const OrganizationDashboard: React.FC = () => {
       ) : (
         <div className="grid sm:grid-cols-2 gap-4">
           {fns.map((fn) => {
-            const status = functionStatusFor(fn, state.candidates);
-            const poolSize = candidatesForFunction(fn.id, state.candidates).length;
+            const status = functionStatusFor(fn, visibleCandidates);
+            const poolSize = candidatesForFunction(fn.id, visibleCandidates).length;
             return (
               <Card key={fn.id} to={`/organizations/${org.id}/functions/${fn.id}`}>
                 <div className="flex items-start justify-between gap-2">

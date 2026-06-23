@@ -9,7 +9,7 @@
 
 ---
 
-## Current state (Phases 0–3 done)
+## Current state (Phases 0–4 done)
 
 The new app is built under `src/` and is the live entry (`index.html` → `/src/main.tsx`).
 The old top-level files still exist but are **not loaded**; they get deleted in Phase 6.
@@ -23,9 +23,10 @@ The old top-level files still exist but are **not loaded**; they get deleted in 
   **derived, never stored**.
 - `store/AppContext.tsx` — Context + `useReducer`; persists whole state to `localStorage`
   on every change; syncs `<html lang/dir>`. Hook: `useApp() → { state, dispatch }`.
-- `store/reducer.ts` — actions so far: `SET_LANGUAGE`, `LOGIN`, `SET_ROLE`, `LOGOUT`,
-  `ADD_ORG`, `UPDATE_ORG`. (`LOGIN`/`SET_ROLE` map a role → a representative seeded user
-  so scope follows the active role.)
+- `store/reducer.ts` — actions: `SET_LANGUAGE`, `LOGIN`, `SET_ROLE`, `LOGOUT`, `ADD_ORG`,
+  `UPDATE_ORG`, `ADD_FUNCTION`, `UPDATE_FUNCTION`, `DELETE_FUNCTION`, `SELECT_SUCCESSOR`,
+  `ADD_CANDIDATE`, `SET_SCORE` (clamped 0–100, upsert), `SET_TASK_STATUS`. (`LOGIN`/`SET_ROLE`
+  map a role → a representative seeded user so scope follows the active role.)
 - `store/storage.ts` — versioned key `blacksite.state.v1` (bump to discard stale state),
   `loadState`/`saveState`. No reset button by design.
 - `store/seed.ts` — seed: 3 orgs (`org-acme`, `org-gda`, `org-mubarra`), 5 functions
@@ -45,9 +46,9 @@ The old top-level files still exist but are **not loaded**; they get deleted in 
   `Badge` (+ `statusColor`, `priorityColor`), `PageHeader`, `Field`/`TextInput`/`TextArea`/
   `SelectInput`, `Placeholder`.
 - `routes/` — `Login`, `Home` (role-aware landing), `OrganizationsList`,
-  `OrganizationDashboard`, `OrganizationForm`, `ComingSoon`.
-- `App.tsx` — router. Function routes are live (`FunctionsList`/`FunctionForm`/`FunctionDetail`).
-  **Only the two candidate routes still render `<Stub>` placeholders.**
+  `OrganizationDashboard`, `OrganizationForm`, `FunctionsList`, `FunctionForm`,
+  `FunctionDetail`, `CandidatesList`, `CandidateDetail`, `ComingSoon`.
+- `App.tsx` — router. **All org/function/candidate routes are live — no `<Stub>` left.**
 - `ui/Modal.tsx` — overlay dialog; closes on Escape, backdrop click, or the X (line-icon)
   button. `ui/ProgressBar.tsx` — clamped 0–100 bar + `%` label (reused by Phase 4 readiness).
 
@@ -99,77 +100,125 @@ Verified in Chrome against the checklist below. All boxes pass:
 
 ---
 
-## Next phase — Phase 4: Candidate detail (scoring + journey + readiness)
+## Phase 4 — verified ✅ (reviewer pass, 2026-06-23)
 
-**Goal:** the candidates list and the ⭐ candidate detail screen — editable per-criterion
-scores that drive the readiness gauge, and the 4-stage journey with checkable tasks. After
-this phase the candidate routes stop being stubs and the readiness numbers become *live*
-(editing a score flows all the way up: candidate readiness → function status → org rollup).
+Verified in Chrome against the checklist. All boxes pass:
+- [x] `tsc --noEmit` clean for `src/` (0 errors). No console errors.
+- [x] Candidates list renders for an org; rows resolve the function title (via an id→fn map);
+      name links to the candidate detail.
+- [x] Candidate detail shows profile + per-criterion scores + the 4-stage journey; links from
+      the function pool table land here.
+- [x] **Score edit updates readiness live** — set Khalid's scores → gauge went 56% → 90% with
+      no refresh, and persisted to `localStorage`.
+- [x] Journey checkbox toggles a task and **persists** across refresh; per-stage and overall
+      progress recompute.
+- [x] Function status / readiness stay derived (`computeReadiness`, `functionStatusFor`,
+      `journeyProgress` reused — nothing stored). RTL + English both correct.
 
-### Reducer actions to add (`store/reducer.ts`)
-- `SET_SCORE { candidateId: string; criterionKey: string; value: number }` — **upsert** into
-  the candidate's `scores` (replace the entry for that key, or append if absent). Clamp 0–100.
-  **Decision: scores save live on every input change** (dispatch on `onChange`) — no Save
-  button, no local dirty state. The readiness gauge must visibly update as you type.
-- `SET_TASK_STATUS { candidateId: string; stageCode: string; taskId: string; status: TaskStatus }`
-  — flip one task's status within the matching stage. Keep it immutable (map, don't mutate).
-- `UPDATE_CANDIDATE { candidate: Candidate }` — for editing the profile fields (optional this
-  phase; only add if you build candidate edit. Not required by the checklist.)
+`SET_SCORE` (clamped, upsert) and `SET_TASK_STATUS` (immutable stage/task map) landed in the
+reducer; scores save live on `onChange` as decided. `UPDATE_CANDIDATE` was not needed and
+wasn't added — fine.
 
-Do **not** store `readiness` or function `status` — they stay derived (`computeReadiness`,
-`functionStatusFor`, `journeyProgress` already exist in `lib/selectors.ts`; reuse them).
+**Review notes (non-blocking — the frontend was solid this time, no layout defects):**
+1. `candidateStatusColor` is **duplicated verbatim** in `routes/CandidatesList.tsx` and
+   `routes/CandidateDetail.tsx`. Lift it into `ui/Badge.tsx` next to `statusColor`/
+   `priorityColor` and import from there. Small DRY cleanup; do it opportunistically.
+2. The score `<input type="number">` snaps an emptied field to `0` (`Number('') → 0`). Minor;
+   acceptable for a 0–100 score. Leave unless it annoys in testing.
 
-### Screens (replace the two `<Stub>` routes in `App.tsx`)
-1. **CandidatesList** — `/organizations/:orgId/candidates`
-   - Table/cards of every candidate in the org (across all functions): name, current → target,
-     the function they're in (resolve `criticalFunctionId` → title), readiness, status.
-     Row links to the candidate detail. Empty state when the org has no candidates.
-   - (Supervisor-only filtering is **Phase 5** — show all candidates here for now.)
-2. **CandidateDetail** — `/organizations/:orgId/candidates/:candId` ⭐
-   - Resolve the candidate and its function. If not found → redirect to the candidates list.
-   - **Profile:** name, current/target position, department, status badge.
-   - **Scores panel:** one row per *function criterion* (drive off `fn.criteria`, not the
-     stored scores — a criterion with no score yet shows 0). Each row: label, weight, and a
-     number input (0–100) → `SET_SCORE` on change. Show the live **readiness gauge**
-     (reuse `ProgressBar`) computed via `computeReadiness(candidate, fn)`; it must update as
-     you type. Surface the derived function status nearby so the threshold flip is visible.
-   - **Journey:** the 4 stages from `candidate.journey`; per stage list its tasks with a
-     control to set status (a checkbox toggling `completed`/`notStarted` is enough — an
-     `inProgress` middle state is optional). Show per-stage and overall progress via
-     `journeyProgress` (or a per-stage count). `SET_TASK_STATUS` on toggle.
-3. Wire the candidate-name links already present in `FunctionDetail`'s pool table — they
-   already point at `…/candidates/:candId`, so they light up for free.
+> Heads up for the next implementer: the running Vite dev server binds to **port 3000**
+> (vite default), even though `.claude/launch.json` / older notes mention 3001. Use whatever
+> port the `vite` startup log prints.
 
-### UI primitives
-`ProgressBar` already exists (readiness gauge + journey progress). A `Gauge.tsx` is listed in
-BUILD_PLAN §6 but is **optional** — `ProgressBar` covers it. Reuse `Field`/`TextInput`
-(type="number") for scores and `Badge` for statuses. Add a small checkbox/toggle only if
-needed; a styled native checkbox is fine (no new dependency).
+---
+
+## Next phase — Phase 5: Roles, permissions & coming-soon
+
+**Goal:** make the role switcher *mean* something. Wire a single `can()` permission helper
+into the UI so each role sees/does exactly what APP_SPEC §2.1 allows — hide or disable the
+actions a role can't perform, scope the data a role can see, and make Candidate/Viewer
+read-only. Then fill the remaining nav with `ComingSoon` stubs so there are no dead ends.
+
+This is the first phase with **no new screens** — it's guards and visibility over the screens
+that already exist. The role switcher (topbar) already swaps the active role + seeded user;
+this phase makes the rest of the app react to it.
+
+### The permission model (`src/lib/permissions.ts` — new, with Vitest)
+Build the matrix from APP_SPEC §2.1 as one pure function plus a scope helper:
+
+```ts
+type Action =
+  | 'org.create' | 'org.edit'
+  | 'fn.create' | 'fn.edit' | 'fn.selectSuccessor'
+  | 'candidate.addToPool' | 'candidate.score' | 'candidate.journey'
+  | 'candidate.viewProfile';
+
+can(role, action, scope?): boolean   // scope = { orgId?, candidate? } + the active user
+```
+
+Encode the §2.1 table exactly:
+- **Consultant** — everything, all orgs.
+- **Org Admin** — `org.edit` (own org only), `fn.create`/`fn.edit`/`fn.selectSuccessor`,
+  `candidate.addToPool`, `candidate.journey`, view profiles. **Cannot score.**
+- **HR Manager** — `candidate.addToPool`, `candidate.score`, `candidate.journey`, view
+  profiles. **Cannot create functions or select successors.**
+- **Supervisor** — `candidate.score` / `candidate.journey` **only for candidates whose
+  `supervisorId` is this user**; view assigned profiles only.
+- **Candidate** — read-only; can view **only their own** candidate (the user's `candidateId`).
+- **Viewer** — read-only across their org; may view functions/candidates, no mutating actions.
+
+Keep `can()` pure and table-driven; put the Supervisor/Candidate scope checks (compare
+`candidate.supervisorId` / `user.candidateId`) in a small `scopeOk` helper. **Cover it with
+Vitest** (BUILD_PLAN §1 promised tests for the data + permission layer — this is that test).
+
+> Data note: the seed already has `supervisorId` on the model (BUILD_PLAN §5) and a user per
+> role. Confirm at least one candidate is assigned to the seeded Supervisor and that the
+> Candidate user's `candidateId` points at a real candidate — if not, fix the seed so the
+> scoped roles are demonstrable. Bump the storage key (`blacksite.state.v2`) if you change the
+> seed shape so stale `localStorage` is discarded.
+
+### Wire `can()` into the UI (hide or disable, don't just leave dead buttons)
+- **FunctionsList / FunctionDetail / FunctionForm:** gate "New function", "Edit",
+  "Select successor", and the criteria editor on `fn.create`/`fn.edit`/`fn.selectSuccessor`.
+- **FunctionDetail pool:** gate "Add candidate to pool" on `candidate.addToPool`; gate the
+  per-row "Select successor" on `fn.selectSuccessor`.
+- **CandidateDetail:** gate the score inputs on `candidate.score` (render read-only values when
+  not allowed) and the journey checkboxes on `candidate.journey`. For Candidate/Viewer the
+  whole screen is read-only.
+- **CandidatesList:** Supervisor sees **only assigned** candidates; Candidate is redirected to
+  their own detail; others see all in the org.
+- **OrganizationsList / OrganizationForm:** already partly role-aware — confirm "New org" and
+  "Edit" honor `org.create`/`org.edit` (Org Admin edits own only).
+- **Sidebar:** already role-aware per the file map — re-check it hides what a role can't reach
+  (Candidate sees only their journey; Viewer is read-only entries).
+- Prefer **hiding** an action the role can never do; **disable** (with a reason) only when the
+  control's absence would be confusing. No dead-end buttons.
+
+### Coming-soon stubs in the nav (no dead ends)
+`ComingSoon` already exists at `/coming-soon/:feature`. Add the deferred entries from
+APP_SPEC §6 to the sidebar (Reports/analytics, reflection logs, surveys, AI insights, value
+mirror) pointing at `/coming-soon/<feature>` so the nav is complete. Clean placeholder copy,
+no decorative icons, both `en`/`ar`.
 
 ### i18n keys to add (both `en` + `ar`)
-Candidates list (title/subtitle/empty, column headers: candidate/current→target/function/
-readiness/status — reuse `functions.candidate/current/target/readiness/status` where they
-fit). Candidate detail (profile heading, scores heading, "score" label, journey heading,
-stage progress, task "mark done"/"done", overall progress). Reuse `status.*`, `priority.*`,
-`form.*`. Every new key needs `en` **and** `ar`.
-
-### Router change (`App.tsx`)
-Replace the two `/organizations/:orgId/candidates…` `<Stub>` routes with `CandidatesList` and
-`CandidateDetail`. Add them to `src/routes/` and import in `App.tsx`.
+Any "read-only" / "you don't have permission" microcopy you surface, plus `comingSoon.*`
+labels for each deferred nav entry. Reuse existing keys everywhere else.
 
 ### Verification checklist (reviewer runs this in Chrome)
-- [ ] `tsc --noEmit` clean for `src/`; no console errors.
-- [ ] Candidates list renders for an org; rows resolve the function title; link to detail works.
-- [ ] Candidate detail shows profile + scores + journey; links from the pool table land here.
-- [ ] **Edit a score → readiness gauge updates immediately** (no refresh). Push `fn-cto`'s
-      Khalid above 85 on enough criteria → his readiness ≥ 85 → function `fn-cto` stays/turns
-      `ready`; drop Sara below 85 too and confirm the function flips to `in-progress`.
-- [ ] Function status + org readiness rollup reflect the score change (cross-check the org
-      dashboard / functions list badges).
-- [ ] Toggle journey tasks → per-stage and overall progress update and **persist** across refresh.
-- [ ] No emojis; copy is literal; RTL + English both look right.
+- [ ] `tsc --noEmit` clean for `src/`; **`vitest run` green** (permission matrix covered);
+      no console errors.
+- [ ] Switch through all six roles via the topbar switcher — the sidebar, visible data, and
+      available actions change to match §2.1 each time (no logout needed).
+- [ ] **Org Admin** can create/edit functions and select a successor but the **score inputs
+      are read-only**; **HR Manager** can score and add to pool but **cannot** create functions
+      or select a successor.
+- [ ] **Supervisor** sees only their assigned candidates and can score/journey only those.
+- [ ] **Candidate** lands on their own detail, fully **read-only** (no score inputs, no
+      checkboxes, no edit buttons); cannot reach another candidate.
+- [ ] **Viewer** can browse the org read-only — no mutating action is reachable.
+- [ ] Deferred nav entries route to `ComingSoon`, not dead ends. No emojis; RTL + English right.
 
-### Out of scope for Phase 4 (do NOT build)
-Permissions / read-only Candidate role and Supervisor candidate-filtering (Phase 5).
-ComingSoon nav wiring (Phase 5). Reflection logs, surveys, AI insights, reports (stubs only,
-later). Don't touch the old top-level files (Phase 6 cleanup).
+### Out of scope for Phase 5 (do NOT build)
+The deferred features themselves (reflection logs, surveys, stage closure/signatures, AI
+insights/chatbot, reports/auto-pilot, value mirror) — stubs only. Old top-level file deletion
+is **Phase 6**. Don't add a backend or real auth — roles stay mock/seeded.

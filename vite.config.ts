@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
         }
       },
       test: {
-        include: ['lib/**/*.test.ts'],
+        include: ['src/lib/**/*.test.ts', 'lib/**/*.test.ts'],
       },
     };
 });

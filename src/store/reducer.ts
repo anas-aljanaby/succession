@@ -4,6 +4,7 @@ import type {
   CriticalFunction,
   Language,
   Organization,
+  TaskStatus,
   UserRole,
 } from '../types';
 
@@ -18,13 +19,23 @@ export type Action =
   | { type: 'UPDATE_FUNCTION'; fn: CriticalFunction }
   | { type: 'DELETE_FUNCTION'; fnId: string }
   | { type: 'SELECT_SUCCESSOR'; fnId: string; candidateId: string }
-  | { type: 'ADD_CANDIDATE'; candidate: Candidate };
+  | { type: 'ADD_CANDIDATE'; candidate: Candidate }
+  | { type: 'SET_SCORE'; candidateId: string; criterionKey: string; value: number }
+  | {
+      type: 'SET_TASK_STATUS';
+      candidateId: string;
+      stageCode: string;
+      taskId: string;
+      status: TaskStatus;
+    };
 
 // For the demo, a role maps to a representative seeded user so that scope
 // (organizationId / candidateId) follows the active role.
 function userIdForRole(state: AppState, role: UserRole): string | null {
   return state.users.find((u) => u.roles.includes(role))?.id ?? null;
 }
+
+const clampScore = (value: number) => Math.max(0, Math.min(100, value));
 
 export function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
@@ -85,6 +96,52 @@ export function reducer(state: AppState, action: Action): AppState {
       };
     case 'ADD_CANDIDATE':
       return { ...state, candidates: [...state.candidates, action.candidate] };
+    case 'SET_SCORE':
+      return {
+        ...state,
+        candidates: state.candidates.map((candidate) => {
+          if (candidate.id !== action.candidateId) return candidate;
+
+          const value = clampScore(action.value);
+          const hasScore = candidate.scores.some(
+            (score) => score.criterionKey === action.criterionKey
+          );
+
+          return {
+            ...candidate,
+            scores: hasScore
+              ? candidate.scores.map((score) =>
+                  score.criterionKey === action.criterionKey
+                    ? { ...score, value }
+                    : score
+                )
+              : [...candidate.scores, { criterionKey: action.criterionKey, value }],
+          };
+        }),
+      };
+    case 'SET_TASK_STATUS':
+      return {
+        ...state,
+        candidates: state.candidates.map((candidate) =>
+          candidate.id === action.candidateId
+            ? {
+                ...candidate,
+                journey: candidate.journey.map((stage) =>
+                  stage.code === action.stageCode
+                    ? {
+                        ...stage,
+                        tasks: stage.tasks.map((task) =>
+                          task.id === action.taskId
+                            ? { ...task, status: action.status }
+                            : task
+                        ),
+                      }
+                    : stage
+                ),
+              }
+            : candidate
+        ),
+      };
     default:
       return state;
   }

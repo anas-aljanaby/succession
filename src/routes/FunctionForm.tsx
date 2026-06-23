@@ -4,6 +4,7 @@ import type { CriticalFunction, Priority } from '../types';
 import { useApp } from '../store/AppContext';
 import { DEFAULT_CRITERIA } from '../lib/criteria';
 import { useLanguage } from '../lib/i18n';
+import { can } from '../lib/permissions';
 import { Button } from '../ui/Button';
 import { Field, SelectInput, TextInput } from '../ui/Field';
 import { PageHeader } from '../ui/PageHeader';
@@ -19,6 +20,8 @@ export const FunctionForm: React.FC = () => {
   const { state, dispatch } = useApp();
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const activeRole = state.session.activeRole;
+  const activeUser = state.users.find((user) => user.id === state.session.userId);
 
   const org = state.organizations.find((item) => item.id === orgId);
   const existing = fnId ? state.functions.find((item) => item.id === fnId) : undefined;
@@ -32,6 +35,14 @@ export const FunctionForm: React.FC = () => {
 
   if (!org) return <Navigate to="/organizations" replace />;
   if (fnId && (!existing || existing.organizationId !== org.id)) {
+    return <Navigate to={`/organizations/${org.id}/functions`} replace />;
+  }
+  if (
+    !can(activeRole, existing ? 'fn.edit' : 'fn.create', {
+      user: activeUser,
+      orgId: org.id,
+    })
+  ) {
     return <Navigate to={`/organizations/${org.id}/functions`} replace />;
   }
 

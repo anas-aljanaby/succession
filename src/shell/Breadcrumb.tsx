@@ -23,6 +23,7 @@ export const Breadcrumb: React.FC = () => {
     else if (seg === 'candidates') label = t('nav.candidates');
     else if (seg === 'coming-soon') label = t('comingSoon.title');
     else if (seg === 'new' || seg === 'edit') continue; // not a navigable crumb
+    else if (prev === 'coming-soon') label = t(`comingSoon.feature.${seg}`);
     else if (prev === 'organizations')
       label = state.organizations.find((o) => o.id === seg)?.name ?? seg;
     else if (prev === 'functions')

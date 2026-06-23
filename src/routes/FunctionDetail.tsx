@@ -4,6 +4,7 @@ import type { Candidate } from '../types';
 import { useApp } from '../store/AppContext';
 import { defaultJourney } from '../lib/journey';
 import { useLanguage } from '../lib/i18n';
+import { can, canAccessOrg, visibleCandidatesForOrg } from '../lib/permissions';
 import {
   candidatesForFunction,
   computeReadiness,
@@ -22,6 +23,8 @@ export const FunctionDetail: React.FC = () => {
   const { state, dispatch } = useApp();
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const activeRole = state.session.activeRole;
+  const activeUser = state.users.find((user) => user.id === state.session.userId);
 
   const org = state.organizations.find((item) => item.id === orgId);
   const fn = state.functions.find((item) => item.id === fnId);
@@ -38,13 +41,31 @@ export const FunctionDetail: React.FC = () => {
   if (!fn || fn.organizationId !== org.id) {
     return <Navigate to={`/organizations/${org.id}/functions`} replace />;
   }
+  if (!canAccessOrg(activeRole, { user: activeUser, orgId: org.id })) {
+    return <Navigate to="/organizations" replace />;
+  }
 
   const status = functionStatusFor(fn, state.candidates);
+  const visibleCandidates = visibleCandidatesForOrg(
+    candidatesForFunction(fn.id, state.candidates),
+    activeRole,
+    activeUser,
+    org.id
+  );
   const selectedCandidate = fn.selectedCandidateId
-    ? state.candidates.find((candidate) => candidate.id === fn.selectedCandidateId)
+    ? visibleCandidates.find((candidate) => candidate.id === fn.selectedCandidateId)
     : undefined;
+  const canAddCandidate = can(activeRole, 'candidate.addToPool', {
+    user: activeUser,
+    orgId: org.id,
+  });
+  const canEditFunction = can(activeRole, 'fn.edit', { user: activeUser, orgId: org.id });
+  const canSelectSuccessor = can(activeRole, 'fn.selectSuccessor', {
+    user: activeUser,
+    orgId: org.id,
+  });
 
-  const rankedCandidates = candidatesForFunction(fn.id, state.candidates)
+  const rankedCandidates = visibleCandidates
     .map((candidate) => ({
       candidate,
       readiness: computeReadiness(candidate, fn),
@@ -55,6 +76,7 @@ export const FunctionDetail: React.FC = () => {
     );
 
   const openAddCandidate = () => {
+    if (!canAddCandidate) return;
     setCandidateForm({
       name: '',
       currentPosition: '',
@@ -65,11 +87,13 @@ export const FunctionDetail: React.FC = () => {
   };
 
   const selectSuccessor = (candidateId: string) => {
+    if (!canSelectSuccessor) return;
     dispatch({ type: 'SELECT_SUCCESSOR', fnId: fn.id, candidateId });
   };
 
   const addCandidate = (event: React.FormEvent) => {
     event.preventDefault();
+    if (!canAddCandidate) return;
 
     const candidate: Candidate = {
       id: `cand-${Date.now()}`,
@@ -94,14 +118,20 @@ export const FunctionDetail: React.FC = () => {
         title={fn.title}
         subtitle={org.name}
         actions={
-          <>
-            <Button variant="secondary" onClick={openAddCandidate}>
-              {t('functions.addToPool')}
-            </Button>
-            <Button onClick={() => navigate(`/organizations/${org.id}/functions/${fn.id}/edit`)}>
-              {t('org.edit')}
-            </Button>
-          </>
+          canAddCandidate || canEditFunction ? (
+            <>
+              {canAddCandidate ? (
+                <Button variant="secondary" onClick={openAddCandidate}>
+                  {t('functions.addToPool')}
+                </Button>
+              ) : null}
+              {canEditFunction ? (
+                <Button onClick={() => navigate(`/organizations/${org.id}/functions/${fn.id}/edit`)}>
+                  {t('org.edit')}
+                </Button>
+              ) : null}
+            </>
+          ) : null
         }
       />
 
@@ -207,7 +237,7 @@ export const FunctionDetail: React.FC = () => {
                         <td className="px-2 py-3 align-top">
                           {isSelected ? (
                             <Badge label={t('functions.selected')} color="green" />
-                          ) : (
+                          ) : canSelectSuccessor ? (
                             <Button
                               type="button"
                               variant="ghost"
@@ -216,7 +246,7 @@ export const FunctionDetail: React.FC = () => {
                             >
                               {t('functions.selectSuccessor')}
                             </Button>
-                          )}
+                          ) : null}
                         </td>
                       </tr>
                     );
