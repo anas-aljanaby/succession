@@ -23,11 +23,16 @@ interface CandidatesManagementProps {
   onCreatePlan: (candidateId: string) => void;
 }
 
-const statusStyles: Record<Candidate['status'], { text: string, bg: string, text_color: string }> = {
-    active: { text: 'نشط', bg: 'bg-green-500/10', text_color: 'text-green-400' },
-    paused: { text: 'متوقف مؤقتاً', bg: 'bg-yellow-500/10', text_color: 'text-yellow-400' },
-    completed: { text: 'مكتمل', bg: 'bg-blue-500/10', text_color: 'text-blue-400' },
-    archived: { text: 'مؤرشف', bg: 'bg-gray-500/10', text_color: 'text-gray-400' },
+const statusBg: Record<Candidate['status'], { bg: string, text_color: string }> = {
+    active: { bg: 'bg-green-500/10', text_color: 'text-green-400' },
+    paused: { bg: 'bg-yellow-500/10', text_color: 'text-yellow-400' },
+    completed: { bg: 'bg-blue-500/10', text_color: 'text-blue-400' },
+    archived: { bg: 'bg-gray-500/10', text_color: 'text-gray-400' },
+};
+
+const getStatusText = (statusKey: Candidate['status'], t: Translations): string => {
+    const map: Record<Candidate['status'], string> = { active: t.active, paused: t.paused, completed: t.completed, archived: t.archived };
+    return map[statusKey];
 };
 
 
@@ -74,7 +79,7 @@ const CandidatesManagement: React.FC<CandidatesManagementProps> = (props) => {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap justify-between items-center gap-4">
-        <h2 className="text-3xl font-bold text-white">إدارة المرشحين</h2>
+        <h2 className="text-3xl font-bold text-white">{t.candidatesManagement}</h2>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1 bg-gray-800 p-1 rounded-lg">
             <button onClick={() => handleViewModeChange('grid')} className={`p-2 rounded-md ${candidatesState.viewMode === 'grid' ? 'bg-primary-500' : ''}`}><ViewGridIcon /></button>
@@ -82,24 +87,28 @@ const CandidatesManagement: React.FC<CandidatesManagementProps> = (props) => {
           </div>
           <Button onClick={() => handleOpenForm(null)}>
             <PlusIcon />
-            إضافة مرشح
+            {t.addCandidate}
           </Button>
         </div>
       </div>
 
-      <CandidateFilters 
+      <CandidateFilters
         filters={candidatesState.filters}
         onFilterChange={handleFilterChange}
         departments={allDepartments}
+        t={t}
       />
 
       {candidatesState.viewMode === 'grid' ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredCandidates.map(c => (
-            <CandidateCard 
-                key={c.id} 
+            <CandidateCard
+                key={c.id}
                 candidate={c}
-                onView={() => c.planId && onViewPlan(c.planId)}
+                t={t}
+                onViewPlan={() => c.planId && onViewPlan(c.planId)}
+                onMonitorJourney={() => c.planId && onMonitorJourney(c.planId)}
+                onCreatePlan={() => onCreatePlan(c.id)}
             />
           ))}
         </div>
@@ -109,17 +118,17 @@ const CandidatesManagement: React.FC<CandidatesManagementProps> = (props) => {
             <table className="w-full text-left rtl:text-right">
                 <thead className="bg-gray-900/50">
                     <tr>
-                        <th className="p-4 text-sm font-semibold text-gray-400">اسم المرشح</th>
-                        <th className="p-4 text-sm font-semibold text-gray-400">المنصب المستهدف</th>
-                        <th className="p-4 text-sm font-semibold text-gray-400">المرحلة الحالية</th>
-                        <th className="p-4 text-sm font-semibold text-gray-400">نسبة الإنجاز</th>
-                        <th className="p-4 text-sm font-semibold text-gray-400">الحالة</th>
+                        <th className="p-4 text-sm font-semibold text-gray-400">{t.candidateName}</th>
+                        <th className="p-4 text-sm font-semibold text-gray-400">{t.targetPosition}</th>
+                        <th className="p-4 text-sm font-semibold text-gray-400">{t.currentStage}</th>
+                        <th className="p-4 text-sm font-semibold text-gray-400">{t.completionPercentage}</th>
+                        <th className="p-4 text-sm font-semibold text-gray-400">{t.status}</th>
                         <th className="p-4 text-sm font-semibold text-gray-400">{t.actions}</th>
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-700">
                     {filteredCandidates.map(c => {
-                        const status = statusStyles[c.status];
+                        const status = statusBg[c.status];
                         return (
                             <tr key={c.id} className="hover:bg-gray-800/40">
                                 <td className="p-4 whitespace-nowrap text-white font-medium flex items-center gap-3">
@@ -130,19 +139,19 @@ const CandidatesManagement: React.FC<CandidatesManagementProps> = (props) => {
                                 <td className="p-4 whitespace-nowrap text-gray-400">{getStageName(c.planId)}</td>
                                 <td className="p-4 whitespace-nowrap"><ProgressBar progress={c.journeyProgress} /></td>
                                 <td className="p-4 whitespace-nowrap">
-                                    <span className={`text-xs font-semibold px-2 py-1 rounded-full inline-block ${status.bg} ${status.text_color}`}>{status.text}</span>
+                                    <span className={`text-xs font-semibold px-2 py-1 rounded-full inline-block ${status.bg} ${status.text_color}`}>{getStatusText(c.status, t)}</span>
                                 </td>
                                 <td className="p-4 whitespace-nowrap space-x-2 rtl:space-x-reverse">
                                     {c.planId ? (
                                         <>
-                                            <Button onClick={() => onViewPlan(c.planId!)} variant="secondary" size="sm">عرض الخطة</Button>
-                                            <Button onClick={() => onMonitorJourney(c.planId!)} variant="secondary" size="sm">متابعة الرحلة</Button>
+                                            <Button onClick={() => onViewPlan(c.planId!)} variant="secondary" size="sm">{t.viewPlan}</Button>
+                                            <Button onClick={() => onMonitorJourney(c.planId!)} variant="secondary" size="sm">{t.monitorJourney}</Button>
                                         </>
                                     ) : (
-                                        <Button onClick={() => onCreatePlan(c.id)} size="sm">إنشاء خطة</Button>
+                                        <Button onClick={() => onCreatePlan(c.id)} size="sm">{t.createPlan}</Button>
                                     )}
-                                    <Button onClick={() => handleOpenForm(c)} variant="secondary" size="sm">تعديل</Button>
-                                    <Button onClick={() => onDelete(c.id)} variant="secondary" size="sm" className="hover:!bg-red-500/20 hover:!text-red-400">حذف</Button>
+                                    <Button onClick={() => handleOpenForm(c)} variant="secondary" size="sm">{t.edit}</Button>
+                                    <Button onClick={() => onDelete(c.id)} variant="secondary" size="sm" className="hover:!bg-red-500/20 hover:!text-red-400">{t.delete}</Button>
                                 </td>
                             </tr>
                         )
@@ -153,11 +162,12 @@ const CandidatesManagement: React.FC<CandidatesManagementProps> = (props) => {
         </div>
       )}
 
-      <CandidateForm 
+      <CandidateForm
         isOpen={candidatesState.isFormOpen}
         onClose={() => setCandidatesState(prev => ({ ...prev, isFormOpen: false, editingCandidate: null }))}
         onSave={onSave}
         editingCandidate={candidatesState.editingCandidate}
+        t={t}
       />
     </div>
   );

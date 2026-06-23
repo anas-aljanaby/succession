@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
+import type { Translations } from '../../types';
 import { Card } from '../common/Card';
 import { Select } from '../common/Select';
 import { mockActivityLog } from '../../data/mockActivityLog';
 
-const ActivityTimeline: React.FC = () => {
+interface ActivityTimelineProps {
+  t: Translations;
+}
+
+const ActivityTimeline: React.FC<ActivityTimelineProps> = ({ t }) => {
   const [filter, setFilter] = useState('');
 
   const filteredActivities = mockActivityLog.filter(
     (activity) => !filter || activity.type === filter
   );
-  
+
   const activityTypes = [...new Set(mockActivityLog.map(a => a.type))];
 
   return (
     <Card>
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold text-white">آخر الأنشطة</h3>
+        <h3 className="text-xl font-semibold text-white">{t.latestActivities}</h3>
         <div className="w-48">
           <Select
             options={activityTypes.map(type => ({ value: type, label: type }))}
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            placeholder="فلترة حسب النشاط"
+            placeholder={t.filterByActivity}
           />
         </div>
       </div>

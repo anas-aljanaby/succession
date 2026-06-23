@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Translations } from '../../types';
 import { Card } from '../common/Card';
 
 interface MetricCardProps {
@@ -24,18 +25,19 @@ interface ConsultantMetricsProps {
         activeOrganizations: number;
         pendingApprovals: number;
         monthlyGrowth: number;
-    }
+    };
+    t: Translations;
 }
 
-const ConsultantMetrics: React.FC<ConsultantMetricsProps> = ({ metrics }) => {
+const ConsultantMetrics: React.FC<ConsultantMetricsProps> = ({ metrics, t }) => {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <MetricCard title="إجمالي المؤسسات" value={metrics.totalOrganizations} />
-            <MetricCard title="إجمالي المرشحين النشطين" value={metrics.activeCandidates} />
-            <MetricCard title="معدل الإنجاز العام" value={metrics.averageProgress} unit="%" />
-            <MetricCard title="المؤسسات النشطة/غير النشطة" value={`${metrics.activeOrganizations} / ${metrics.totalOrganizations - metrics.activeOrganizations}`} />
-            <MetricCard title="مراحل تحتاج موافقة" value={metrics.pendingApprovals} />
-            <MetricCard title="الخطط المكتملة هذا الشهر" value={metrics.monthlyGrowth} />
+            <MetricCard title={t.totalOrganizations} value={metrics.totalOrganizations} />
+            <MetricCard title={t.totalActiveCandidates} value={metrics.activeCandidates} />
+            <MetricCard title={t.overallCompletionRate} value={metrics.averageProgress} unit="%" />
+            <MetricCard title={t.activeInactiveOrgs} value={`${metrics.activeOrganizations} / ${metrics.totalOrganizations - metrics.activeOrganizations}`} />
+            <MetricCard title={t.stagesNeedingApproval} value={metrics.pendingApprovals} />
+            <MetricCard title={t.plansCompletedThisMonth} value={metrics.monthlyGrowth} />
         </div>
     );
 };

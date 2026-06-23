@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
+import type { Translations } from '../../types';
 import { Button } from '../common/Button';
 import { PlusIcon } from '../icons/PlusIcon';
-import { ArrowDownTrayIcon } from '../icons/ArrowDownTrayIcon';
 import { ChevronDownIcon } from '../icons/ChevronDownIcon';
 
-const QuickActions: React.FC = () => {
+interface QuickActionsProps {
+  t: Translations;
+}
+
+const QuickActions: React.FC<QuickActionsProps> = ({ t }) => {
   const [isExportOpen, setIsExportOpen] = useState(false);
 
   return (
     <div className="flex flex-wrap gap-4">
       <Button variant="secondary">
         <PlusIcon />
-        إضافة مؤسسة
+        {t.addOrganization}
       </Button>
       <div className="relative inline-block text-left rtl:text-right">
         <div>
           <Button variant="secondary" onClick={() => setIsExportOpen(!isExportOpen)}>
-            تصدير تقرير شامل
+            {t.exportReport}
             <ChevronDownIcon className="-me-1 ms-2 h-5 w-5" />
           </Button>
         </div>
@@ -27,15 +31,15 @@ const QuickActions: React.FC = () => {
             aria-orientation="vertical"
           >
             <div className="py-1" role="none">
-              <a href="#" className="text-gray-200 block px-4 py-2 text-sm hover:bg-gray-600" role="menuitem">PDF: تقرير شامل</a>
-              <a href="#" className="text-gray-200 block px-4 py-2 text-sm hover:bg-gray-600" role="menuitem">Excel: جداول البيانات</a>
-              <a href="#" className="text-gray-200 block px-4 py-2 text-sm hover:bg-gray-600" role="menuitem">CSV: البيانات الخام</a>
+              <a href="#" className="text-gray-200 block px-4 py-2 text-sm hover:bg-gray-600" role="menuitem">{t.pdfReport}</a>
+              <a href="#" className="text-gray-200 block px-4 py-2 text-sm hover:bg-gray-600" role="menuitem">{t.excelTables}</a>
+              <a href="#" className="text-gray-200 block px-4 py-2 text-sm hover:bg-gray-600" role="menuitem">{t.csvData}</a>
             </div>
           </div>
         )}
       </div>
-       <Button variant="secondary">جدولة اجتماع</Button>
-       <Button variant="secondary">إرسال تحديث جماعي</Button>
+       <Button variant="secondary">{t.scheduleMeeting}</Button>
+       <Button variant="secondary">{t.sendMassUpdate}</Button>
     </div>
   );
 };

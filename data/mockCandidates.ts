@@ -87,6 +87,7 @@ export const mockCandidates: Candidate[] = [
     organizationId: 2,
     profileImage: 'https://i.pravatar.cc/150?u=cand105',
     startDate: new Date('2023-02-01').toISOString(),
+    planId: 5,
     journeyProgress: 90,
     status: 'active',
     supervisor: 'Sultan Al-Otaibi',

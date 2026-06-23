@@ -85,6 +85,16 @@ export interface InstitutionalArchiveEntry {
     }
 }
 
+export interface CriticalFunction {
+  id: string;
+  title: string;
+  department: string;
+  priority: 'high' | 'medium' | 'low';
+  candidateId?: string;
+  planId?: number;
+  status: 'vacant' | 'in-progress' | 'ready';
+}
+
 export interface Organization {
   id: number;
   name: string;
@@ -113,6 +123,7 @@ export interface Organization {
   logo?: string;
   createdAt?: string;
   status?: 'active' | 'inactive';
+  criticalFunctions?: CriticalFunction[];
 }
 
 export interface JourneyMilestone {

@@ -4,7 +4,6 @@ import { Card } from '../common/Card';
 import { Button } from '../common/Button';
 import { Spinner } from '../common/Spinner';
 import { mockConsultantMetrics } from '../../data/mockConsultantMetrics';
-import { mockActivityLog } from '../../data/mockActivityLog';
 import ConsultantMetrics from './ConsultantMetrics';
 import ActivityTimeline from './ActivityTimeline';
 import QuickActions from './QuickActions';
@@ -13,9 +12,10 @@ interface ConsultantDashboardProps {
     allPlans: SuccessionPlan[];
     allOrganizations: Organization[];
     t: Translations;
+    onEnterOrg: (orgId: number) => void;
 }
 
-const ConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ allPlans, allOrganizations, t }) => {
+const ConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ allPlans, allOrganizations, t, onEnterOrg }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const ConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ allPlans, all
         return (
             <div className="flex justify-center items-center h-[60vh]">
                 <Spinner />
-                <span className="ml-4 text-gray-400">جاري تحميل لوحة التحكم الشاملة...</span>
+                <span className="ml-4 text-gray-400">{t.loadingConsultantDashboard}</span>
             </div>
         );
     }
@@ -42,24 +42,22 @@ const ConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ allPlans, all
     return (
         <div className="space-y-8 animate-fade-in-up">
             <div>
-                <h2 className="text-3xl font-bold text-white">لوحة تحكم المستشار الشاملة</h2>
-                <p className="text-gray-400 mt-1">نظرة عامة على جميع المؤسسات والأنشطة.</p>
+                <h2 className="text-3xl font-bold text-white">{t.consultantDashboardTitle}</h2>
+                <p className="text-gray-400 mt-1">{t.allOrgsOverview}</p>
             </div>
 
-            {/* Row 1 & 2 */}
-            <ConsultantMetrics metrics={mockConsultantMetrics} />
-            
-            {/* Row 3 - Organizations Table */}
+            <ConsultantMetrics metrics={mockConsultantMetrics} t={t} />
+
             <Card className="col-span-1 lg:col-span-3">
-                <h3 className="text-xl font-semibold text-white mb-4">جدول المؤسسات</h3>
+                <h3 className="text-xl font-semibold text-white mb-4">{t.orgsTable}</h3>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left rtl:text-right">
                         <thead className="border-b border-gray-700">
                             <tr>
-                                <th className="p-4 text-sm font-semibold text-gray-400">اسم المؤسسة</th>
-                                <th className="p-4 text-sm font-semibold text-gray-400">عدد المرشحين</th>
-                                <th className="p-4 text-sm font-semibold text-gray-400">آخر نشاط</th>
-                                <th className="p-4 text-sm font-semibold text-gray-400">الإجراءات</th>
+                                <th className="p-4 text-sm font-semibold text-gray-400">{t.orgName}</th>
+                                <th className="p-4 text-sm font-semibold text-gray-400">{t.candidateCount}</th>
+                                <th className="p-4 text-sm font-semibold text-gray-400">{t.lastActivity}</th>
+                                <th className="p-4 text-sm font-semibold text-gray-400">{t.actions}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,7 +67,7 @@ const ConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ allPlans, all
                                     <td className="p-4 whitespace-nowrap text-gray-300">{org.candidateCount}</td>
                                     <td className="p-4 whitespace-nowrap text-gray-400">{new Date(Date.now() - Math.random() * 10 * 24 * 3600 * 1000).toLocaleDateString()}</td>
                                     <td className="p-4 whitespace-nowrap">
-                                        <Button variant="secondary" size="sm">عرض التفاصيل</Button>
+                                        <Button variant="secondary" size="sm" onClick={() => onEnterOrg(org.id)}>{t.enterWorkspace}</Button>
                                     </td>
                                 </tr>
                             ))}
@@ -78,23 +76,21 @@ const ConsultantDashboard: React.FC<ConsultantDashboardProps> = ({ allPlans, all
                 </div>
             </Card>
 
-            {/* Row 4 - Quick Actions & Alerts */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <Card>
-                    <h3 className="text-xl font-semibold text-white mb-4">تنبيهات</h3>
+                    <h3 className="text-xl font-semibold text-white mb-4">{t.alerts}</h3>
                      <div className="space-y-3">
-                        <div className="p-3 bg-yellow-900/50 rounded-md text-yellow-300">مرشحون متأخرون: 4</div>
-                        <div className="p-3 bg-red-900/50 rounded-md text-red-300">مؤسسات معرضة للخطر: 2</div>
+                        <div className="p-3 bg-yellow-900/50 rounded-md text-yellow-300">{t.delayedCandidates.replace('{count}', '4')}</div>
+                        <div className="p-3 bg-red-900/50 rounded-md text-red-300">{t.atRiskOrgs.replace('{count}', '2')}</div>
                      </div>
                 </Card>
                 <Card className="lg:col-span-2">
-                     <h3 className="text-xl font-semibold text-white mb-4">إجراءات سريعة</h3>
-                     <QuickActions />
+                     <h3 className="text-xl font-semibold text-white mb-4">{t.quickActions}</h3>
+                     <QuickActions t={t} />
                 </Card>
             </div>
-            
-            {/* Additional component from request */}
-            <ActivityTimeline />
+
+            <ActivityTimeline t={t} />
         </div>
     );
 };

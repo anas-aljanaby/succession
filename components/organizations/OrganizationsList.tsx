@@ -24,10 +24,10 @@ const OrganizationsList: React.FC<OrganizationsListProps> = ({ organizations, pl
   return (
     <div className="space-y-6 animate-fade-in-up">
       <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-bold text-white">إدارة المؤسسات</h2>
+        <h2 className="text-3xl font-bold text-white">{t.manageOrganizations}</h2>
         <Button onClick={onAdd}>
           <PlusIcon />
-          إضافة مؤسسة جديدة
+          {t.addNewOrg}
         </Button>
       </div>
       <Card>
@@ -35,10 +35,10 @@ const OrganizationsList: React.FC<OrganizationsListProps> = ({ organizations, pl
           <table className="w-full text-left rtl:text-right">
             <thead className="border-b border-gray-700">
               <tr>
-                <th className="p-4 text-sm font-semibold text-gray-400">اسم المؤسسة</th>
-                <th className="p-4 text-sm font-semibold text-gray-400">تاريخ الإنشاء</th>
-                <th className="p-4 text-sm font-semibold text-gray-400">عدد المرشحين</th>
-                <th className="p-4 text-sm font-semibold text-gray-400">الحالة</th>
+                <th className="p-4 text-sm font-semibold text-gray-400">{t.orgName}</th>
+                <th className="p-4 text-sm font-semibold text-gray-400">{t.creationDate}</th>
+                <th className="p-4 text-sm font-semibold text-gray-400">{t.candidateCount}</th>
+                <th className="p-4 text-sm font-semibold text-gray-400">{t.status}</th>
                 <th className="p-4 text-sm font-semibold text-gray-400">{t.actions}</th>
               </tr>
             </thead>
@@ -52,7 +52,7 @@ const OrganizationsList: React.FC<OrganizationsListProps> = ({ organizations, pl
                   <td className="p-4 whitespace-nowrap text-gray-300">{getCandidateCount(org.id)}</td>
                   <td className="p-4 whitespace-nowrap">
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${org.status === 'active' ? 'bg-green-800 text-green-200' : 'bg-gray-700 text-gray-300'}`}>
-                      {org.status === 'active' ? 'نشطة' : 'غير نشطة'}
+                      {org.status === 'active' ? t.active : t.inactive}
                     </span>
                   </td>
                   <td className="p-4 whitespace-nowrap space-x-2 rtl:space-x-reverse">
@@ -66,8 +66,8 @@ const OrganizationsList: React.FC<OrganizationsListProps> = ({ organizations, pl
           </table>
           {organizations.length === 0 && (
             <div className="text-center py-12 text-gray-500">
-              <p>لم يتم العثور على مؤسسات.</p>
-              <p>اضغط على "إضافة مؤسسة جديدة" للبدء.</p>
+              <p>{t.noOrgsFound}</p>
+              <p>{t.clickAddNewOrg}</p>
             </div>
           )}
         </div>

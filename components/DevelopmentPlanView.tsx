@@ -42,7 +42,7 @@ const DevelopmentPlanView: React.FC<DevelopmentPlanViewProps> = ({ recommendatio
         }
     }
 
-    return { groupedRecommendations: grouped, coreDevelopmentAxes };
+    return { groupedRecommendations: grouped, coreDevelopmentAxes: coreAxes };
   }, [recommendations, stages]);
   
   const languageKey = useMemo(() => language === 'ar' ? 'name_ar' : 'name_en', [language]);

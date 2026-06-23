@@ -1,0 +1,216 @@
+- generic [ref=e2]:
+  - generic [ref=e23]:
+    - banner [ref=e24]:
+      - heading "التعاقب القيادي" [level=1] [ref=e26] [cursor=pointer]
+      - generic [ref=e27]:
+        - generic [ref=e29]:
+          - combobox [ref=e30]:
+            - option "اختر مؤسسة..." [disabled]
+            - option "ACME Corporation"
+            - option "الهيئة العامة للبيانات" [selected]
+            - option "Future Leaders Academy"
+            - option "مبرة المتميزين"
+          - generic:
+            - img
+        - button "تغيير اللغة" [ref=e31] [cursor=pointer]:
+          - img [ref=e32]
+        - button "المستشار الذكي" [ref=e34] [cursor=pointer]:
+          - img [ref=e35]
+        - button "الإشعارات" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+        - button "تسجيل الخروج" [ref=e43] [cursor=pointer]:
+          - img [ref=e44]
+    - navigation [ref=e47]:
+      - generic [ref=e48]:
+        - button "الرئيسية" [ref=e49] [cursor=pointer]
+        - button "المؤسسات" [ref=e50] [cursor=pointer]
+        - button "الهيئة العامة للبيانات" [ref=e246] [cursor=pointer]
+        - button "المرشحون" [ref=e247] [cursor=pointer]
+    - navigation "Breadcrumb" [ref=e248]:
+      - list [ref=e249]:
+        - listitem [ref=e250]:
+          - button "الرئيسية" [ref=e251] [cursor=pointer]:
+            - img [ref=e252]
+            - generic [ref=e254]: الرئيسية
+        - listitem [ref=e255]:
+          - img [ref=e256]
+          - generic [ref=e259]: الهيئة العامة للبيانات
+    - main [ref=e51]:
+      - generic [ref=e260]:
+        - generic [ref=e261]:
+          - heading "لوحة التحكم" [level=2] [ref=e262]
+          - generic [ref=e263]:
+            - generic [ref=e264]: الهيئة العامة للبيانات
+            - generic [ref=e265]: "|"
+            - generic [ref=e266]: القطاع الحكومي
+            - generic [ref=e267]: "|"
+            - generic [ref=e268]:
+              - text: "مستوى النضج:"
+              - generic [ref=e269]: متقدم
+        - generic [ref=e270]:
+          - generic [ref=e271]:
+            - paragraph [ref=e272]: "3"
+            - paragraph [ref=e273]: الوظائف الحرجة
+          - generic [ref=e274]:
+            - paragraph [ref=e275]: "1"
+            - paragraph [ref=e276]: الخلفاء الجاهزون
+          - generic [ref=e277]:
+            - paragraph [ref=e278]: 80%
+            - paragraph [ref=e279]: متوسط مؤشر الجاهزية
+          - generic [ref=e280]:
+            - paragraph [ref=e281]: 90%
+            - paragraph [ref=e282]: نتيجة ORLS
+          - generic [ref=e283]:
+            - paragraph [ref=e284]: 41%
+            - paragraph [ref=e285]: متوسط CRI
+          - generic [ref=e286]:
+            - paragraph [ref=e287]: 59%
+            - paragraph [ref=e288]: متوسط AEI
+        - generic [ref=e289]:
+          - generic [ref=e290]:
+            - heading "الوظائف الحرجة" [level=3] [ref=e292]
+            - generic [ref=e293]:
+              - button "تعديل المراحل" [ref=e294] [cursor=pointer]
+              - button "إضافة وظيفة" [ref=e295] [cursor=pointer]:
+                - img [ref=e296]
+                - text: إضافة وظيفة
+          - generic [ref=e298]:
+            - generic [ref=e299]:
+              - generic [ref=e301]:
+                - generic [ref=e302]:
+                  - img [ref=e304]
+                  - generic [ref=e306]:
+                    - heading "مدير إدارة الاستراتيجية" [level=4] [ref=e307]
+                    - generic [ref=e310]: Strategy
+                - generic [ref=e311]:
+                  - button [ref=e312] [cursor=pointer]:
+                    - img [ref=e313]
+                  - button [ref=e315] [cursor=pointer]:
+                    - img [ref=e316]
+              - generic [ref=e319]:
+                - generic [ref=e320]:
+                  - generic [ref=e321]:
+                    - generic [ref=e322]: L
+                    - generic [ref=e323]:
+                      - paragraph [ref=e324]: Layla Al-Qahtani
+                      - paragraph [ref=e325]: محلل استراتيجي أول
+                  - button [ref=e326] [cursor=pointer]:
+                    - img [ref=e327]
+                - generic [ref=e329]:
+                  - generic [ref=e330]:
+                    - generic [ref=e331]: مؤشر الجاهزية
+                    - generic [ref=e332]: 70%
+                  - button "عرض الخطة →" [ref=e335] [cursor=pointer]
+              - generic [ref=e336]:
+                - generic [ref=e337]: قيد التطوير
+                - generic [ref=e338]: عالية
+            - generic [ref=e339]:
+              - generic [ref=e341]:
+                - generic [ref=e342]:
+                  - img [ref=e344]
+                  - generic [ref=e346]:
+                    - heading "مدير التحول الرقمي" [level=4] [ref=e347]
+                    - generic [ref=e350]: Technology
+                - generic [ref=e351]:
+                  - button [ref=e352] [cursor=pointer]:
+                    - img [ref=e353]
+                  - button [ref=e355] [cursor=pointer]:
+                    - img [ref=e356]
+              - generic [ref=e359]:
+                - generic [ref=e360]:
+                  - generic [ref=e361]:
+                    - generic [ref=e362]: "Y"
+                    - generic [ref=e363]:
+                      - paragraph [ref=e364]: Youssef Mansour
+                      - paragraph [ref=e365]: IT Project Manager
+                  - button [ref=e366] [cursor=pointer]:
+                    - img [ref=e367]
+                - generic [ref=e369]:
+                  - generic [ref=e370]:
+                    - generic [ref=e371]: مؤشر الجاهزية
+                    - generic [ref=e372]: 90%
+                  - button "عرض الخطة →" [ref=e375] [cursor=pointer]
+              - generic [ref=e376]:
+                - generic [ref=e377]: جاهز
+                - generic [ref=e378]: عالية
+            - generic [ref=e379]:
+              - generic [ref=e381]:
+                - generic [ref=e382]:
+                  - img [ref=e384]
+                  - generic [ref=e386]:
+                    - heading "رئيس الشؤون القانونية" [level=4] [ref=e387]
+                    - generic [ref=e390]: Legal
+                - generic [ref=e391]:
+                  - button [ref=e392] [cursor=pointer]:
+                    - img [ref=e393]
+                  - button [ref=e395] [cursor=pointer]:
+                    - img [ref=e396]
+              - generic [ref=e399]:
+                - generic [ref=e400]:
+                  - generic [ref=e401]:
+                    - generic [ref=e402]: M
+                    - generic [ref=e403]:
+                      - paragraph [ref=e404]: Mariam Adel
+                      - paragraph [ref=e405]: Legal Advisor
+                  - button [ref=e406] [cursor=pointer]:
+                    - img [ref=e407]
+                - button "إنشاء خطة" [ref=e409] [cursor=pointer]:
+                  - img [ref=e410]
+                  - text: إنشاء خطة
+              - generic [ref=e413]: قيد التطوير
+        - generic [ref=e415]:
+          - generic [ref=e416]:
+            - heading "المرشحون" [level=3] [ref=e417]
+            - paragraph [ref=e418]: نظرة عامة على المرشح
+          - generic [ref=e419]:
+            - generic [ref=e420]:
+              - paragraph [ref=e421]: "3"
+              - paragraph [ref=e422]: الإجمالي
+            - generic [ref=e423]:
+              - paragraph [ref=e424]: "3"
+              - paragraph [ref=e425]: النشطون
+            - generic [ref=e426]:
+              - paragraph [ref=e427]: "0"
+              - paragraph [ref=e428]: المكتملون
+          - button "إدارة المرشحين" [ref=e429] [cursor=pointer]
+        - generic [ref=e430]:
+          - generic [ref=e431]:
+            - generic [ref=e432]:
+              - heading "أحدث الرؤى" [level=3] [ref=e433]
+              - list [ref=e435]:
+                - listitem [ref=e436]:
+                  - img [ref=e438]
+                  - paragraph [ref=e440]: "ملخص الأرشيف السنوي (2026): متوسط LRI: 80٪، متوسط BVI: 84، ORLS: 90٪، إجمالي الخطط المكتملة: 0."
+                - listitem [ref=e441]:
+                  - img [ref=e443]
+                  - paragraph [ref=e445]: أكملت ليلى القحطاني بنجاح مرحلة 'بناء الكفاءات والتدريب على السياسات'.
+            - generic [ref=e446]:
+              - heading "حلقة التعلم المستمر" [level=3] [ref=e447]
+              - generic [ref=e449]:
+                - img [ref=e450]
+                - paragraph [ref=e452]: لا توجد بيانات ذات صلة لعرضها.
+          - generic [ref=e454]:
+            - heading "أبرز محاور التحسين" [level=3] [ref=e455]
+            - generic [ref=e456]: لا توجد بيانات ذات صلة لعرضها.
+        - generic [ref=e458]:
+          - generic [ref=e459]:
+            - generic [ref=e460]:
+              - img [ref=e461]
+              - heading "وضع الطيار الآلي" [level=3] [ref=e463]
+            - paragraph [ref=e464]: عند التمكين، سيقوم النظام تلقائيًا بتشغيل حلقات التعلم وإنشاء التقارير وإدارة الرؤى بناءً على تحليل الذكاء الاصطناعي. يتطلب هذا درجة جاهزية تنظيمية (ORLS) لا تقل عن 90٪.
+          - generic [ref=e465]:
+            - switch [checked] [ref=e466] [cursor=pointer]
+            - paragraph [ref=e467]: يمكن لمسؤول بيت الخبرة تجاوز متطلب ORLS.
+  - button "Toggle AI Advisor Chat" [ref=e211] [cursor=pointer]:
+    - img [ref=e212]
+  - generic:
+    - generic:
+      - banner:
+        - heading "المستشار الذكي" [level=3]
+        - button:
+          - img
+      - generic:
+        - generic:
+          - textbox "اسأل عن خطط التعاقب، درجات LRI، إلخ..."
+          - button [disabled]:
+            - img

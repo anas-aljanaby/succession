@@ -4,14 +4,9 @@ import type { Language, Organization, SuccessionPlan, User, SuccessionJourneySta
 import { translations, mockOrganizations, mockSuccessionPlans, mockUsers, mockReflectionLogs, leadershipBuildingSurvey, journeyConfig } from './constants';
 import { mockCandidates } from './data/mockCandidates';
 import { mockPlanTemplates } from './data/mockPlanTemplates';
-import Header from './components/Header';
-import Dashboard from './components/Dashboard';
-import SuccessionPlanner from './components/SuccessionPlanner';
-import JourneyMonitor from './components/JourneyMonitor';
-import JourneyTimelinePreview from './components/JourneyTimelinePreview';
-import ValuesDashboard from './components/ValuesDashboard';
-import StageDetailScreen from './components/StageDetailScreen';
-import ConsultingHouseDashboard from './components/ConsultingHouseDashboard';
+import { AppShellFrame } from './components/app/AppShellFrame';
+import { AppViewRouter } from './components/app/AppViewRouter';
+// ConsultingHouseDashboard is rendered via AppViewRouter > ConsultantViews
 import { LanguageSwitcher } from './components/common/LanguageSwitcher';
 import { Button } from './components/common/Button';
 import { Spinner } from './components/common/Spinner';
@@ -30,19 +25,11 @@ import { generateYearlySummary } from './services/archivingService';
 // import SetupReadinessScreen from './components/SetupReadinessScreen';
 import { Modal } from './components/common/Modal';
 import SurveyModal from './components/SurveyModal';
-import CandidatePlanView from './components/CandidatePlanView';
-import LearningExperienceView from './components/LearningExperienceView';
-import StageClosurePage from './components/StageClosurePage';
 import { getClosureType } from './services/hybridClosureFlowController';
-import OrganizationsList from './components/organizations/OrganizationsList';
-import OrganizationDetails from './components/organizations/OrganizationDetails';
-import OrganizationForm from './components/organizations/OrganizationForm';
 import { PermissionProvider } from './lib/permissions/PermissionProvider';
-import CandidatesManagement from './components/candidates/CandidatesManagement';
-import ConsultantDashboard from './components/consultant/ConsultantDashboard';
-import StageDashboard from './components/stage-dashboard/StageDashboard';
-import PlanCreationWizard from './components/plan-flow/PlanCreationWizard';
 import { NotificationProvider } from './lib/notifications/NotificationContext';
+import type { NavigationParams } from './lib/navigation/types';
+import { attachAppApiNavigation, installAppApi } from './lib/navigation/appApiBridge';
 
 
 const getInitialLanguage = (): Language => {
@@ -154,9 +141,47 @@ export const App: React.FC = () => {
       document.documentElement.className = isAuthenticated ? 'theme-corporate' : '';
     }
   }, [selectedOrg, isAuthenticated]);
-  
-  // Fix: Defined handleSuccessfulLogin to manage user session and authentication state.
-  const handleSuccessfulLogin = (user: User) => {
+
+  const navigate = useCallback((view: View, params: NavigationParams = {}) => {
+    if (params.clearPlan) {
+      setActivePlan(null);
+    }
+    if (params.clearStage) {
+      setSelectedStageCode(null);
+      setSelectedStageCodeForDashboard(null);
+    }
+
+    if (params.planId) {
+      const plan = plans.find(p => p.id === params.planId);
+      if (plan) {
+        setActivePlan(plan);
+        const candidate = candidatesState.candidates.find(c => c.planId === params.planId);
+        if (candidate) {
+          setCandidatesState(prev => ({ ...prev, selectedCandidateId: candidate.id }));
+        }
+      }
+    } else if (params.candidateId) {
+      setCandidatesState(prev => ({ ...prev, selectedCandidateId: params.candidateId || null }));
+      const candidate = candidatesState.candidates.find(c => c.id === params.candidateId);
+      if (candidate?.planId) {
+        const plan = plans.find(p => p.id === candidate.planId);
+        setActivePlan(plan || null);
+      } else if (!params.clearPlan) {
+        setActivePlan(null);
+      }
+    }
+
+    if (params.stageId) {
+      setSelectedStageCode(params.stageId);
+      if (view === 'stage-dashboard') {
+        setSelectedStageCodeForDashboard(params.stageId);
+      }
+    }
+
+    setCurrentView(view);
+  }, [plans, candidatesState.candidates]);
+
+  const handleSuccessfulLogin = useCallback((user: User) => {
     const token = generateJwt(user);
     localStorage.setItem('authToken', token);
     setIsAuthenticated(true);
@@ -168,9 +193,9 @@ export const App: React.FC = () => {
     } else if (user.organizationId) {
       setSelectedOrgId(user.organizationId);
     }
-    setCurrentView('dashboard');
-  };
-  
+    navigate(initialRole === 'CONSULTANT' ? 'consulting-house-dashboard' : 'dashboard');
+  }, [navigate]);
+
   // Check for JWT on initial load
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -185,7 +210,7 @@ export const App: React.FC = () => {
             localStorage.removeItem('authToken');
         }
     }
-  }, []);
+  }, [handleSuccessfulLogin]);
 
   // Fix: Defined handleUpdateOrganization to update organization state.
   const handleUpdateOrganization = (updatedOrg: Organization) => {
@@ -474,9 +499,7 @@ export const App: React.FC = () => {
         });
       }
       
-      setCurrentView('dashboard');
-      setActivePlan(null);
-      setSelectedStageCode(null);
+      navigate('dashboard', { clearPlan: true, clearStage: true });
   };
   
   const onRunDailyAnalysis = useCallback(async () => {
@@ -742,7 +765,7 @@ export const App: React.FC = () => {
         };
         setOrganizations(prev => [...prev, newOrg]);
     }
-    setCurrentView('organizations-list');
+    navigate('organizations-list');
     setEditingOrg(null);
   };
 
@@ -824,8 +847,7 @@ export const App: React.FC = () => {
 
   // Expose API for new components
   useEffect(() => {
-    (window as any).appApi = {
-      ...((window as any).appApi || {}),
+    const api = attachAppApiNavigation(navigate, {
       getCandidatesForOrganization: (orgId: number) => candidatesState.candidates.filter(c => c.organizationId === orgId),
       getCandidateById: (candidateId: string) => candidatesState.candidates.find(c => c.id === candidateId),
       getPlanTemplates: () => mockPlanTemplates,
@@ -858,46 +880,6 @@ export const App: React.FC = () => {
         }));
 
         showNotification({ type: 'success', title: t.toast_planCreated_title, subtitle: t.toast_planCreated_subtitle.replace('{candidateName}', candidate.name) });
-      },
-      navigateTo: (view: View, params: any) => {
-        // Handle plan and candidate context first
-        if (params?.planId) {
-            const plan = plans.find(p => p.id === params.planId);
-            if (plan) {
-                setActivePlan(plan);
-                // Also try to sync selected candidate
-                const candidate = candidatesState.candidates.find(c => c.planId === params.planId);
-                if (candidate) {
-                    setCandidatesState(prev => ({ ...prev, selectedCandidateId: candidate.id }));
-                }
-            }
-        } else if (params?.candidateId) {
-          setCandidatesState(prev => ({ ...prev, selectedCandidateId: params.candidateId }));
-          const candidate = candidatesState.candidates.find(c => c.id === params.candidateId);
-          if (candidate?.planId) {
-            const plan = plans.find(p => p.id === candidate.planId);
-            setActivePlan(plan || null);
-          } else {
-            setActivePlan(null);
-          }
-        }
-        
-        // Handle view-specific context
-        if (params?.stageId) {
-          setSelectedStageCode(params.stageId);
-        }
-        
-        // Finally, change the view
-        setCurrentView(view);
-      },
-      setCurrentView: (view: View, params?: any) => {
-        if (params?.stageId) {
-          setSelectedStageCode(params.stageId);
-        }
-        if (params?.candidateId) {
-          setCandidatesState(prev => ({ ...prev, selectedCandidateId: params.candidateId }));
-        }
-        setCurrentView(view);
       },
       // Stage Transition Controller APIs
       getStageStatus: (stageId: string, candidateId?: string) => {
@@ -932,8 +914,9 @@ export const App: React.FC = () => {
           console.log(`Transitioning candidate ${candidateId} to stage ${nextStageId}. This action is handled by navigation.`);
           return Promise.resolve(true);
       },
-    };
-  }, [candidatesState.candidates, showNotification, plans, currentUser, organizations, t]);
+    });
+    installAppApi(api);
+  }, [candidatesState.candidates, showNotification, plans, currentUser, organizations, t, navigate]);
 
   if (!isAuthenticated) {
     const handleStart = (role: UserRole) => {
@@ -958,400 +941,101 @@ export const App: React.FC = () => {
       return <div className="min-h-screen flex items-center justify-center"><Spinner /></div>
   }
   
-  if (!localizedOrg && (currentView !== 'consulting-house-dashboard' && !currentView.startsWith('organization') && currentView !== 'candidates-management' && currentView !== 'consultant-dashboard' && currentView !== 'plan-creation-wizard')) {
-    if (activeRole === 'CONSULTANT') {
-        return (
-            <NotificationProvider>
-                <PermissionProvider user={currentUser} activeRole={activeRole}>
-                 <div className="min-h-screen">
-                    <Header 
-                        t={t} language={language} setLanguage={setLanguage}
-                        orgs={organizations} selectedOrgId={selectedOrgId}
-                        onOrgChange={(id) => setSelectedOrgId(id)}
-                        user={currentUser} activeRole={activeRole}
-                        onRoleSwitch={(role) => setActiveRole(role)}
-                        onLogout={() => setIsLogoutModalOpen(true)}
-                        onNavigateToGlobalDashboard={() => setCurrentView('consulting-house-dashboard')}
-                        onNavigateToConsultantDashboard={() => setCurrentView('consultant-dashboard')}
-                        onNavigateToOrganizations={() => setCurrentView('organizations-list')}
-                        onToggleChatbot={() => setIsChatbotOpen(!isChatbotOpen)}
-                        activePlan={activePlan}
-                        onNavigateToJourneyTimelinePreview={() => {if(activePlan) setCurrentView('journey-timeline-preview')}}
-                        onNavigateToValuesDashboard={() => {if(activePlan) setCurrentView('values-dashboard')}}
-                        onSettingsClick={() => alert(t.alert_settingsClicked)}
-                        candidates={candidatesState.candidates}
-                        selectedCandidateId={candidatesState.selectedCandidateId}
-                        onSelectCandidate={(id) => setCandidatesState(prev => ({ ...prev, selectedCandidateId: id }))}
-                    />
-                    <main className="p-8">
-                        <ConsultingHouseDashboard 
-                            allPlans={localizedPlans} 
-                            allOrganizations={organizations}
-                            allReflectionLogs={reflectionLogs}
-                            t={t}
-                            language={language}
-                            onRunDailyAnalysis={onRunDailyAnalysis}
-                            onUpdateOrganization={handleUpdateOrganization}
-                        />
-                    </main>
-                </div>
-                </PermissionProvider>
-            </NotificationProvider>
-        )
+  // Redirect to consulting home if no org is selected and view requires one
+  if (!localizedOrg && !['consulting-house-dashboard', 'consultant-dashboard', 'organizations-list', 'organization-details', 'organization-form', 'candidates-management', 'plan-creation-wizard'].includes(currentView)) {
+    if (activeRole !== 'CONSULTANT') {
+      return <div>{t.error_no_org}</div>;
     }
-    return <div>{t.error_no_org}</div>;
   }
-  
-  const localizedOrgPlans = localizedPlans.filter(p => p.orgId === localizedOrg?.id);
 
-  let mainContent;
-  if (currentView === 'dashboard') {
-    mainContent = (
-      <Dashboard
-        plans={localizedOrgPlans}
-        organization={localizedOrg!}
-        t={t}
-        viewPlan={(plan) => {
-            setActivePlan(plan);
-            setCurrentView('candidate-plan');
-        }}
-        createPlan={() => setCurrentView('planner')}
-        onUpdateOrganization={handleUpdateOrganization}
-        activeRole={activeRole}
-        onApproveClosure={handleApproveClosure}
-        onReturnClosure={handleReturnClosure}
-        processingPlanIds={processingPlanIds}
-        candidates={candidatesState.candidates.filter(c => c.organizationId === localizedOrg?.id)}
-        onNavigateToCandidates={() => setCurrentView('candidates-management')}
-        onNavigateToPlanWizard={(candidateId?: string) => {
-          setCandidatesState(prev => ({...prev, selectedCandidateId: candidateId || null}));
-          setCurrentView('plan-creation-wizard');
-        }}
-      />
-    );
-  } else if (currentView === 'planner') {
-      mainContent = (
-          <SuccessionPlanner 
-              t={t}
-              onSave={(newPlanData) => {
-                  const newPlan: SuccessionPlan = {
-                      ...newPlanData,
-                      id: Date.now(),
-                      orgId: localizedOrg!.id,
-                  };
-                  setPlans([...plans, newPlan]);
-                  setCurrentView('dashboard');
-              }}
-              onCancel={() => setCurrentView('dashboard')}
-              organization={localizedOrg!}
-          />
-      );
-  } else if (currentView === 'plan-creation-wizard') {
-    mainContent = (
-        <PlanCreationWizard
-            organizationId={selectedOrgId?.toString()}
-            preselectedCandidateId={candidatesState.selectedCandidateId || undefined}
-            t={t}
-            onCancel={() => {
-              setCandidatesState(prev => ({...prev, selectedCandidateId: null}));
-              setCurrentView('dashboard');
-            }}
-            onComplete={(plan) => {
-              // Logic to add the plan and navigate
-              setPlans(prev => [...prev, plan]);
-              setCandidatesState(prev => ({...prev, selectedCandidateId: null}));
-              setActivePlan(plan);
-              setCurrentView('candidate-plan');
-            }}
-        />
-    );
-  } else if (currentView === 'organizations-list') {
-      mainContent = (
-          <OrganizationsList
-              organizations={organizations}
-              plans={plans}
-              t={t}
-              onAdd={() => { setEditingOrg(null); setCurrentView('organization-form'); }}
-              onEdit={(org) => { setEditingOrg(org); setCurrentView('organization-form'); }}
-              onView={(org) => { setSelectedOrgId(org.id); setCurrentView('organization-details'); }}
-              onDelete={(orgId) => setOrganizations(orgs => orgs.filter(o => o.id !== orgId))}
-          />
-      );
-  } else if (currentView === 'organization-form') {
-      mainContent = (
-          <OrganizationForm
-              organization={editingOrg}
-              t={t}
-              onSave={handleSaveOrganization}
-              onCancel={() => setCurrentView('organizations-list')}
-          />
-      );
-  } else if (currentView === 'organization-details' && selectedOrg) {
-      mainContent = (
-          <OrganizationDetails
-              organization={selectedOrg}
-              plans={plans.filter(p => p.orgId === selectedOrg.id)}
-              t={t}
-              onBack={() => { setSelectedOrgId(null); setCurrentView('organizations-list'); }}
-              onEdit={(org) => { setEditingOrg(org); setCurrentView('organization-form'); }}
-          />
-      );
-  } else if (currentView === 'consulting-house-dashboard') {
-       mainContent = (
-            <ConsultingHouseDashboard 
-                allPlans={localizedPlans} 
-                allOrganizations={organizations}
-                allReflectionLogs={reflectionLogs}
-                t={t}
-                language={language}
-                onRunDailyAnalysis={onRunDailyAnalysis}
-                onUpdateOrganization={handleUpdateOrganization}
-            />
-       );
-  } else if (currentView === 'consultant-dashboard') {
-    mainContent = (
-         <ConsultantDashboard
-             allPlans={localizedPlans} 
-             allOrganizations={organizations}
-             t={t}
-         />
-    );
-  } else if (currentView === 'candidates-management') {
-    mainContent = (
-      <CandidatesManagement
-        candidatesState={candidatesState}
-        setCandidatesState={setCandidatesState}
-        plans={plans}
-        stages={localizedOrg?.stages || []}
-        t={t}
-        onSave={handleSaveCandidate}
-        onDelete={handleDeleteCandidate}
-        onViewPlan={(planId) => {
-          const plan = plans.find(p => p.id === planId);
-          if (plan) {
-            setActivePlan(plan);
-            setCurrentView('candidate-plan');
-          }
-        }}
-        onMonitorJourney={(planId) => {
-          const plan = plans.find(p => p.id === planId);
-          if (plan) {
-            setActivePlan(plan);
-            setCurrentView('monitor');
-          }
-        }}
-        onCreatePlan={(candidateId) => {
-            setCandidatesState(prev => ({...prev, selectedCandidateId: candidateId}));
-            setCurrentView('plan-creation-wizard');
-        }}
-      />
-    );
-  } else if (currentView === 'monitor' && localizedActivePlan) {
-      mainContent = (
-          <JourneyMonitor
-              plan={localizedActivePlan}
-              organization={localizedOrg!}
-              t={t}
-              onBack={() => {
-                  setCurrentView('dashboard');
-                  setActivePlan(null);
-              }}
-              onUpdatePlan={handleUpdatePlan}
-              currentUser={currentUser}
-              activeRole={activeRole}
-              allUsers={mockUsers}
-              reflectionLogs={reflectionLogs}
-              onAddReflectionLog={onAddReflectionLog}
-              onFeedbackSubmit={onFeedbackSubmit}
-              language={language}
-              onNavigateToJourneyTimelinePreview={() => setCurrentView('journey-timeline-preview')}
-              onNavigateToValuesDashboard={() => setCurrentView('values-dashboard')}
-              onIndicatorsUpdate={() => console.log("Indicators updated!")}
-              onStageComplete={() => showNotification({ type: 'success', title: 'Stage Complete!', subtitle: 'Great work moving to the next phase.' })}
-              onJourneyComplete={() => setCurrentView('summary-screen')}
-              onStartSurvey={(planId, stageCode, options) => setSurveyState({ isOpen: true, planId, stageCode, ...options })}
-          />
-      );
-  } else if (currentView === 'journey-timeline-preview' && localizedActivePlan) {
-      mainContent = (
-          <JourneyTimelinePreview 
-              plan={localizedActivePlan}
-              organization={localizedOrg!}
-              t={t}
-              onBack={() => {
-                  setActivePlan(null);
-                  setCurrentView('dashboard');
-              }}
-              onStageSelect={(stageCode) => {
-                  setSelectedStageCode(stageCode);
-                  setCurrentView('stage-detail-screen');
-              }}
-              activeRole={activeRole}
-          />
-      );
-  } else if (currentView === 'values-dashboard' && localizedActivePlan) {
-      mainContent = (
-          <ValuesDashboard
-              plan={localizedActivePlan}
-              organization={localizedOrg!}
-              t={t}
-              onBack={() => setCurrentView('monitor')}
-              reflectionLogs={reflectionLogs.filter(r => r.org_id === localizedOrg!.id)}
-              allUsers={mockUsers}
-              currentUser={currentUser}
-              onAddReflectionLog={onAddReflectionLog}
-              language={language}
-              activeRole={activeRole}
-          />
-      );
-  } else if (currentView === 'stage-detail-screen' && localizedActivePlan && selectedStageCode) {
-      mainContent = (
-          <StageDetailScreen
-              plan={localizedActivePlan}
-              organization={localizedOrg!}
-              stageCode={selectedStageCode}
-              t={t}
-              onBack={() => setCurrentView('journey-timeline-preview')}
-              reflectionLogs={reflectionLogs}
-              allUsers={mockUsers}
-              currentUser={currentUser}
-              activeRole={activeRole}
-              onAddReflectionLog={onAddReflectionLog}
-              language={language}
-              onUpdatePlan={handleUpdatePlan}
-              onStartSurvey={(stageCode, options) => setSurveyState({ isOpen: true, planId: localizedActivePlan.id, stageCode, ...options })}
-              showNotification={showNotification}
-              onNavigateToLearningExperience={() => setCurrentView('learning-experience')}
-              onNavigateToClosure={() => { setCurrentView('stage-closure'); }}
-              onNavigateToStageDashboard={(stageCode) => {
-                setSelectedStageCodeForDashboard(stageCode);
-                setCurrentView('stage-dashboard');
-              }}
-          />
-      )
-  } else if (currentView === 'stage-dashboard' && selectedStageCodeForDashboard && localizedOrg) {
-    mainContent = (
-        <StageDashboard
-            stageCode={selectedStageCodeForDashboard}
-            organization={localizedOrg}
-            plans={localizedOrgPlans}
-            candidates={candidatesState.candidates.filter(c => c.organizationId === localizedOrg.id)}
-            t={t}
-            onBack={() => {
-                setCurrentView('journey-timeline-preview');
-                setSelectedStageCodeForDashboard(null);
-            }}
-            onNavigateToCandidate={(planId) => {
-                const plan = plans.find(p => p.id === planId);
-                if (plan) {
-                    setActivePlan(plan);
-                    setCurrentView('monitor');
-                }
-            }}
-        />
-    );
-  } else if (currentView === 'summary-screen' && localizedActivePlan) {
-      mainContent = (
-          <SummaryScreen
-              plan={localizedActivePlan}
-              organization={localizedOrg!}
-              t={t}
-              onBackToDashboard={() => {
-                  setCurrentView('dashboard');
-                  setActivePlan(null);
-              }}
-          />
-      )
-  } else if (currentView === 'candidate-plan') {
-       const planToView = localizedActivePlan || localizedPlans.find(p => p.candidate.id === currentUser.candidateId);
-       if (planToView) {
-           mainContent = (
-               <CandidatePlanView 
-                  plan={planToView}
-                  organization={localizedOrg!}
-                  t={t}
-                  onBack={() => {
-                    setActivePlan(null);
-                    setCurrentView('dashboard');
-                  }}
-                  reflectionLogs={reflectionLogs}
-               />
-           );
-       } else if (activeRole === 'CANDIDATE' && planToView) {
-            setActivePlan(planToView);
-            setCurrentView('journey-timeline-preview');
-       } else {
-            mainContent = <div>{t.noPlanAssigned}</div>
-       }
-  } else if (currentView === 'learning-experience' && localizedActivePlan && selectedStageCode) {
-       const stage = localizedOrg!.stages.find(s => s.code === selectedStageCode);
-       mainContent = (
-           <LearningExperienceView
-              onBack={() => setCurrentView('stage-detail-screen')}
-              t={t}
-              stageCode={selectedStageCode}
-              stageName={stage?.name}
-           />
-       );
-} else if (currentView === 'stage-closure' && localizedActivePlan && selectedStageCode) {
-    mainContent = (
-        <StageClosurePage
-            plan={localizedActivePlan}
-            organization={localizedOrg!}
-            stageCode={selectedStageCode}
-            t={t}
-            onBack={() => setCurrentView('stage-detail-screen')}
-            currentUser={currentUser}
-            activeRole={activeRole}
-            onConfirmClosure={handleConfirmClosure}
-            onUpdatePlan={handleUpdatePlan}
-            showNotification={showNotification}
-            allPlans={localizedOrgPlans}
-            reflectionLogs={reflectionLogs}
-        />
-    )
-}
+  // Provide a fallback org for views that don't need one (consultant/org-management views)
+  const safeLocalizedOrg = localizedOrg || organizations[0] || {} as Organization;
+  const localizedOrgPlans = localizedPlans.filter(p => p.orgId === safeLocalizedOrg?.id);
 
-const candidatesForHeader = selectedOrgId
-    ? candidatesState.candidates.filter(c => c.organizationId === selectedOrgId)
-    : [];
+  const handleEnterOrg = (orgId: number) => {
+    setSelectedOrgId(orgId);
+    navigate('dashboard', { clearPlan: true, clearStage: true });
+  };
+
+  const mainContent = (
+    <AppViewRouter
+      currentView={currentView}
+      t={t}
+      language={language}
+      organizations={organizations}
+      selectedOrg={selectedOrg}
+      selectedOrgId={selectedOrgId}
+      localizedOrg={safeLocalizedOrg}
+      localizedPlans={localizedPlans}
+      localizedOrgPlans={localizedOrgPlans}
+      localizedActivePlan={localizedActivePlan}
+      plans={plans}
+      reflectionLogs={reflectionLogs}
+      currentUser={currentUser}
+      activeRole={activeRole}
+      selectedStageCode={selectedStageCode}
+      selectedStageCodeForDashboard={selectedStageCodeForDashboard}
+      editingOrg={editingOrg}
+      candidatesState={candidatesState}
+      processingPlanIds={processingPlanIds}
+      navigate={navigate}
+      setPlans={setPlans}
+      setActivePlan={setActivePlan}
+      setSelectedStageCodeForDashboard={setSelectedStageCodeForDashboard}
+      setSelectedOrgId={setSelectedOrgId}
+      setEditingOrg={setEditingOrg}
+      setOrganizations={setOrganizations}
+      setCandidatesState={setCandidatesState}
+      setSurveyState={setSurveyState}
+      handleUpdateOrganization={handleUpdateOrganization}
+      handleApproveClosure={handleApproveClosure}
+      handleReturnClosure={handleReturnClosure}
+      handleSaveOrganization={handleSaveOrganization}
+      handleSaveCandidate={handleSaveCandidate}
+      handleDeleteCandidate={handleDeleteCandidate}
+      handleUpdatePlan={handleUpdatePlan}
+      handleConfirmClosure={handleConfirmClosure}
+      onRunDailyAnalysis={onRunDailyAnalysis}
+      onAddReflectionLog={onAddReflectionLog}
+      onFeedbackSubmit={onFeedbackSubmit}
+      showNotification={showNotification}
+      onEnterOrg={handleEnterOrg}
+    />
+  );
 
   return (
     <NotificationProvider>
         <PermissionProvider user={currentUser} activeRole={activeRole}>
-        <div className="min-h-screen">
-        <Header 
-            t={t} language={language} setLanguage={setLanguage}
-            orgs={organizations} selectedOrgId={selectedOrgId}
-            onOrgChange={(id) => setSelectedOrgId(id)}
-            user={currentUser} activeRole={activeRole}
+        <AppShellFrame
+            t={t}
+            language={language}
+            setLanguage={setLanguage}
+            organizations={organizations}
+            selectedOrgId={selectedOrgId}
+            selectedOrg={selectedOrg || null}
+            onOrgChange={(id) => {
+              setSelectedOrgId(id);
+              navigate('dashboard', { clearPlan: true, clearStage: true });
+            }}
+            user={currentUser}
+            activeRole={activeRole}
             onRoleSwitch={(role) => setActiveRole(role)}
             onLogout={() => setIsLogoutModalOpen(true)}
-            onNavigateToGlobalDashboard={() => setCurrentView('dashboard')}
-            onNavigateToConsultantDashboard={() => setCurrentView('consultant-dashboard')}
-            onNavigateToOrganizations={() => setCurrentView('organizations-list')}
+            onNavigateHome={() => {
+              setSelectedOrgId(null);
+              setActivePlan(null);
+              navigate('consulting-house-dashboard', { clearPlan: true, clearStage: true });
+            }}
             onToggleChatbot={() => setIsChatbotOpen(!isChatbotOpen)}
             activePlan={activePlan}
-            onNavigateToJourneyTimelinePreview={() => {if(activePlan) setCurrentView('journey-timeline-preview')}}
-            onNavigateToValuesDashboard={() => {if(activePlan) setCurrentView('values-dashboard')}}
-            onSettingsClick={() => alert(t.alert_settingsClicked)}
-            candidates={candidatesForHeader}
-            selectedCandidateId={candidatesState.selectedCandidateId}
-            onSelectCandidate={(id) => {
-              const candidate = candidatesState.candidates.find(c => c.id === id);
-              if (candidate?.planId) {
-                const plan = plans.find(p => p.id === candidate.planId);
-                if (plan) setActivePlan(plan);
-                else setActivePlan(null);
-              } else {
-                setActivePlan(null);
-              }
-              setCandidatesState(prev => ({ ...prev, selectedCandidateId: id }));
-            }}
-        />
-        <main className="p-4 sm:p-6 lg:p-8">
+            selectedStageCode={selectedStageCode}
+            currentView={currentView}
+            onNavigateSection={(view) => navigate(view)}
+            navigate={navigate}
+            onClearOrg={() => setSelectedOrgId(null)}
+        >
             {mainContent}
-        </main>
+        </AppShellFrame>
         <AiChatbot 
             isOpen={isChatbotOpen}
             onToggle={() => setIsChatbotOpen(!isChatbotOpen)}
@@ -1360,7 +1044,7 @@ const candidatesForHeader = selectedOrgId
                 const newHistory: ChatMessage[] = [...chatMessages, { sender: 'user', text: message }];
                 setChatMessages(newHistory);
                 setIsChatbotLoading(true);
-                const aiResponse = await getChatbotResponse(newHistory, currentUser, activeRole, localizedOrg, language);
+                const aiResponse = await getChatbotResponse(newHistory, currentUser, activeRole, safeLocalizedOrg, language);
                 setChatMessages([...newHistory, { sender: 'ai', text: aiResponse }]);
                 setIsChatbotLoading(false);
             }}
@@ -1380,8 +1064,7 @@ const candidatesForHeader = selectedOrgId
                         setActiveRole(null);
                         setSelectedOrgId(null);
                         setIsLogoutModalOpen(false);
-                        setCurrentView('dashboard');
-                        setActivePlan(null);
+                        navigate('dashboard', { clearPlan: true, clearStage: true });
                         setCandidatesState(prev => ({ ...prev, selectedCandidateId: null }));
                     }}>{t.confirm}</Button>
                 </div>
@@ -1395,12 +1078,11 @@ const candidatesForHeader = selectedOrgId
                     t={t}
                     onSubmit={onSurveySubmit}
                     stageCode={surveyState.stageCode}
-                    stageName={localizedOrg?.stages.find(s => s.code === surveyState.stageCode)?.name}
+                    stageName={safeLocalizedOrg?.stages?.find(s => s.code === surveyState.stageCode)?.name}
                     title={surveyState.title}
                     description={surveyState.description}
                 />
             )}
-        </div>
         </PermissionProvider>
     </NotificationProvider>
   );

@@ -1,0 +1,23 @@
+- generic [ref=e3]:
+  - generic [ref=e5]:
+    - button "Switch to English" [ref=e6] [cursor=pointer]: EN
+    - button "Switch to Arabic" [pressed] [ref=e7] [cursor=pointer]: AR
+  - generic [ref=e9]:
+    - img [ref=e12]
+    - generic [ref=e14]:
+      - heading "أهلاً بك في رحلة التعاقب القيادي مستشارك، مصطفى الموصل" [level=1] [ref=e15]:
+        - text: أهلاً بك في
+        - generic [ref=e16]: رحلة التعاقب القيادي
+        - generic [ref=e17]: مستشارك، مصطفى الموصل
+      - generic [ref=e19]:
+        - combobox [ref=e20]:
+          - option "اختر دورك للبدء..." [disabled]
+          - option "مرشح قيادي"
+          - option "مشرف مباشر"
+          - option "مدير الموارد البشرية"
+          - option "مسؤول المؤسسة"
+          - option "مستشار بيت الخبرة" [selected]
+          - option "مطّلع"
+        - generic:
+          - img
+      - button "ابدأ التجربة" [ref=e22] [cursor=pointer]

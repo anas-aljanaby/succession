@@ -20,16 +20,20 @@ interface ConsultingHouseDashboardProps {
   language: Language;
   onRunDailyAnalysis: () => Promise<void>;
   onUpdateOrganization: (org: Organization) => void;
+  onNavigateToOrganizations: () => void;
 }
 
-function MetricCard({ title, value }: { title: string; value: string; }) {
-    return (
-        <Card className="text-center">
-            <h3 className="text-lg font-medium text-gray-300">{title}</h3>
-            <p className="text-5xl font-bold text-white mt-2">{value}</p>
-        </Card>
-    );
-}
+const ArrowRightIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className || "w-5 h-5"}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+  </svg>
+);
+
+const BuildingIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6h1.5m-1.5 3h1.5m-1.5 3h1.5M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m3.75-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21" />
+  </svg>
+);
 
 function ReportDetailView({ reportData, t }: { reportData: ReportData, t: Translations }) {
     return (
@@ -146,7 +150,7 @@ function ArchiveDetailModal({ entry, onClose, t }: { entry: InstitutionalArchive
 
 type PendingReport = { org: Organization, report: MonthlyReport };
 
-function ConsultingHouseDashboard({ allPlans, allOrganizations, allReflectionLogs, t, language, onRunDailyAnalysis, onUpdateOrganization }: ConsultingHouseDashboardProps) {
+function ConsultingHouseDashboard({ allPlans, allOrganizations, allReflectionLogs, t, language, onRunDailyAnalysis, onUpdateOrganization, onNavigateToOrganizations }: ConsultingHouseDashboardProps) {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [selectedReport, setSelectedReport] = useState<{ org: Organization, report: MonthlyReport } | null>(null);
@@ -237,29 +241,58 @@ function ConsultingHouseDashboard({ allPlans, allOrganizations, allReflectionLog
 
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-center">
-        <div>
-            <h2 className="text-3xl font-bold text-white">{t.consultingDashboardTitle}</h2>
-            <p className="text-gray-400 mt-1">{t.overview}</p>
+      {/* Hero Section */}
+      <div className="rounded-2xl bg-gradient-to-br from-gray-800/80 via-gray-800/40 to-gray-900/80 border border-white/[.06] p-6 sm:p-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">{t.welcomeBackConsultant}</h2>
+            <p className="text-gray-400 mt-1">{t.dashboardSubtitle}</p>
+          </div>
+          <Button onClick={handleRunAnalysis} disabled={isAnalyzing} variant="secondary" size="sm">
+              {isAnalyzing ? <Spinner/> : <PlayIcon />}
+              {isAnalyzing ? t.analyzing : t.runDailyAnalysis}
+          </Button>
         </div>
-        <Button onClick={handleRunAnalysis} disabled={isAnalyzing}>
-            {isAnalyzing ? <Spinner/> : <PlayIcon />}
-            {isAnalyzing ? t.analyzing : t.runDailyAnalysis}
-        </Button>
+
+        {/* Compact Inline Metrics */}
+        <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-6">
+          <div className="bg-gray-900/60 rounded-xl p-4 text-center border border-white/[.04]">
+            <p className="text-3xl sm:text-4xl font-bold text-white">{avgLri}%</p>
+            <p className="text-xs sm:text-sm text-gray-400 mt-1">{t.avgLriScore}</p>
+          </div>
+          <div className="bg-gray-900/60 rounded-xl p-4 text-center border border-white/[.04]">
+            <p className="text-3xl sm:text-4xl font-bold text-white">{avgOrls}%</p>
+            <p className="text-xs sm:text-sm text-gray-400 mt-1">{t.avgOrls}</p>
+          </div>
+          <div className="bg-gray-900/60 rounded-xl p-4 text-center border border-white/[.04]">
+            <p className="text-3xl sm:text-4xl font-bold text-white">{avgBvi}</p>
+            <p className="text-xs sm:text-sm text-gray-400 mt-1">{t.avgBvi}</p>
+          </div>
+        </div>
+
+        {/* Prominent Go to Institutes CTA */}
+        <button
+          onClick={onNavigateToOrganizations}
+          className="w-full group flex items-center justify-between gap-4 rounded-xl bg-primary-600/10 border-2 border-primary-500 hover:bg-primary-600 transition-all duration-200 p-5 sm:p-6 text-white hover:shadow-lg hover:shadow-primary-600/20"
+        >
+          <div className="flex items-center gap-4">
+            <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-white/15 flex items-center justify-center">
+              <BuildingIcon className="w-6 h-6" />
+            </div>
+            <div className="text-start">
+              <span className="text-lg sm:text-xl font-bold block">{t.goToInstitutes}</span>
+              <span className="text-sm text-white/70">{t.goToInstitutesSubtitle}</span>
+            </div>
+          </div>
+          <ArrowRightIcon className="w-6 h-6 flex-shrink-0 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
+        </button>
       </div>
 
-      {/* Global Metrics */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <MetricCard title={t.avgLriScore} value={`${avgLri}%`} />
-        <MetricCard title={t.avgOrls} value={`${avgOrls}%`} />
-        <MetricCard title={t.avgBvi} value={`${avgBvi}`} />
-      </div>
-      
-       {/* Monthly Reports & Global Themes */}
-       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {/* Monthly Reports & Global Themes */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className={pendingReports.length === 0 ? 'border-dashed !border-white/[.08]' : ''}>
                 <div className="flex items-center gap-3 mb-4">
-                    <DocumentTextIcon className="text-cyan-400" />
+                    <DocumentTextIcon className="w-5 h-5 text-cyan-400 shrink-0" />
                     <h3 className="text-xl font-semibold text-white">{t.monthlyReports}</h3>
                 </div>
                 {pendingReports.length > 0 ? (
@@ -280,9 +313,9 @@ function ConsultingHouseDashboard({ allPlans, allOrganizations, allReflectionLog
                         ))}
                     </ul>
                 ) : (
-                    <div className="flex flex-col items-center justify-center text-center py-4 min-h-[240px]">
-                        <DocumentTextIcon className="w-16 h-16 text-gray-500 opacity-30" />
-                        <p className="mt-4 text-sm text-gray-500">{t.noPendingReports}</p>
+                    <div className="flex flex-col items-center justify-center text-center py-8 gap-2">
+                        <DocumentTextIcon className="w-8 h-8 text-gray-600" />
+                        <p className="text-sm text-gray-500">{t.noPendingReports}</p>
                     </div>
                 )}
             </Card>
@@ -308,12 +341,12 @@ function ConsultingHouseDashboard({ allPlans, allOrganizations, allReflectionLog
                 const avgReadiness = orgPlans.length > 0
                     ? Math.round(orgPlans.reduce((acc, plan) => acc + plan.readiness, 0) / orgPlans.length)
                     : 0;
-                
+
                 const topValues = analyzeValuesFromReflections(orgLogs, language);
 
                 const orlsScores = Object.values(org.orlsAssessment) as number[];
                 const orlsAverage = orlsScores.length > 0 ? Math.round(orlsScores.reduce((sum, score) => sum + score, 0) / orlsScores.length) : 0;
-                
+
                 const stagesWithMetrics = org.stages.filter(s => typeof s.cri === 'number');
                 const highCri = stagesWithMetrics.some(s => s.cri! > 70);
 
@@ -341,7 +374,7 @@ function ConsultingHouseDashboard({ allPlans, allOrganizations, allReflectionLog
                                 <p className="text-xs text-gray-400">{t.orlsScore}</p>
                             </div>
                         </div>
-                        
+
                         <div>
                             <h5 className="text-sm font-semibold text-gray-300 mb-2">{t.topValues}</h5>
                             {topValues.length > 0 ? (
