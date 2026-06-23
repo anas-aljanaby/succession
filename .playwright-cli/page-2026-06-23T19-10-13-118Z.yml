@@ -1,0 +1,95 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e8] [cursor=pointer]:
+        - /url: /organizations
+    - navigation [ref=e9]:
+      - link "لوحة المعلومات" [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "المزيد (قريباً)" [ref=e13] [cursor=pointer]:
+        - /url: /coming-soon
+        - text: المزيد
+        - generic [ref=e14]: (قريباً)
+  - generic [ref=e15]:
+    - banner [ref=e16]:
+      - navigation [ref=e17]:
+        - link "الرئيسية" [ref=e18] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e19]: /
+        - link "المؤسسات" [ref=e20] [cursor=pointer]:
+          - /url: /organizations
+        - generic [ref=e21]: /
+        - generic [ref=e22]: ACME Corporation
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - generic [ref=e25]: المؤسسة
+          - combobox "المؤسسة" [ref=e26]:
+            - option "ACME Corporation" [selected]
+            - option "الهيئة العامة للبيانات"
+            - option "مبرة المتميزين"
+        - generic [ref=e27]:
+          - generic [ref=e28]: المرشح
+          - combobox "المرشح" [ref=e29]:
+            - option "اختر مرشحاً" [disabled] [selected]
+            - option "Khalid Al-Ghamdi"
+            - option "Sara Mansour"
+            - option "Omar Abdullah"
+        - generic [ref=e30]:
+          - generic [ref=e31]: الدور
+          - combobox "الدور" [ref=e32]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e33] [cursor=pointer]
+        - button "تسجيل الخروج" [ref=e34] [cursor=pointer]
+    - main [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]:
+            - heading "ACME Corporation" [level=1] [ref=e39]
+            - paragraph [ref=e40]: "شركات · Technology · متطورة · الجاهزية: 33%"
+          - generic [ref=e41]:
+            - button "عرض المرشحين" [ref=e42] [cursor=pointer]
+            - button "تعديل" [ref=e43] [cursor=pointer]
+        - generic [ref=e44]:
+          - heading "الوظائف الحرجة" [level=2] [ref=e45]
+          - link "عرض الكل" [ref=e46] [cursor=pointer]:
+            - /url: /organizations/org-acme/functions
+        - generic [ref=e47]:
+          - 'link "Chief Technology Officer جاهز Technology عالية المرشحون: 2" [ref=e48] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-cto
+            - generic [ref=e49]:
+              - heading "Chief Technology Officer" [level=3] [ref=e50]
+              - generic [ref=e51]: جاهز
+            - paragraph [ref=e52]: Technology
+            - generic [ref=e53]:
+              - generic [ref=e54]: عالية
+              - generic [ref=e55]: "المرشحون: 2"
+          - 'link "Chief Marketing Officer قيد التنفيذ Marketing متوسطة المرشحون: 1" [ref=e56] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-cmo
+            - generic [ref=e57]:
+              - heading "Chief Marketing Officer" [level=3] [ref=e58]
+              - generic [ref=e59]: قيد التنفيذ
+            - paragraph [ref=e60]: Marketing
+            - generic [ref=e61]:
+              - generic [ref=e62]: متوسطة
+              - generic [ref=e63]: "المرشحون: 1"
+          - 'link "VP of Engineering شاغرة Technology عالية المرشحون: 0" [ref=e64] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-vpe
+            - generic [ref=e65]:
+              - heading "VP of Engineering" [level=3] [ref=e66]
+              - generic [ref=e67]: شاغرة
+            - paragraph [ref=e68]: Technology
+            - generic [ref=e69]:
+              - generic [ref=e70]: عالية
+              - generic [ref=e71]: "المرشحون: 0"

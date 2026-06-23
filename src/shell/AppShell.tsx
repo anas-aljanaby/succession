@@ -1,12 +1,21 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useApp } from '../store/AppContext';
 import { Sidebar } from './Sidebar';
 import { Topbar } from './Topbar';
 
 export const AppShell: React.FC = () => {
   const { state, dispatch } = useApp();
-  const activeRole = state.session.activeRole ?? 'CONSULTANT';
+  const navigate = useNavigate();
+  const activeRole = state.session.activeRole;
+
+  useEffect(() => {
+    if (!state.session.userId || !activeRole) {
+      navigate('/login', { replace: true });
+    }
+  }, [state.session.userId, activeRole, navigate]);
+
+  if (!state.session.userId || !activeRole) return null;
 
   return (
     <div className="min-h-screen flex bg-gray-900 text-gray-100">

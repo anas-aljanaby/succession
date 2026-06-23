@@ -19,15 +19,6 @@ function useActiveOrgId(): string | null {
   return match ? match[1] : null;
 }
 
-const comingSoonItems = [
-  'reports',
-  'reflection-logs',
-  'surveys',
-  'stage-closure',
-  'ai-insights',
-  'value-mirror',
-];
-
 export const Sidebar: React.FC = () => {
   const { t } = useLanguage();
   const { state } = useApp();
@@ -89,12 +80,10 @@ export const Sidebar: React.FC = () => {
           <NavLink to={`/organizations/${orgId}/candidates`} className={linkClass}>
             {t('nav.candidates')}
           </NavLink>
-          {comingSoonItems.map((feature) => (
-            <NavLink key={feature} to={`/coming-soon/${feature}`} className={linkClass}>
-              {t(`comingSoon.feature.${feature}`)}{' '}
-              <span className="text-xs text-gray-500">({t('nav.soon')})</span>
-            </NavLink>
-          ))}
+          <NavLink to="/coming-soon" className={linkClass}>
+            {t('nav.more')}{' '}
+            <span className="text-xs text-gray-500">({t('nav.soon')})</span>
+          </NavLink>
         </nav>
       )}
     </aside>

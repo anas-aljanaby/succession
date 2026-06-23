@@ -37,6 +37,7 @@ export const App: React.FC = () => {
             <Route path="/organizations/:orgId/candidates" element={<CandidatesList />} />
             <Route path="/organizations/:orgId/candidates/:candId" element={<CandidateDetail />} />
 
+            <Route path="/coming-soon" element={<ComingSoon />} />
             <Route path="/coming-soon/:feature" element={<ComingSoon />} />
           </Route>
 
