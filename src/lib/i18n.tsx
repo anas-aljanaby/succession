@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { Language } from '../types';
+import { useApp } from '../store/AppContext';
 
 type Dict = Record<string, string>;
 
@@ -56,35 +56,22 @@ const translations: Record<Language, Dict> = {
   },
 };
 
-interface LanguageContextValue {
+interface LanguageApi {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
   dir: 'rtl' | 'ltr';
 }
 
-const LanguageContext = createContext<LanguageContextValue | null>(null);
-
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('ar');
-  const dir = language === 'ar' ? 'rtl' : 'ltr';
-
-  useEffect(() => {
-    document.documentElement.lang = language;
-    document.documentElement.dir = dir;
-  }, [language, dir]);
-
-  const t = (key: string) => translations[language][key] ?? key;
-
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, dir }}>
-      {children}
-    </LanguageContext.Provider>
-  );
-};
-
-export const useLanguage = (): LanguageContextValue => {
-  const ctx = useContext(LanguageContext);
-  if (!ctx) throw new Error('useLanguage must be used within LanguageProvider');
-  return ctx;
+// Language lives in the app store (so it persists). This hook is the stable read/write
+// surface used across the UI.
+export const useLanguage = (): LanguageApi => {
+  const { state, dispatch } = useApp();
+  const language = state.ui.language;
+  return {
+    language,
+    setLanguage: (lang) => dispatch({ type: 'SET_LANGUAGE', language: lang }),
+    t: (key) => translations[language][key] ?? key,
+    dir: language === 'ar' ? 'rtl' : 'ltr',
+  };
 };
