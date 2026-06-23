@@ -1,8 +1,13 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
-import type { AppState } from '../types';
+import type { AppState, Language } from '../types';
 import { reducer, type Action } from './reducer';
 import { loadState, saveState } from './storage';
 import { seedState } from './seed';
+
+const APP_TITLE: Record<Language, string> = {
+  en: 'Leadership Succession',
+  ar: 'التعاقب القيادي',
+};
 
 interface AppContextValue {
   state: AppState;
@@ -25,6 +30,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     document.documentElement.lang = state.ui.language;
     document.documentElement.dir = state.ui.language === 'ar' ? 'rtl' : 'ltr';
+    document.title = APP_TITLE[state.ui.language];
   }, [state.ui.language]);
 
   return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;

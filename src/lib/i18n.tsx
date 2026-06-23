@@ -5,7 +5,7 @@ type Dict = Record<string, string>;
 
 const translations: Record<Language, Dict> = {
   en: {
-    appName: 'Succession',
+    appName: 'Leadership Succession',
     'nav.home': 'Home',
     'nav.organizations': 'Organizations',
     'nav.dashboard': 'Dashboard',
@@ -200,7 +200,7 @@ const translations: Record<Language, Dict> = {
     'lang.ar': 'Arabic',
   },
   ar: {
-    appName: 'التعاقب',
+    appName: 'التعاقب القيادي',
     'nav.home': 'الرئيسية',
     'nav.organizations': 'المؤسسات',
     'nav.dashboard': 'لوحة المعلومات',
@@ -240,7 +240,7 @@ const translations: Record<Language, Dict> = {
     'role.SUPERVISOR': 'المشرف',
     'role.CANDIDATE': 'المرشح',
     'role.VIEWER': 'مطّلع',
-    'login.title': 'تعاقب القيادات',
+    'login.title': 'التعاقب القيادي',
     'login.subtitle': 'اختر دوراً للمتابعة',
     'comingSoon.title': 'قريباً',
     'comingSoon.hubTitle': 'المزيد',
