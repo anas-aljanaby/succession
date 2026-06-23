@@ -132,93 +132,90 @@ wasn't added — fine.
 
 ---
 
-## Next phase — Phase 5: Roles, permissions & coming-soon
+## Phase 5 — verified ✅ (reviewer pass, 2026-06-23)
 
-**Goal:** make the role switcher *mean* something. Wire a single `can()` permission helper
-into the UI so each role sees/does exactly what APP_SPEC §2.1 allows — hide or disable the
-actions a role can't perform, scope the data a role can see, and make Candidate/Viewer
-read-only. Then fill the remaining nav with `ComingSoon` stubs so there are no dead ends.
+Verified against the checklist. `tsc --noEmit` clean for `src/` (the only errors are in the
+old top-level `components/` files — not loaded, deleted in Phase 6). `vitest run` green:
+**6 permission tests** in `src/lib/permissions.test.ts` (one per role) + 3 legacy nav tests.
 
-This is the first phase with **no new screens** — it's guards and visibility over the screens
-that already exist. The role switcher (topbar) already swaps the active role + seeded user;
-this phase makes the rest of the app react to it.
+- [x] `src/lib/permissions.ts` encodes §2.1 exactly: a table-driven `can(role, action, scope)`
+      plus a `scopeOk` helper for the Supervisor (`candidate.supervisorId === user.id` **and**
+      same org) and Candidate (`candidate.id === user.candidateId`) scope checks. Two extra
+      helpers landed and are used everywhere: `canAccessOrg` (org-scoped route guard) and
+      `visibleCandidatesForOrg` (data scoping). Clean, pure, no React in the lib.
+- [x] Role table correct: Consultant = all/all orgs; Org Admin = structural + journey but
+      **not score**; HR Manager = pool/score/journey but **not** create-fn/select-successor;
+      Supervisor/Candidate scoped via `scopeOk`; Viewer read-only in own org.
+- [x] UI gates **hide** actions rather than leaving dead buttons — New function, Edit, Add to
+      pool, per-row Select successor, New org all gated; score inputs render as read-only
+      values with `permissions.readOnly` microcopy when `candidate.score` is denied; journey
+      checkboxes carry `disabled`.
+- [x] CandidatesList scopes rows via `visibleCandidatesForOrg`; Candidate is redirected to
+      their own detail from the list and the org list; CandidateDetail/FunctionsList/
+      FunctionDetail/OrganizationsList guard on `canAccessOrg` and `Navigate` away otherwise.
+- [x] Sidebar is role-aware: Candidate gets only Home + "My journey"; Supervisor's Functions
+      link is hidden; org nav only renders when `canAccessOrg` passes.
+- [x] Seed is demonstrable: `u-sup` supervises `cand-khalid` + `cand-sara`; `u-cand.candidateId
+      = cand-khalid`. (These scope fields predate Phase 5, so the storage key was **not** bumped
+      — correct call; stale `v1` state already carries them.)
+- [x] ComingSoon nav complete: reports, reflection-logs, surveys, stage-closure, ai-insights,
+      value-mirror — all routed, both `en`/`ar`, no decorative icons. Phase 4's
+      `candidateStatusColor` DRY note was also addressed (lifted into `ui/Badge.tsx`).
 
-### The permission model (`src/lib/permissions.ts` — new, with Vitest)
-Build the matrix from APP_SPEC §2.1 as one pure function plus a scope helper:
+**Review notes (non-blocking — no defects, do opportunistically):**
+1. `FunctionDetail` computes the header status badge with `functionStatusFor(fn,
+   state.candidates)` (line 48 — **all** candidates), while the pool ranking and
+   `CandidateDetail` use `visibleCandidates`. For a Supervisor the header would reflect the
+   full pool but the table shows only assigned candidates. Pick one — using `visibleCandidates`
+   there too is the consistent choice.
+2. Supervisor/Viewer can still reach `FunctionsList`/`FunctionDetail` by typing the URL
+   (`canAccessOrg` passes for any same-org role); the Supervisor's sidebar link is hidden but
+   the route isn't blocked. Harmless — those screens are read-only for them — but note it.
+3. The score `<input type="number">` still snaps an emptied field to `0` (carried from Phase 4).
+   Acceptable.
 
-```ts
-type Action =
-  | 'org.create' | 'org.edit'
-  | 'fn.create' | 'fn.edit' | 'fn.selectSuccessor'
-  | 'candidate.addToPool' | 'candidate.score' | 'candidate.journey'
-  | 'candidate.viewProfile';
+---
 
-can(role, action, scope?): boolean   // scope = { orgId?, candidate? } + the active user
-```
+## Next phase — Phase 6: Cleanup (delete legacy, finalize entry)
 
-Encode the §2.1 table exactly:
-- **Consultant** — everything, all orgs.
-- **Org Admin** — `org.edit` (own org only), `fn.create`/`fn.edit`/`fn.selectSuccessor`,
-  `candidate.addToPool`, `candidate.journey`, view profiles. **Cannot score.**
-- **HR Manager** — `candidate.addToPool`, `candidate.score`, `candidate.journey`, view
-  profiles. **Cannot create functions or select successors.**
-- **Supervisor** — `candidate.score` / `candidate.journey` **only for candidates whose
-  `supervisorId` is this user**; view assigned profiles only.
-- **Candidate** — read-only; can view **only their own** candidate (the user's `candidateId`).
-- **Viewer** — read-only across their org; may view functions/candidates, no mutating actions.
+**Goal:** remove the dead pre-rebuild code now that every screen lives under `src/` and is the
+live entry. This is the final BUILD_PLAN phase — **no features, no behavior change.** Pure
+deletion + verification that nothing under `src/` depended on what was removed.
 
-Keep `can()` pure and table-driven; put the Supervisor/Candidate scope checks (compare
-`candidate.supervisorId` / `user.candidateId`) in a small `scopeOk` helper. **Cover it with
-Vitest** (BUILD_PLAN §1 promised tests for the data + permission layer — this is that test).
+### What's safe to delete (verified: nothing in `src/` imports any of it)
+`index.html` already points at `/src/main.tsx`, and a grep for legacy imports inside `src/`
+comes back empty. The orphaned top-level files are:
+- `App.tsx`, `index.tsx`, `NavigationMap.ts`, `constants.ts`, top-level `types.ts`
+- `components/` (the entire old screen set — this is what produces the remaining `tsc` errors)
+- top-level `lib/` (the **old** lib — not `src/lib/`)
 
-> Data note: the seed already has `supervisorId` on the model (BUILD_PLAN §5) and a user per
-> role. Confirm at least one candidate is assigned to the seeded Supervisor and that the
-> Candidate user's `candidateId` points at a real candidate — if not, fix the seed so the
-> scoped roles are demonstrable. Bump the storage key (`blacksite.state.v2`) if you change the
-> seed shape so stale `localStorage` is discarded.
+> ⚠️ `lib/navigation/navigation.test.ts` (the 3 legacy nav tests in the current `vitest run`)
+> lives under the old top-level `lib/`. Confirm it tests only legacy navigation, then delete it
+> with `lib/`. After Phase 6, `vitest run` should show **only** `src/lib/permissions.test.ts`.
 
-### Wire `can()` into the UI (hide or disable, don't just leave dead buttons)
-- **FunctionsList / FunctionDetail / FunctionForm:** gate "New function", "Edit",
-  "Select successor", and the criteria editor on `fn.create`/`fn.edit`/`fn.selectSuccessor`.
-- **FunctionDetail pool:** gate "Add candidate to pool" on `candidate.addToPool`; gate the
-  per-row "Select successor" on `fn.selectSuccessor`.
-- **CandidateDetail:** gate the score inputs on `candidate.score` (render read-only values when
-  not allowed) and the journey checkboxes on `candidate.journey`. For Candidate/Viewer the
-  whole screen is read-only.
-- **CandidatesList:** Supervisor sees **only assigned** candidates; Candidate is redirected to
-  their own detail; others see all in the org.
-- **OrganizationsList / OrganizationForm:** already partly role-aware — confirm "New org" and
-  "Edit" honor `org.create`/`org.edit` (Org Admin edits own only).
-- **Sidebar:** already role-aware per the file map — re-check it hides what a role can't reach
-  (Candidate sees only their journey; Viewer is read-only entries).
-- Prefer **hiding** an action the role can never do; **disable** (with a reason) only when the
-  control's absence would be confusing. No dead-end buttons.
+> Keep: root `vite.config.ts`, `index.html`, `tsconfig.json`, `package.json`, everything under
+> `src/`, and `docs/`. Don't touch `output/playwright/` screenshots.
 
-### Coming-soon stubs in the nav (no dead ends)
-`ComingSoon` already exists at `/coming-soon/:feature`. Add the deferred entries from
-APP_SPEC §6 to the sidebar (Reports/analytics, reflection logs, surveys, AI insights, value
-mirror) pointing at `/coming-soon/<feature>` so the nav is complete. Clean placeholder copy,
-no decorative icons, both `en`/`ar`.
+### Steps
+1. Delete the legacy files/dirs listed above → verify: `git status` shows only deletions +
+   this doc.
+2. Check `tsconfig.json` / `vite.config.ts` for `include`/`alias`/`root` entries that referenced
+   the deleted paths; remove only those. Don't restructure config that still applies to `src/`.
+3. Re-run the full gate.
 
-### i18n keys to add (both `en` + `ar`)
-Any "read-only" / "you don't have permission" microcopy you surface, plus `comingSoon.*`
-labels for each deferred nav entry. Reuse existing keys everywhere else.
+### Verification checklist (reviewer runs this)
+- [ ] `npx tsc --noEmit -p tsconfig.json` is **fully clean** — zero errors now that the old
+      `components/` files are gone (this is the first phase where there's no "ignore legacy"
+      caveat).
+- [ ] `vitest run` green and contains **only** `src/lib/permissions.test.ts` (legacy nav test
+      removed with its dir).
+- [ ] `npm run dev` boots; app loads, routes switch, refresh persists — no broken imports, no
+      console errors. Spot-check one flow per role to confirm nothing was wired to deleted code.
+- [ ] `npm run build` (if defined) succeeds with no unresolved-import warnings.
+- [ ] `git status` shows deletions of legacy files only — no stray edits to `src/`.
 
-### Verification checklist (reviewer runs this in Chrome)
-- [ ] `tsc --noEmit` clean for `src/`; **`vitest run` green** (permission matrix covered);
-      no console errors.
-- [ ] Switch through all six roles via the topbar switcher — the sidebar, visible data, and
-      available actions change to match §2.1 each time (no logout needed).
-- [ ] **Org Admin** can create/edit functions and select a successor but the **score inputs
-      are read-only**; **HR Manager** can score and add to pool but **cannot** create functions
-      or select a successor.
-- [ ] **Supervisor** sees only their assigned candidates and can score/journey only those.
-- [ ] **Candidate** lands on their own detail, fully **read-only** (no score inputs, no
-      checkboxes, no edit buttons); cannot reach another candidate.
-- [ ] **Viewer** can browse the org read-only — no mutating action is reachable.
-- [ ] Deferred nav entries route to `ComingSoon`, not dead ends. No emojis; RTL + English right.
-
-### Out of scope for Phase 5 (do NOT build)
-The deferred features themselves (reflection logs, surveys, stage closure/signatures, AI
-insights/chatbot, reports/auto-pilot, value mirror) — stubs only. Old top-level file deletion
-is **Phase 6**. Don't add a backend or real auth — roles stay mock/seeded.
+### Out of scope for Phase 6 (do NOT build)
+Any deferred feature (reflection logs, surveys, stage closure, AI insights, reports, value
+mirror) — those stay ComingSoon stubs. No new screens, no refactors of `src/`, no backend,
+no real auth. If you spot a cleanup worth doing inside `src/`, note it here — don't fold it
+into the deletion commit.
