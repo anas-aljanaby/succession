@@ -8,7 +8,6 @@ import { can } from '../lib/permissions';
 import { Button } from '../ui/Button';
 import { Field, SelectInput, TextInput } from '../ui/Field';
 import { PageHeader } from '../ui/PageHeader';
-import { Card } from '../ui/Card';
 
 const PRIORITIES: Priority[] = ['high', 'medium', 'low'];
 
@@ -92,14 +91,14 @@ export const FunctionForm: React.FC = () => {
   };
 
   return (
-    <section className="max-w-4xl">
+    <section className="mx-auto max-w-[1180px]">
       <PageHeader
         title={existing ? t('functions.editTitle') : t('functions.createTitle')}
-        subtitle={org.name}
+        subtitle={<span className="text-[var(--text)]">{org.name}</span>}
       />
 
       <form onSubmit={onSubmit} className="space-y-6">
-        <Card>
+        <div className="surface-card p-5">
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label={t('functions.functionTitle')}>
               <TextInput
@@ -128,11 +127,11 @@ export const FunctionForm: React.FC = () => {
               </SelectInput>
             </Field>
           </div>
-        </Card>
+        </div>
 
-        <Card>
+        <div className="surface-card p-5">
           <div className="mb-4 flex items-center justify-between gap-4">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-400">
+            <h2 className="text-sm font-semibold text-[var(--text)]">
               {t('functions.criteriaEditor')}
             </h2>
             <Button type="button" variant="secondary" onClick={addCriterion}>
@@ -144,7 +143,7 @@ export const FunctionForm: React.FC = () => {
             {criteria.map((criterion, index) => (
               <div
                 key={criterion.key}
-                className="grid gap-3 rounded-lg border border-gray-800 bg-gray-900/50 p-3 sm:grid-cols-[minmax(0,1fr)_140px_auto]"
+                className="grid gap-3 rounded-lg border border-[var(--border)] bg-[var(--card-2)] p-3 sm:grid-cols-[minmax(0,1fr)_140px_auto]"
               >
                 <Field label={t('functions.criterionLabel')}>
                   <TextInput
@@ -179,14 +178,20 @@ export const FunctionForm: React.FC = () => {
               </div>
             ))}
           </div>
-        </Card>
+        </div>
 
         <div className="flex items-center gap-2">
           <Button type="submit">{t('form.save')}</Button>
           <Button
             type="button"
             variant="secondary"
-            onClick={() => navigate(existing ? `/organizations/${org.id}/functions/${existing.id}` : `/organizations/${org.id}/functions`)}
+            onClick={() =>
+              navigate(
+                existing
+                  ? `/organizations/${org.id}/functions/${existing.id}`
+                  : `/organizations/${org.id}/functions`
+              )
+            }
           >
             {t('form.cancel')}
           </Button>

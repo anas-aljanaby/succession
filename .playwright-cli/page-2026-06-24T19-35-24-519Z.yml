@@ -1,0 +1,156 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب القيادي
+    - navigation [ref=e6]:
+      - link "لوحة التحكم" [ref=e7] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e8] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e9] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "المزيد (قريباً)" [ref=e10] [cursor=pointer]:
+        - /url: /coming-soon
+        - text: المزيد
+        - generic [ref=e11]: (قريباً)
+      - link "الإعدادات" [ref=e12] [cursor=pointer]:
+        - /url: /settings
+  - generic [ref=e13]:
+    - banner [ref=e14]:
+      - generic [ref=e15]:
+        - navigation [ref=e16]:
+          - button "الجدول الزمني للرحلة (معاينة)" [disabled] [ref=e17]:
+            - img [ref=e18]
+          - button "لوحة القيم" [disabled] [ref=e21]:
+            - img [ref=e22]
+        - navigation [ref=e25]:
+          - link "الرئيسية" [ref=e26] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e27]: /
+          - link "المؤسسات" [ref=e28] [cursor=pointer]:
+            - /url: /organizations
+          - generic [ref=e29]: /
+          - link "شركة ACME" [ref=e30] [cursor=pointer]:
+            - /url: /organizations/org-acme
+          - generic [ref=e31]: /
+          - link "الوظائف الحرجة" [ref=e32] [cursor=pointer]:
+            - /url: /organizations/org-acme/functions
+          - generic [ref=e33]: /
+          - generic [ref=e34]: مدير التكنولوجيا
+      - generic [ref=e35]:
+        - generic [ref=e37]:
+          - button "شركة ACME" [ref=e38] [cursor=pointer]:
+            - img [ref=e39]
+            - generic [ref=e41]: شركة ACME
+          - button "المؤسسة" [ref=e42] [cursor=pointer]:
+            - img [ref=e43]
+        - generic [ref=e45]:
+          - generic [ref=e46]: المرشح
+          - combobox "المرشح" [ref=e47]:
+            - option "اختر مرشحاً" [disabled] [selected]
+            - option "خالد الغامدي"
+            - option "سارة منصور"
+            - option "عمر عبد الله"
+        - generic [ref=e48]:
+          - img [ref=e49]
+          - generic [ref=e51]: الدور
+          - combobox "الدور" [active] [ref=e52]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e53] [cursor=pointer]:
+          - img [ref=e54]
+        - button "المستشار الذكي" [ref=e56] [cursor=pointer]:
+          - img [ref=e57]
+        - button "الإشعارات" [ref=e61] [cursor=pointer]:
+          - img [ref=e62]
+        - button "تسجيل الخروج" [ref=e65] [cursor=pointer]:
+          - img [ref=e66]
+    - main [ref=e69]:
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - heading "مدير التكنولوجيا" [level=1] [ref=e73]
+            - generic [ref=e74]: شركة ACME
+          - generic [ref=e75]:
+            - button "إضافة مرشح إلى المجموعة" [ref=e76] [cursor=pointer]
+            - button "تعديل" [ref=e77] [cursor=pointer]
+        - generic [ref=e78]:
+          - generic [ref=e79]: التكنولوجيا
+          - generic [ref=e80]: عالية
+          - generic [ref=e81]: جاهز
+          - generic [ref=e82]: "الخليفة المختار: لم يتم الاختيار"
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - heading "المعايير" [level=2] [ref=e85]
+            - generic [ref=e86]:
+              - generic [ref=e87]:
+                - generic [ref=e88]: الكفاءة
+                - generic [ref=e89]: "الوزن: 1"
+              - generic [ref=e90]:
+                - generic [ref=e91]: القيادة
+                - generic [ref=e92]: "الوزن: 1"
+              - generic [ref=e93]:
+                - generic [ref=e94]: التفكير الاستراتيجي
+                - generic [ref=e95]: "الوزن: 1"
+              - generic [ref=e96]:
+                - generic [ref=e97]: التوافق مع القيم
+                - generic [ref=e98]: "الوزن: 1"
+              - generic [ref=e99]:
+                - generic [ref=e100]: مرونة التعلم
+                - generic [ref=e101]: "الوزن: 1"
+          - generic [ref=e102]:
+            - generic [ref=e103]:
+              - heading "مجموعة المرشحين" [level=2] [ref=e104]
+              - generic [ref=e105]: "حجم المجموعة: 2"
+            - table [ref=e107]:
+              - rowgroup [ref=e108]:
+                - row "المرشح المنصب الحالي المنصب المستهدف الكفاءة القيادة التفكير الاستراتيجي التوافق مع القيم مرونة التعلم الجاهزية الحالة" [ref=e109]:
+                  - columnheader "المرشح" [ref=e110]
+                  - columnheader "المنصب الحالي" [ref=e111]
+                  - columnheader "المنصب المستهدف" [ref=e112]
+                  - columnheader "الكفاءة" [ref=e113]
+                  - columnheader "القيادة" [ref=e114]
+                  - columnheader "التفكير الاستراتيجي" [ref=e115]
+                  - columnheader "التوافق مع القيم" [ref=e116]
+                  - columnheader "مرونة التعلم" [ref=e117]
+                  - columnheader "الجاهزية" [ref=e118]
+                  - columnheader "الحالة" [ref=e119]
+                  - columnheader [ref=e120]
+              - rowgroup [ref=e121]:
+                - row "سارة منصور قائدة الهندسة مدير التكنولوجيا 88 90 85 92 86 88% نشطة اختيار خليفة" [ref=e122]:
+                  - cell "سارة منصور" [ref=e123]:
+                    - link "سارة منصور" [ref=e124] [cursor=pointer]:
+                      - /url: /organizations/org-acme/candidates/cand-sara
+                  - cell "قائدة الهندسة" [ref=e125]
+                  - cell "مدير التكنولوجيا" [ref=e126]
+                  - cell "88" [ref=e127]
+                  - cell "90" [ref=e128]
+                  - cell "85" [ref=e129]
+                  - cell "92" [ref=e130]
+                  - cell "86" [ref=e131]
+                  - cell "88%" [ref=e132]:
+                    - generic [ref=e136]: 88%
+                  - cell "نشطة" [ref=e137]:
+                    - generic [ref=e138]: نشطة
+                  - cell "اختيار خليفة" [ref=e139]:
+                    - button "اختيار خليفة" [ref=e140] [cursor=pointer]
+                - row "خالد الغامدي مطور أول مدير التكنولوجيا 60 50 45 70 55 56% نشطة اختيار خليفة" [ref=e141]:
+                  - cell "خالد الغامدي" [ref=e142]:
+                    - link "خالد الغامدي" [ref=e143] [cursor=pointer]:
+                      - /url: /organizations/org-acme/candidates/cand-khalid
+                  - cell "مطور أول" [ref=e144]
+                  - cell "مدير التكنولوجيا" [ref=e145]
+                  - cell "60" [ref=e146]
+                  - cell "50" [ref=e147]
+                  - cell "45" [ref=e148]
+                  - cell "70" [ref=e149]
+                  - cell "55" [ref=e150]
+                  - cell "56%" [ref=e151]:
+                    - generic [ref=e155]: 56%
+                  - cell "نشطة" [ref=e156]:
+                    - generic [ref=e157]: نشطة
+                  - cell "اختيار خليفة" [ref=e158]:
+                    - button "اختيار خليفة" [ref=e159] [cursor=pointer]

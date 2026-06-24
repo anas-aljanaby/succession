@@ -10,13 +10,17 @@ import {
   computeReadiness,
   functionStatusFor,
 } from '../lib/selectors';
-import { Badge, priorityColor, statusColor } from '../ui/Badge';
 import { Button } from '../ui/Button';
-import { Card } from '../ui/Card';
 import { Field, TextInput } from '../ui/Field';
 import { Modal } from '../ui/Modal';
 import { PageHeader } from '../ui/PageHeader';
+import { Pill } from '../ui/Pill';
 import { ProgressBar } from '../ui/ProgressBar';
+import {
+  candidateStatusTone,
+  functionStatusTone,
+  priorityTone,
+} from '../ui/tone';
 
 export const FunctionDetail: React.FC = () => {
   const { orgId, fnId } = useParams();
@@ -113,10 +117,10 @@ export const FunctionDetail: React.FC = () => {
   };
 
   return (
-    <section className="space-y-6">
+    <section className="mx-auto max-w-[1180px] space-y-6">
       <PageHeader
         title={fn.title}
-        subtitle={org.name}
+        subtitle={<span className="text-[var(--text)]">{org.name}</span>}
         actions={
           canAddCandidate || canEditFunction ? (
             <>
@@ -136,65 +140,74 @@ export const FunctionDetail: React.FC = () => {
       />
 
       <div className="flex flex-wrap items-center gap-3 text-sm">
-        <span className="text-gray-300">{fn.department}</span>
-        <Badge label={t(`priority.${fn.priority}`)} color={priorityColor(fn.priority)} />
-        <Badge label={t(`fnStatus.${status}`)} color={statusColor(status)} />
-        <span className="text-gray-300">
+        <span className="text-[var(--text-muted)]">{fn.department}</span>
+        <Pill tone={priorityTone(fn.priority)}>{t(`priority.${fn.priority}`)}</Pill>
+        <Pill tone={functionStatusTone(status)}>{t(`fnStatus.${status}`)}</Pill>
+        <span className="text-[var(--text-muted)]">
           {t('functions.selectedSuccessor')}:{' '}
-          <span className="text-gray-100">
+          <span className="text-[var(--text)]">
             {selectedCandidate?.name ?? t('functions.noneSelected')}
           </span>
         </span>
       </div>
 
       <div className="space-y-6">
-        <Card>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
-            {t('functions.criteria')}
-          </h2>
+        <div className="surface-card p-5">
+          <h2 className="text-sm font-semibold text-[var(--text)]">{t('functions.criteria')}</h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {fn.criteria.map((criterion) => (
               <div
                 key={criterion.key}
-                className="flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-900/50 px-3 py-2"
+                className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--card-2)] px-3 py-2"
               >
-                <span className="text-sm text-gray-200">{criterion.label}</span>
-                <span className="text-xs text-gray-400">
+                <span className="text-sm text-[var(--text)]">{criterion.label}</span>
+                <span className="text-xs text-[var(--text-faint)]">
                   {t('functions.weight')}: {criterion.weight}
                 </span>
               </div>
             ))}
           </div>
-        </Card>
+        </div>
 
-        <Card>
+        <div className="surface-card overflow-hidden p-5">
           <div className="mb-4 flex items-center justify-between gap-4">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
-              {t('functions.pool')}
-            </h2>
-            <span className="text-sm text-gray-300">
+            <h2 className="text-sm font-semibold text-[var(--text)]">{t('functions.pool')}</h2>
+            <span className="text-sm text-[var(--text-muted)]">
               {t('functions.poolSize')}: {rankedCandidates.length}
             </span>
           </div>
 
           {rankedCandidates.length === 0 ? (
-            <p className="text-sm text-gray-400">{t('functions.noCandidates')}</p>
+            <p className="text-sm text-[var(--text-faint)]">{t('functions.noCandidates')}</p>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full text-sm">
-                <thead className="border-b border-gray-700 bg-gray-900/60">
-                  <tr>
-                    <th className="px-2 py-3 text-start font-medium text-gray-300">{t('functions.candidate')}</th>
-                    <th className="px-2 py-3 text-start font-medium text-gray-300">{t('functions.current')}</th>
-                    <th className="px-2 py-3 text-start font-medium text-gray-300">{t('functions.target')}</th>
+            <div className="-mx-5 overflow-x-auto">
+              <table className="w-full text-start text-sm">
+                <thead>
+                  <tr className="border-b border-[var(--border)]">
+                    <th className="px-4 py-3 text-[11.5px] font-semibold text-[var(--text-faint)]">
+                      {t('functions.candidate')}
+                    </th>
+                    <th className="px-4 py-3 text-[11.5px] font-semibold text-[var(--text-faint)]">
+                      {t('functions.current')}
+                    </th>
+                    <th className="px-4 py-3 text-[11.5px] font-semibold text-[var(--text-faint)]">
+                      {t('functions.target')}
+                    </th>
                     {fn.criteria.map((criterion) => (
-                      <th key={criterion.key} className="px-2 py-3 text-start font-medium text-gray-300">
+                      <th
+                        key={criterion.key}
+                        className="px-4 py-3 text-[11.5px] font-semibold text-[var(--text-faint)]"
+                      >
                         {criterion.label}
                       </th>
                     ))}
-                    <th className="px-2 py-3 text-start font-medium text-gray-300">{t('functions.readiness')}</th>
-                    <th className="px-2 py-3 text-start font-medium text-gray-300">{t('functions.status')}</th>
-                    <th className="px-2 py-3 text-start font-medium text-gray-300" />
+                    <th className="min-w-[14rem] px-4 py-3 text-[11.5px] font-semibold text-[var(--text-faint)]">
+                      {t('functions.readiness')}
+                    </th>
+                    <th className="px-4 py-3 text-[11.5px] font-semibold text-[var(--text-faint)]">
+                      {t('functions.status')}
+                    </th>
+                    <th className="px-4 py-3 text-[11.5px] font-semibold text-[var(--text-faint)]" />
                   </tr>
                 </thead>
                 <tbody>
@@ -204,41 +217,46 @@ export const FunctionDetail: React.FC = () => {
                     return (
                       <tr
                         key={candidate.id}
-                        className={`border-b border-gray-700/70 last:border-b-0 hover:bg-gray-800/40${
-                          isSelected ? ' bg-primary-500/10' : ''
+                        className={`border-b border-[var(--border)] transition-colors last:border-0 hover:bg-[var(--card-2)]${
+                          isSelected ? ' bg-[var(--accent-soft)]' : ''
                         }`}
                       >
-                        <td className="px-2 py-3 align-top">
+                        <td className="px-4 py-3.5 align-top">
                           <Link
                             to={`/organizations/${org.id}/candidates/${candidate.id}`}
-                            className="font-medium text-white transition-colors hover:text-primary-300"
+                            className="font-medium text-[var(--text)] transition-colors hover:text-[var(--accent-bright)]"
                           >
                             {candidate.name}
                           </Link>
                         </td>
-                        <td className="px-2 py-3 align-top text-gray-300">
+                        <td className="px-4 py-3.5 align-top text-[var(--text-muted)]">
                           {candidate.currentPosition}
                         </td>
-                        <td className="px-2 py-3 align-top text-gray-300">
+                        <td className="px-4 py-3.5 align-top text-[var(--text-muted)]">
                           {candidate.targetPosition}
                         </td>
                         {fn.criteria.map((criterion) => (
-                          <td key={criterion.key} className="px-2 py-3 align-top text-gray-300">
-                            {candidate.scores.find((score) => score.criterionKey === criterion.key)?.value ?? 0}
+                          <td
+                            key={criterion.key}
+                            className="px-4 py-3.5 align-top text-[var(--text-muted)]"
+                          >
+                            {candidate.scores.find((score) => score.criterionKey === criterion.key)
+                              ?.value ?? 0}
                           </td>
                         ))}
-                        <td className="min-w-28 px-2 py-3 align-top">
+                        <td className="px-4 py-3.5 align-top">
                           <ProgressBar value={readiness} />
                         </td>
-                        <td className="px-2 py-3 align-top">
-                          <Badge
-                            label={t(`status.${candidate.status}`)}
-                            color={isSelected ? 'green' : 'gray'}
-                          />
+                        <td className="px-4 py-3.5 align-top">
+                          <Pill
+                            tone={isSelected ? 'ok' : candidateStatusTone(candidate.status)}
+                          >
+                            {t(`status.${candidate.status}`)}
+                          </Pill>
                         </td>
-                        <td className="px-2 py-3 align-top">
+                        <td className="px-4 py-3.5 align-top">
                           {isSelected ? (
-                            <Badge label={t('functions.selected')} color="green" />
+                            <Pill tone="ok">{t('functions.selected')}</Pill>
                           ) : canSelectSuccessor ? (
                             <Button
                               type="button"
@@ -257,7 +275,7 @@ export const FunctionDetail: React.FC = () => {
               </table>
             </div>
           )}
-        </Card>
+        </div>
       </div>
 
       {isAddOpen ? (

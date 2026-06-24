@@ -17,23 +17,23 @@ export const Modal: React.FC<Props> = ({ title, onClose, children }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950/80 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--bg)]/80 p-4"
       onClick={onClose}
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="w-full max-w-2xl rounded-xl border border-gray-800 bg-gray-900 p-6 shadow-2xl"
+        className="surface-card w-full max-w-2xl p-6 shadow-2xl"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between gap-4">
-          <h2 className="text-lg font-semibold text-white">{title}</h2>
+          <h2 className="text-lg font-semibold text-[var(--text)]">{title}</h2>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="rounded-md p-2 text-gray-400 transition-colors hover:bg-gray-800 hover:text-white"
+            className="rounded-md p-2 text-[var(--text-faint)] transition-colors hover:bg-[var(--card-2)] hover:text-[var(--text)]"
           >
             <svg
               width="16"

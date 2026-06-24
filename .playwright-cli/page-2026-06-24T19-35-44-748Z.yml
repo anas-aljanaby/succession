@@ -1,0 +1,156 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: Leadership Succession
+    - navigation [ref=e6]:
+      - link "Dashboard" [ref=e160] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "Critical Functions" [ref=e161] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "Candidates" [ref=e162] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "More (soon)" [ref=e163] [cursor=pointer]:
+        - /url: /coming-soon
+        - text: More
+        - generic [ref=e11]: (soon)
+      - link "Settings" [ref=e164] [cursor=pointer]:
+        - /url: /settings
+  - generic [ref=e13]:
+    - banner [ref=e14]:
+      - generic [ref=e15]:
+        - navigation [ref=e16]:
+          - button "Journey Timeline (Preview)" [disabled] [ref=e165]:
+            - img [ref=e18]
+          - button "Values Dashboard" [disabled] [ref=e166]:
+            - img [ref=e22]
+        - navigation [ref=e25]:
+          - link "Home" [ref=e167] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e27]: /
+          - link "Organizations":
+            - /url: /organizations
+          - generic [ref=e29]: /
+          - link "ACME Corporation":
+            - /url: /organizations/org-acme
+          - generic [ref=e31]: /
+          - link "Critical Functions":
+            - /url: /organizations/org-acme/functions
+          - generic [ref=e33]: /
+          - generic: Chief Technology Officer
+      - generic [ref=e35]:
+        - generic [ref=e37]:
+          - button "ACME Corporation" [ref=e168] [cursor=pointer]:
+            - img [ref=e39]
+            - generic [ref=e41]: ACME Corporation
+          - button "Organization" [ref=e169] [cursor=pointer]:
+            - img [ref=e43]
+        - generic [ref=e45]:
+          - generic [ref=e46]: Candidate
+          - combobox "Candidate" [ref=e170]:
+            - option "Select candidate" [disabled] [selected]
+            - option "Khalid Al-Ghamdi"
+            - option "Sara Mansour"
+            - option "Omar Abdullah"
+        - generic [ref=e48]:
+          - img [ref=e49]
+          - generic [ref=e51]: Role
+          - combobox "Role" [ref=e171]:
+            - option "Consultant" [selected]
+            - option "Organization Admin"
+            - option "HR Manager"
+            - option "Supervisor"
+            - option "Candidate"
+            - option "Viewer"
+        - button "Arabic" [active] [ref=e172] [cursor=pointer]:
+          - img [ref=e54]
+        - button "AI Advisor" [ref=e173] [cursor=pointer]:
+          - img [ref=e57]
+        - button "Notifications" [ref=e174] [cursor=pointer]:
+          - img [ref=e62]
+        - button "Log out" [ref=e175] [cursor=pointer]:
+          - img [ref=e66]
+    - main [ref=e69]:
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - heading "Chief Technology Officer" [level=1] [ref=e176]
+            - generic [ref=e74]: ACME Corporation
+          - generic [ref=e75]:
+            - button "Add candidate to pool" [ref=e177] [cursor=pointer]
+            - button "Edit" [ref=e178] [cursor=pointer]
+        - generic [ref=e78]:
+          - generic [ref=e79]: Technology
+          - generic [ref=e80]: High
+          - generic [ref=e81]: Ready
+          - generic [ref=e82]: "Selected successor: None selected"
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - heading "Criteria" [level=2] [ref=e179]
+            - generic [ref=e86]:
+              - generic [ref=e87]:
+                - generic [ref=e88]: Competence
+                - generic [ref=e89]: "Weight: 1"
+              - generic [ref=e90]:
+                - generic [ref=e91]: Leadership
+                - generic [ref=e92]: "Weight: 1"
+              - generic [ref=e93]:
+                - generic [ref=e94]: Strategic Thinking
+                - generic [ref=e95]: "Weight: 1"
+              - generic [ref=e96]:
+                - generic [ref=e97]: Values Alignment
+                - generic [ref=e98]: "Weight: 1"
+              - generic [ref=e99]:
+                - generic [ref=e100]: Learning Agility
+                - generic [ref=e101]: "Weight: 1"
+          - generic [ref=e102]:
+            - generic [ref=e103]:
+              - heading "Candidate pool" [level=2] [ref=e180]
+              - generic [ref=e105]: "Pool size: 2"
+            - table [ref=e107]:
+              - rowgroup [ref=e108]:
+                - row "Candidate Current position Target position Competence Leadership Strategic Thinking Values Alignment Learning Agility Readiness Status" [ref=e181]:
+                  - columnheader "Candidate" [ref=e182]
+                  - columnheader "Current position" [ref=e183]
+                  - columnheader "Target position" [ref=e184]
+                  - columnheader "Competence" [ref=e185]
+                  - columnheader "Leadership" [ref=e186]
+                  - columnheader "Strategic Thinking" [ref=e187]
+                  - columnheader "Values Alignment" [ref=e188]
+                  - columnheader "Learning Agility" [ref=e189]
+                  - columnheader "Readiness" [ref=e190]
+                  - columnheader "Status" [ref=e191]
+                  - columnheader [ref=e120]
+              - rowgroup [ref=e121]:
+                - row "Sara Mansour Engineering Lead Chief Technology Officer 88 90 85 92 86 88% Active Select successor" [ref=e192]:
+                  - cell "Sara Mansour" [ref=e193]:
+                    - link "Sara Mansour" [ref=e194] [cursor=pointer]:
+                      - /url: /organizations/org-acme/candidates/cand-sara
+                  - cell "Engineering Lead" [ref=e195]
+                  - cell "Chief Technology Officer" [ref=e196]
+                  - cell "88" [ref=e127]
+                  - cell "90" [ref=e128]
+                  - cell "85" [ref=e129]
+                  - cell "92" [ref=e130]
+                  - cell "86" [ref=e131]
+                  - cell "88%" [ref=e132]:
+                    - generic [ref=e136]: 88%
+                  - cell "Active" [ref=e197]:
+                    - generic [ref=e138]: Active
+                  - cell "Select successor" [ref=e198]:
+                    - button "Select successor" [ref=e199] [cursor=pointer]
+                - row "Khalid Al-Ghamdi Senior Developer Chief Technology Officer 60 50 45 70 55 56% Active Select successor" [ref=e200]:
+                  - cell "Khalid Al-Ghamdi" [ref=e201]:
+                    - link "Khalid Al-Ghamdi" [ref=e202] [cursor=pointer]:
+                      - /url: /organizations/org-acme/candidates/cand-khalid
+                  - cell "Senior Developer" [ref=e203]
+                  - cell "Chief Technology Officer" [ref=e204]
+                  - cell "60" [ref=e146]
+                  - cell "50" [ref=e147]
+                  - cell "45" [ref=e148]
+                  - cell "70" [ref=e149]
+                  - cell "55" [ref=e150]
+                  - cell "56%" [ref=e151]:
+                    - generic [ref=e155]: 56%
+                  - cell "Active" [ref=e205]:
+                    - generic [ref=e157]: Active
+                  - cell "Select successor" [ref=e206]:
+                    - button "Select successor" [ref=e207] [cursor=pointer]

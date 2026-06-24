@@ -1,13 +1,13 @@
 import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useApp } from '../store/AppContext';
 import { useLanguage } from '../lib/i18n';
 import { can, canAccessOrg, visibleCandidatesForOrg } from '../lib/permissions';
 import { orgReadiness } from '../lib/selectors';
 import { PageHeader } from '../ui/PageHeader';
 import { Button } from '../ui/Button';
-import { Card } from '../ui/Card';
-import { Badge } from '../ui/Badge';
+import { Pill } from '../ui/Pill';
+import { orgStatusTone } from '../ui/tone';
 
 export const OrganizationsList: React.FC = () => {
   const { state } = useApp();
@@ -32,7 +32,7 @@ export const OrganizationsList: React.FC = () => {
   }
 
   return (
-    <section>
+    <section className="mx-auto max-w-[1180px]">
       <PageHeader
         title={t('orgs.title')}
         subtitle={t('orgs.subtitle')}
@@ -44,9 +44,9 @@ export const OrganizationsList: React.FC = () => {
       />
 
       {organizations.length === 0 ? (
-        <p className="text-sm text-gray-400">{t('orgs.empty')}</p>
+        <p className="text-sm text-[var(--text-faint)]">{t('orgs.empty')}</p>
       ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {organizations.map((org) => {
             const fnCount = state.functions.filter(
               (f) => f.organizationId === org.id
@@ -59,26 +59,29 @@ export const OrganizationsList: React.FC = () => {
             );
             const readiness = orgReadiness(org.id, state.functions, visibleCandidates);
             return (
-              <Card key={org.id} to={`/organizations/${org.id}`}>
-                <div className="flex items-start justify-between gap-2">
-                  <h2 className="font-semibold text-white">{org.name}</h2>
-                  <Badge
-                    label={t(`status.${org.status}`)}
-                    color={org.status === 'active' ? 'green' : 'gray'}
-                  />
+              <Link
+                key={org.id}
+                to={`/organizations/${org.id}`}
+                className="surface-card block p-5 transition-colors hover:border-[var(--border-strong)]"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h2 className="font-semibold text-[var(--text)]">{org.name}</h2>
+                    <p className="mt-1 text-sm text-[var(--text-muted)]">
+                      {t(`type.${org.type}`)} · {org.sector}
+                    </p>
+                  </div>
+                  <Pill tone={orgStatusTone(org.status)}>{t(`status.${org.status}`)}</Pill>
                 </div>
-                <p className="mt-1 text-sm text-gray-300">
-                  {t(`type.${org.type}`)} · {org.sector}
-                </p>
                 <div className="mt-4 flex items-center justify-between text-sm">
-                  <span className="text-gray-300">
+                  <span className="text-[var(--text-muted)]">
                     {fnCount} {t('orgs.functionsLabel')}
                   </span>
-                  <span className="text-gray-300">
+                  <span className="text-[var(--text-muted)]">
                     {t('orgs.readinessLabel')}: {readiness}%
                   </span>
                 </div>
-              </Card>
+              </Link>
             );
           })}
         </div>
