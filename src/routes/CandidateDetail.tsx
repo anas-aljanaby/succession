@@ -9,14 +9,15 @@ import {
   functionStatusFor,
   journeyProgress,
 } from '../lib/selectors';
-import { Badge, candidateStatusColor, statusColor } from '../ui/Badge';
-import { Card } from '../ui/Card';
 import { Field, TextInput } from '../ui/Field';
 import { PageHeader } from '../ui/PageHeader';
+import { Pill } from '../ui/Pill';
 import { ProgressBar } from '../ui/ProgressBar';
-
-const taskStatusColor = (status: TaskStatus) =>
-  status === 'completed' ? 'green' : status === 'inProgress' ? 'amber' : 'gray';
+import {
+  candidateStatusTone,
+  functionStatusTone,
+  taskStatusTone,
+} from '../ui/tone';
 
 const stageCounts = (stage: JourneyStage) => {
   const total = stage.tasks.length;
@@ -99,89 +100,87 @@ export const CandidateDetail: React.FC = () => {
   };
 
   return (
-    <section className="space-y-6">
+    <section className="mx-auto max-w-[1180px] space-y-6">
       <PageHeader
         title={candidate.name}
-        subtitle={`${org.name} · ${fn.title}`}
+        subtitle={
+          <>
+            <span className="text-[var(--text)]">{org.name}</span>
+            <span className="text-[var(--text-faint)]"> · </span>
+            <span>{fn.title}</span>
+          </>
+        }
       />
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_360px]">
-        <Card>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
-            {t('candidates.profile')}
-          </h2>
+        <div className="surface-card p-5">
+          <h2 className="text-sm font-semibold text-[var(--text)]">{t('candidates.profile')}</h2>
           <dl className="mt-4 grid gap-4 sm:grid-cols-2">
             <div>
-              <dt className="text-xs uppercase tracking-wide text-gray-400">
+              <dt className="text-xs font-medium text-[var(--text-faint)]">
                 {t('functions.current')}
               </dt>
-              <dd className="mt-1 text-sm text-gray-100">{candidate.currentPosition}</dd>
+              <dd className="mt-1 text-sm text-[var(--text)]">{candidate.currentPosition}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase tracking-wide text-gray-400">
+              <dt className="text-xs font-medium text-[var(--text-faint)]">
                 {t('functions.target')}
               </dt>
-              <dd className="mt-1 text-sm text-gray-100">{candidate.targetPosition}</dd>
+              <dd className="mt-1 text-sm text-[var(--text)]">{candidate.targetPosition}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase tracking-wide text-gray-400">
+              <dt className="text-xs font-medium text-[var(--text-faint)]">
                 {t('functions.department')}
               </dt>
-              <dd className="mt-1 text-sm text-gray-100">{candidate.department}</dd>
+              <dd className="mt-1 text-sm text-[var(--text)]">{candidate.department}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase tracking-wide text-gray-400">
+              <dt className="text-xs font-medium text-[var(--text-faint)]">
                 {t('functions.status')}
               </dt>
               <dd className="mt-1 flex flex-wrap gap-2">
-                <Badge
-                  label={t(`status.${candidate.status}`)}
-                  color={candidateStatusColor(candidate.status)}
-                />
-                <Badge
-                  label={t(`fnStatus.${functionStatus}`)}
-                  color={statusColor(functionStatus)}
-                />
+                <Pill tone={candidateStatusTone(candidate.status)}>
+                  {t(`status.${candidate.status}`)}
+                </Pill>
+                <Pill tone={functionStatusTone(functionStatus)}>
+                  {t(`fnStatus.${functionStatus}`)}
+                </Pill>
               </dd>
             </div>
           </dl>
-        </Card>
+        </div>
 
-        <Card>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
-            {t('candidates.readiness')}
-          </h2>
+        <div className="surface-card p-5">
+          <h2 className="text-sm font-semibold text-[var(--text)]">{t('candidates.readiness')}</h2>
           <div className="mt-5">
             <ProgressBar value={readiness} />
           </div>
-          <p className="mt-3 text-sm text-gray-300">
+          <p className="mt-3 text-sm text-[var(--text-muted)]">
             {t('candidates.functionStatus')}: {t(`fnStatus.${functionStatus}`)}
           </p>
-        </Card>
+        </div>
       </div>
 
-      <Card>
+      <div className="surface-card p-5">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
-            {t('candidates.scores')}
-          </h2>
-          <span className="text-sm text-gray-300">
+          <h2 className="text-sm font-semibold text-[var(--text)]">{t('candidates.scores')}</h2>
+          <span className="text-sm text-[var(--text-muted)]">
             {t('functions.criteria')}: {fn.criteria.length}
           </span>
         </div>
         {!canScore ? (
-          <p className="mb-4 text-sm text-gray-400">{t('permissions.readOnly')}</p>
+          <p className="mb-4 text-sm text-[var(--text-faint)]">{t('permissions.readOnly')}</p>
         ) : null}
 
         <div className="space-y-3">
           {fn.criteria.map((criterion) => (
             <div
               key={criterion.key}
-              className="grid gap-3 rounded-lg border border-gray-700 bg-gray-900/50 p-3 sm:grid-cols-[minmax(0,1fr)_160px]"
+              className="grid gap-3 rounded-lg border border-[var(--border)] bg-[var(--card-2)] p-3 sm:grid-cols-[minmax(0,1fr)_160px]"
             >
               <div>
-                <h3 className="font-medium text-gray-100">{criterion.label}</h3>
-                <p className="mt-1 text-sm text-gray-400">
+                <h3 className="font-medium text-[var(--text)]">{criterion.label}</h3>
+                <p className="mt-1 text-sm text-[var(--text-faint)]">
                   {t('functions.weight')}: {criterion.weight}
                 </p>
               </div>
@@ -198,10 +197,10 @@ export const CandidateDetail: React.FC = () => {
                 </Field>
               ) : (
                 <div>
-                  <span className="block mb-1 text-sm text-gray-300">
+                  <span className="mb-1 block text-sm text-[var(--text-muted)]">
                     {t('candidates.score')}
                   </span>
-                  <span className="block rounded-md border border-gray-700 bg-gray-950/40 px-3 py-2 text-sm text-gray-200">
+                  <span className="block rounded-md border border-[var(--border)] bg-[var(--card-3)] px-3 py-2 text-sm text-[var(--text)]">
                     {scoreFor(criterion.key)}
                   </span>
                 </div>
@@ -209,19 +208,17 @@ export const CandidateDetail: React.FC = () => {
             </div>
           ))}
         </div>
-      </Card>
+      </div>
 
-      <Card id="journey">
+      <div className="surface-card p-5" id="journey">
         <div className="mb-5 grid gap-3 sm:grid-cols-[minmax(0,1fr)_280px]">
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
-              {t('candidates.journey')}
-            </h2>
-            <p className="mt-1 text-sm text-gray-400">
+            <h2 className="text-sm font-semibold text-[var(--text)]">{t('candidates.journey')}</h2>
+            <p className="mt-1 text-sm text-[var(--text-faint)]">
               {t('candidates.overallProgress')}: {overallProgress}%
             </p>
             {!canManageJourney ? (
-              <p className="mt-2 text-sm text-gray-400">{t('permissions.readOnly')}</p>
+              <p className="mt-2 text-sm text-[var(--text-faint)]">{t('permissions.readOnly')}</p>
             ) : null}
           </div>
           <ProgressBar value={overallProgress} />
@@ -234,16 +231,16 @@ export const CandidateDetail: React.FC = () => {
             return (
               <div
                 key={stage.code}
-                className="rounded-lg border border-gray-700 bg-gray-900/50 p-4"
+                className="rounded-lg border border-[var(--border)] bg-[var(--card-2)] p-4"
               >
                 <div className="mb-4 flex items-start justify-between gap-3">
                   <div>
-                    <h3 className="font-medium text-white">{stage.name}</h3>
-                    <p className="mt-1 text-sm text-gray-400">
+                    <h3 className="font-medium text-[var(--text)]">{stage.name}</h3>
+                    <p className="mt-1 text-sm text-[var(--text-faint)]">
                       {t('candidates.stageProgress')}: {counts.done}/{counts.total}
                     </p>
                   </div>
-                  <span className="text-xs font-medium text-gray-400">{stage.code}</span>
+                  <span className="text-xs font-medium text-[var(--text-faint)]">{stage.code}</span>
                 </div>
                 <ProgressBar value={counts.progress} />
 
@@ -251,23 +248,22 @@ export const CandidateDetail: React.FC = () => {
                   {stage.tasks.map((task) => (
                     <label
                       key={task.id}
-                      className="flex items-start gap-3 rounded-md border border-gray-700 bg-gray-950/40 p-3"
+                      className="flex items-start gap-3 rounded-md border border-[var(--border)] bg-[var(--card-3)] p-3"
                     >
                       <input
                         type="checkbox"
                         checked={task.status === 'completed'}
                         disabled={!canManageJourney}
                         aria-label={`${t('candidates.markDone')}: ${task.title}`}
-                        className="mt-1 h-4 w-4 rounded border-gray-700 bg-gray-800 text-primary-500 focus:ring-primary-500"
+                        className="mt-1 h-4 w-4 rounded border-[var(--border)] bg-[var(--card-2)] text-[var(--accent)] focus:ring-[var(--accent)]"
                         onChange={() => toggleTask(stage.code, task.id, task.status)}
                       />
                       <span className="min-w-0 flex-1">
-                        <span className="block text-sm text-gray-100">{task.title}</span>
+                        <span className="block text-sm text-[var(--text)]">{task.title}</span>
                         <span className="mt-2 inline-block">
-                          <Badge
-                            label={t(`taskStatus.${task.status}`)}
-                            color={taskStatusColor(task.status)}
-                          />
+                          <Pill tone={taskStatusTone(task.status)}>
+                            {t(`taskStatus.${task.status}`)}
+                          </Pill>
                         </span>
                       </span>
                     </label>
@@ -277,7 +273,7 @@ export const CandidateDetail: React.FC = () => {
             );
           })}
         </div>
-      </Card>
+      </div>
     </section>
   );
 };

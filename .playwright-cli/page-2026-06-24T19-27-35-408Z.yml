@@ -1,0 +1,233 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: Leadership Succession
+    - navigation [ref=e6]:
+      - link "Dashboard" [ref=e259] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "Critical Functions" [ref=e260] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "Candidates" [ref=e261] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "More (soon)" [ref=e262] [cursor=pointer]:
+        - /url: /coming-soon
+        - text: More
+        - generic [ref=e11]: (soon)
+      - link "Settings" [ref=e263] [cursor=pointer]:
+        - /url: /settings
+  - generic [ref=e13]:
+    - banner [ref=e14]:
+      - generic [ref=e15]:
+        - navigation [ref=e16]:
+          - button "Journey Timeline (Preview)" [ref=e264] [cursor=pointer]:
+            - img [ref=e18]
+          - button "Values Dashboard" [ref=e265] [cursor=pointer]:
+            - img [ref=e22]
+        - generic [ref=e24]:
+          - navigation [ref=e25]:
+            - link "Home" [ref=e266] [cursor=pointer]:
+              - /url: /
+            - generic [ref=e27]: /
+            - link "Organizations":
+              - /url: /organizations
+            - generic [ref=e29]: /
+            - link "ACME Corporation":
+              - /url: /organizations/org-acme
+            - generic [ref=e31]: /
+            - link "Candidates":
+              - /url: /organizations/org-acme/candidates
+            - generic [ref=e33]: /
+            - generic: Khalid Al-Ghamdi
+          - generic [ref=e35]: Khalid Al-Ghamdi
+      - generic [ref=e36]:
+        - generic [ref=e38]:
+          - button "ACME Corporation" [ref=e267] [cursor=pointer]:
+            - img [ref=e40]
+            - generic [ref=e42]: ACME Corporation
+          - button "Organization" [ref=e268] [cursor=pointer]:
+            - img [ref=e44]
+        - generic [ref=e46]:
+          - generic [ref=e47]: Candidate
+          - combobox "Candidate" [ref=e269]:
+            - option "Select candidate" [disabled]
+            - option "Khalid Al-Ghamdi" [selected]
+            - option "Sara Mansour"
+            - option "Omar Abdullah"
+        - generic [ref=e49]:
+          - img [ref=e50]
+          - generic [ref=e52]: Role
+          - combobox "Role" [ref=e270]:
+            - option "Consultant" [selected]
+            - option "Organization Admin"
+            - option "HR Manager"
+            - option "Supervisor"
+            - option "Candidate"
+            - option "Viewer"
+        - button "Arabic" [active] [ref=e271] [cursor=pointer]:
+          - img [ref=e55]
+        - button "AI Advisor" [ref=e272] [cursor=pointer]:
+          - img [ref=e58]
+        - button "Notifications" [ref=e273] [cursor=pointer]:
+          - img [ref=e63]
+        - button "Log out" [ref=e274] [cursor=pointer]:
+          - img [ref=e67]
+    - main [ref=e70]:
+      - generic [ref=e71]:
+        - generic [ref=e73]:
+          - heading "Khalid Al-Ghamdi" [level=1] [ref=e275]
+          - generic [ref=e75]: ACME Corporation · Chief Technology Officer
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - heading "Profile" [level=2] [ref=e276]
+            - generic [ref=e79]:
+              - generic [ref=e80]:
+                - term [ref=e81]: Current position
+                - definition [ref=e82]: Senior Developer
+              - generic [ref=e83]:
+                - term [ref=e84]: Target position
+                - definition [ref=e85]: Chief Technology Officer
+              - generic [ref=e86]:
+                - term [ref=e87]: Department
+                - definition [ref=e88]: Technology
+              - generic [ref=e89]:
+                - term [ref=e90]: Status
+                - definition [ref=e91]:
+                  - generic [ref=e92]: Active
+                  - generic [ref=e93]: Ready
+          - generic [ref=e94]:
+            - heading "Readiness" [level=2] [ref=e277]
+            - generic [ref=e100]: 56%
+            - paragraph [ref=e101]: "Function status: Ready"
+        - generic [ref=e102]:
+          - generic [ref=e103]:
+            - heading "Scores" [level=2] [ref=e278]
+            - generic [ref=e105]: "Criteria: 5"
+          - generic [ref=e106]:
+            - generic [ref=e107]:
+              - generic [ref=e108]:
+                - heading "Competence" [level=3] [ref=e279]
+                - paragraph [ref=e110]: "Weight: 1"
+              - generic [ref=e111]:
+                - generic [ref=e112]: Score
+                - spinbutton "Score" [ref=e280]: "60"
+            - generic [ref=e114]:
+              - generic [ref=e115]:
+                - heading "Leadership" [level=3] [ref=e281]
+                - paragraph [ref=e117]: "Weight: 1"
+              - generic [ref=e118]:
+                - generic [ref=e119]: Score
+                - spinbutton "Score" [ref=e282]: "50"
+            - generic [ref=e121]:
+              - generic [ref=e122]:
+                - heading "Strategic Thinking" [level=3] [ref=e283]
+                - paragraph [ref=e124]: "Weight: 1"
+              - generic [ref=e125]:
+                - generic [ref=e126]: Score
+                - spinbutton "Score" [ref=e284]: "45"
+            - generic [ref=e128]:
+              - generic [ref=e129]:
+                - heading "Values Alignment" [level=3] [ref=e285]
+                - paragraph [ref=e131]: "Weight: 1"
+              - generic [ref=e132]:
+                - generic [ref=e133]: Score
+                - spinbutton "Score" [ref=e286]: "70"
+            - generic [ref=e135]:
+              - generic [ref=e136]:
+                - heading "Learning Agility" [level=3] [ref=e287]
+                - paragraph [ref=e138]: "Weight: 1"
+              - generic [ref=e139]:
+                - generic [ref=e140]: Score
+                - spinbutton "Score" [ref=e288]: "55"
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - generic [ref=e144]:
+              - heading "Journey" [level=2] [ref=e289]
+              - paragraph [ref=e146]: "Overall progress: 27%"
+            - generic [ref=e150]: 27%
+          - generic [ref=e151]:
+            - generic [ref=e152]:
+              - generic [ref=e153]:
+                - generic [ref=e154]:
+                  - heading "Assessment & Planning" [level=3] [ref=e290]
+                  - paragraph [ref=e156]: "Stage progress: 3/3"
+                - generic [ref=e157]: STG1
+              - generic [ref=e161]: 100%
+              - generic [ref=e162]:
+                - generic [ref=e163]:
+                  - 'checkbox "Mark done: Review the current leadership structure" [checked] [ref=e291]'
+                  - generic [ref=e165]:
+                    - generic [ref=e166]: Review the current leadership structure
+                    - generic [ref=e168]: Done
+                - generic [ref=e169]:
+                  - 'checkbox "Mark done: Define the target role profile" [checked] [ref=e292]'
+                  - generic [ref=e171]:
+                    - generic [ref=e172]: Define the target role profile
+                    - generic [ref=e174]: Done
+                - generic [ref=e175]:
+                  - 'checkbox "Mark done: Agree on selection criteria" [checked] [ref=e293]'
+                  - generic [ref=e177]:
+                    - generic [ref=e178]: Agree on selection criteria
+                    - generic [ref=e180]: Done
+            - generic [ref=e181]:
+              - generic [ref=e182]:
+                - generic [ref=e183]:
+                  - heading "Building & Development" [level=3] [ref=e294]
+                  - paragraph [ref=e185]: "Stage progress: 0/3"
+                - generic [ref=e186]: STG2
+              - generic [ref=e189]: 0%
+              - generic [ref=e190]:
+                - generic [ref=e191]:
+                  - 'checkbox "Mark done: Run the qualification program" [ref=e295]'
+                  - generic [ref=e193]:
+                    - generic [ref=e194]: Run the qualification program
+                    - generic [ref=e196]: In progress
+                - generic [ref=e197]:
+                  - 'checkbox "Mark done: Assign a mentor" [ref=e296]'
+                  - generic [ref=e199]:
+                    - generic [ref=e200]: Assign a mentor
+                    - generic [ref=e202]: Not started
+                - generic [ref=e203]:
+                  - 'checkbox "Mark done: Track progress against the plan" [ref=e297]'
+                  - generic [ref=e205]:
+                    - generic [ref=e206]: Track progress against the plan
+                    - generic [ref=e208]: Not started
+            - generic [ref=e209]:
+              - generic [ref=e210]:
+                - generic [ref=e211]:
+                  - heading "Application & Evaluation" [level=3] [ref=e298]
+                  - paragraph [ref=e213]: "Stage progress: 0/3"
+                - generic [ref=e214]: STG3
+              - generic [ref=e217]: 0%
+              - generic [ref=e218]:
+                - generic [ref=e219]:
+                  - 'checkbox "Mark done: Lead a stretch assignment" [ref=e299]'
+                  - generic [ref=e221]:
+                    - generic [ref=e222]: Lead a stretch assignment
+                    - generic [ref=e224]: Not started
+                - generic [ref=e225]:
+                  - 'checkbox "Mark done: Evaluate development outcomes" [ref=e300]'
+                  - generic [ref=e227]:
+                    - generic [ref=e228]: Evaluate development outcomes
+                    - generic [ref=e230]: Not started
+                - generic [ref=e231]:
+                  - 'checkbox "Mark done: Refine the plan" [ref=e301]'
+                  - generic [ref=e233]:
+                    - generic [ref=e234]: Refine the plan
+                    - generic [ref=e236]: Not started
+            - generic [ref=e237]:
+              - generic [ref=e238]:
+                - generic [ref=e239]:
+                  - heading "Sustainability & Improvement" [level=3] [ref=e302]
+                  - paragraph [ref=e241]: "Stage progress: 0/2"
+                - generic [ref=e242]: STG4
+              - generic [ref=e245]: 0%
+              - generic [ref=e246]:
+                - generic [ref=e247]:
+                  - 'checkbox "Mark done: Follow up after transition" [ref=e303]'
+                  - generic [ref=e249]:
+                    - generic [ref=e250]: Follow up after transition
+                    - generic [ref=e252]: Not started
+                - generic [ref=e253]:
+                  - 'checkbox "Mark done: Monitor sustained impact" [ref=e304]'
+                  - generic [ref=e255]:
+                    - generic [ref=e256]: Monitor sustained impact
+                    - generic [ref=e258]: Not started

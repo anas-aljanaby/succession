@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import type { CandidateStatus } from '../types';
 import { useApp } from '../store/AppContext';
 import { useLanguage } from '../lib/i18n';
 import { canAccessOrg, visibleCandidatesForOrg } from '../lib/permissions';
@@ -8,14 +7,7 @@ import { computeReadiness } from '../lib/selectors';
 import { PageHeader } from '../ui/PageHeader';
 import { Pill } from '../ui/Pill';
 import { ProgressBar } from '../ui/ProgressBar';
-import type { Tone } from '../ui/tone';
-
-const candidateStatusTone = (status: CandidateStatus): Tone => {
-  if (status === 'selected') return 'ok';
-  if (status === 'paused') return 'warn';
-  if (status === 'withdrawn') return 'bad';
-  return 'info';
-};
+import { candidateStatusTone } from '../ui/tone';
 
 export const CandidatesList: React.FC = () => {
   const { orgId } = useParams();
