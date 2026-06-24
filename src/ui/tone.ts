@@ -1,4 +1,4 @@
-import type { CandidateStatus, FunctionStatus, TaskStatus } from '../types';
+import type { CandidateStatus, FunctionStatus, Priority, TaskStatus } from '../types';
 
 export type Tone = 'accent' | 'ok' | 'warn' | 'bad' | 'info';
 
@@ -34,5 +34,11 @@ export const functionStatusTone = (status: FunctionStatus): Tone => {
 export const taskStatusTone = (status: TaskStatus): Tone => {
   if (status === 'completed') return 'ok';
   if (status === 'inProgress') return 'warn';
+  return 'info';
+};
+
+export const priorityTone = (priority: Priority): Tone => {
+  if (priority === 'high') return 'bad';
+  if (priority === 'medium') return 'warn';
   return 'info';
 };

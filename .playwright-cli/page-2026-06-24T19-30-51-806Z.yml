@@ -1,0 +1,116 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب القيادي
+    - navigation [ref=e6]:
+      - link "لوحة التحكم" [ref=e7] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e8] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e9] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "المزيد (قريباً)" [ref=e10] [cursor=pointer]:
+        - /url: /coming-soon
+        - text: المزيد
+        - generic [ref=e11]: (قريباً)
+      - link "الإعدادات" [ref=e12] [cursor=pointer]:
+        - /url: /settings
+  - generic [ref=e13]:
+    - banner [ref=e14]:
+      - generic [ref=e15]:
+        - navigation [ref=e16]:
+          - button "الجدول الزمني للرحلة (معاينة)" [disabled] [ref=e17]:
+            - img [ref=e18]
+          - button "لوحة القيم" [disabled] [ref=e21]:
+            - img [ref=e22]
+        - navigation [ref=e25]:
+          - link "الرئيسية" [ref=e26] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e27]: /
+          - link "المؤسسات" [ref=e28] [cursor=pointer]:
+            - /url: /organizations
+          - generic [ref=e29]: /
+          - link "شركة ACME" [ref=e30] [cursor=pointer]:
+            - /url: /organizations/org-acme
+          - generic [ref=e31]: /
+          - generic [ref=e32]: الوظائف الحرجة
+      - generic [ref=e33]:
+        - generic [ref=e35]:
+          - button "شركة ACME" [ref=e36] [cursor=pointer]:
+            - img [ref=e37]
+            - generic [ref=e39]: شركة ACME
+          - button "المؤسسة" [ref=e40] [cursor=pointer]:
+            - img [ref=e41]
+        - generic [ref=e43]:
+          - generic [ref=e44]: المرشح
+          - combobox "المرشح" [ref=e45]:
+            - option "اختر مرشحاً" [disabled] [selected]
+            - option "خالد الغامدي"
+            - option "سارة منصور"
+            - option "عمر عبد الله"
+        - generic [ref=e46]:
+          - img [ref=e47]
+          - generic [ref=e49]: الدور
+          - combobox "الدور" [ref=e50]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e51] [cursor=pointer]:
+          - img [ref=e52]
+        - button "المستشار الذكي" [active] [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+        - button "الإشعارات" [ref=e59] [cursor=pointer]:
+          - img [ref=e60]
+        - button "تسجيل الخروج" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+    - generic [ref=e103]:
+      - button "إلغاء" [ref=e104] [cursor=pointer]
+      - complementary [ref=e105]:
+        - generic [ref=e106]:
+          - heading "المستشار الذكي" [level=3] [ref=e107]
+          - button "إلغاء" [ref=e108] [cursor=pointer]:
+            - img [ref=e109]
+        - generic [ref=e112]: اسأل عن جاهزية التعاقب أو تقدم الرحلة أو مقارنة المرشحين.
+        - generic [ref=e113]:
+          - textbox "اسأل المستشار…" [ref=e114]
+          - button "إرسال" [ref=e115] [cursor=pointer]
+    - main [ref=e67]:
+      - generic [ref=e68]:
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - heading "الوظائف الحرجة" [level=1] [ref=e71]
+            - generic [ref=e72]: شركة ACME · الوظائف الحرجة في هذه المؤسسة.
+          - button "وظيفة جديدة" [ref=e74] [cursor=pointer]
+        - generic [ref=e75]:
+          - 'link "مدير التكنولوجيا التكنولوجيا جاهز عالية حجم المجموعة: 2" [ref=e76] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-cto
+            - generic [ref=e77]:
+              - generic [ref=e78]:
+                - heading "مدير التكنولوجيا" [level=2] [ref=e79]
+                - paragraph [ref=e80]: التكنولوجيا
+              - generic [ref=e81]: جاهز
+            - generic [ref=e82]:
+              - generic [ref=e83]: عالية
+              - generic [ref=e84]: "حجم المجموعة: 2"
+          - 'link "مدير التسويق التسويق قيد التنفيذ متوسطة حجم المجموعة: 1" [ref=e85] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-cmo
+            - generic [ref=e86]:
+              - generic [ref=e87]:
+                - heading "مدير التسويق" [level=2] [ref=e88]
+                - paragraph [ref=e89]: التسويق
+              - generic [ref=e90]: قيد التنفيذ
+            - generic [ref=e91]:
+              - generic [ref=e92]: متوسطة
+              - generic [ref=e93]: "حجم المجموعة: 1"
+          - 'link "نائب رئيس الهندسة التكنولوجيا شاغرة عالية حجم المجموعة: 0" [ref=e94] [cursor=pointer]':
+            - /url: /organizations/org-acme/functions/fn-vpe
+            - generic [ref=e95]:
+              - generic [ref=e96]:
+                - heading "نائب رئيس الهندسة" [level=2] [ref=e97]
+                - paragraph [ref=e98]: التكنولوجيا
+              - generic [ref=e99]: شاغرة
+            - generic [ref=e100]:
+              - generic [ref=e101]: عالية
+              - generic [ref=e102]: "حجم المجموعة: 0"

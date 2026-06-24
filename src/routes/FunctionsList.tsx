@@ -1,13 +1,13 @@
 import React from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { useApp } from '../store/AppContext';
 import { useLanguage } from '../lib/i18n';
 import { can, canAccessOrg, visibleCandidatesForOrg } from '../lib/permissions';
 import { candidatesForFunction, functionStatusFor } from '../lib/selectors';
 import { PageHeader } from '../ui/PageHeader';
 import { Button } from '../ui/Button';
-import { Card } from '../ui/Card';
-import { Badge, priorityColor, statusColor } from '../ui/Badge';
+import { Pill } from '../ui/Pill';
+import { functionStatusTone, priorityTone } from '../ui/tone';
 
 export const FunctionsList: React.FC = () => {
   const { orgId } = useParams();
@@ -36,10 +36,16 @@ export const FunctionsList: React.FC = () => {
   });
 
   return (
-    <section>
+    <section className="mx-auto max-w-[1180px]">
       <PageHeader
         title={t('functions.title')}
-        subtitle={`${org.name} · ${t('functions.subtitle')}`}
+        subtitle={
+          <>
+            <span className="text-[var(--text)]">{org.name}</span>
+            <span className="text-[var(--text-faint)]"> · </span>
+            <span>{t('functions.subtitle')}</span>
+          </>
+        }
         actions={
           canCreateFunction ? (
             <Button onClick={() => navigate(`/organizations/${org.id}/functions/new`)}>
@@ -50,7 +56,7 @@ export const FunctionsList: React.FC = () => {
       />
 
       {functions.length === 0 ? (
-        <p className="text-sm text-gray-400">{t('functions.empty')}</p>
+        <p className="text-sm text-[var(--text-faint)]">{t('functions.empty')}</p>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {functions.map((fn) => {
@@ -58,24 +64,25 @@ export const FunctionsList: React.FC = () => {
             const poolSize = candidatesForFunction(fn.id, visibleCandidates).length;
 
             return (
-              <Card key={fn.id} to={`/organizations/${org.id}/functions/${fn.id}`}>
+              <Link
+                key={fn.id}
+                to={`/organizations/${org.id}/functions/${fn.id}`}
+                className="surface-card block p-5 transition-colors hover:border-[var(--border-strong)]"
+              >
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h2 className="font-semibold text-white">{fn.title}</h2>
-                    <p className="mt-1 text-sm text-gray-300">{fn.department}</p>
+                    <h2 className="font-semibold text-[var(--text)]">{fn.title}</h2>
+                    <p className="mt-1 text-sm text-[var(--text-muted)]">{fn.department}</p>
                   </div>
-                  <Badge label={t(`fnStatus.${status}`)} color={statusColor(status)} />
+                  <Pill tone={functionStatusTone(status)}>{t(`fnStatus.${status}`)}</Pill>
                 </div>
                 <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
-                  <Badge
-                    label={t(`priority.${fn.priority}`)}
-                    color={priorityColor(fn.priority)}
-                  />
-                  <span className="text-gray-300">
+                  <Pill tone={priorityTone(fn.priority)}>{t(`priority.${fn.priority}`)}</Pill>
+                  <span className="text-[var(--text-muted)]">
                     {t('functions.poolSize')}: {poolSize}
                   </span>
                 </div>
-              </Card>
+              </Link>
             );
           })}
         </div>
