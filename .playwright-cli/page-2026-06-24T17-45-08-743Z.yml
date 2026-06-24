@@ -1,0 +1,90 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e8] [cursor=pointer]:
+        - /url: /organizations
+      - link "الإعدادات" [ref=e9] [cursor=pointer]:
+        - /url: /settings
+    - navigation [ref=e10]:
+      - link "لوحة المعلومات" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-gda
+      - link "الوظائف الحرجة" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-gda/functions
+      - link "المرشحون" [ref=e13] [cursor=pointer]:
+        - /url: /organizations/org-gda/candidates
+      - link "المزيد (قريباً)" [ref=e14] [cursor=pointer]:
+        - /url: /coming-soon
+        - text: المزيد
+        - generic [ref=e15]: (قريباً)
+  - generic [ref=e16]:
+    - banner [ref=e17]:
+      - generic [ref=e18]:
+        - navigation [ref=e19]:
+          - button "الجدول الزمني للرحلة (معاينة)" [disabled] [ref=e20]:
+            - img [ref=e21]
+          - button "لوحة القيم" [disabled] [ref=e24]:
+            - img [ref=e25]
+        - navigation [ref=e28]:
+          - link "الرئيسية" [ref=e29] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e30]: /
+          - link "المؤسسات" [ref=e31] [cursor=pointer]:
+            - /url: /organizations
+          - generic [ref=e120]: /
+          - link "الهيئة العامة للبيانات" [ref=e121] [cursor=pointer]:
+            - /url: /organizations/org-gda
+          - generic [ref=e122]: /
+          - generic [ref=e123]: المرشحون
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]: المؤسسة
+          - combobox "المؤسسة" [ref=e39]:
+            - option "ACME Corporation"
+            - option "الهيئة العامة للبيانات" [selected]
+            - option "مبرة المتميزين"
+        - generic [ref=e43]:
+          - img [ref=e44]
+          - generic [ref=e46]: الدور
+          - combobox "الدور" [ref=e47]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e48] [cursor=pointer]:
+          - img [ref=e49]
+        - button "المستشار الذكي" [ref=e51] [cursor=pointer]:
+          - img [ref=e52]
+        - button "الإشعارات" [ref=e56] [cursor=pointer]:
+          - img [ref=e57]
+        - button "تسجيل الخروج" [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+    - main [ref=e64]:
+      - generic [ref=e65]:
+        - generic [ref=e67]:
+          - heading "المرشحون" [level=1] [ref=e68]
+          - paragraph [ref=e69]: الهيئة العامة للبيانات · المرشحون عبر كل الوظائف الحرجة.
+        - table [ref=e72]:
+          - rowgroup [ref=e73]:
+            - row "المرشح الحالي إلى المستهدف الوظيفة الجاهزية الحالة" [ref=e74]:
+              - columnheader "المرشح" [ref=e75]
+              - columnheader "الحالي إلى المستهدف" [ref=e76]
+              - columnheader "الوظيفة" [ref=e77]
+              - columnheader "الجاهزية" [ref=e78]
+              - columnheader "الحالة" [ref=e79]
+          - rowgroup [ref=e80]:
+            - row "Layla Al-Qahtani Strategy محلل استراتيجي أولإلىمدير إدارة الاستراتيجية مدير إدارة الاستراتيجية 72% نشطة" [ref=e124]:
+              - cell "Layla Al-Qahtani Strategy" [ref=e125]:
+                - link "Layla Al-Qahtani" [ref=e126] [cursor=pointer]:
+                  - /url: /organizations/org-gda/candidates/cand-layla
+                - paragraph [ref=e127]: Strategy
+              - cell "محلل استراتيجي أولإلىمدير إدارة الاستراتيجية" [ref=e128]
+              - cell "مدير إدارة الاستراتيجية" [ref=e129]
+              - cell "72%" [ref=e130]:
+                - generic [ref=e134]: 72%
+              - cell "نشطة" [ref=e135]:
+                - generic [ref=e136]: نشطة

@@ -1,0 +1,81 @@
+- generic [ref=e24]:
+  - complementary [ref=e25]:
+    - generic [ref=e26]: Leadership Succession
+    - navigation [ref=e27]:
+      - link "Home" [ref=e28] [cursor=pointer]:
+        - /url: /
+      - link "Organizations" [ref=e29] [cursor=pointer]:
+        - /url: /organizations
+      - link "Settings" [ref=e30] [cursor=pointer]:
+        - /url: /settings
+  - generic [ref=e31]:
+    - banner [ref=e32]:
+      - generic [ref=e33]:
+        - navigation [ref=e34]:
+          - button "Journey Timeline (Preview)" [disabled] [ref=e35]:
+            - img [ref=e36]
+          - button "Values Dashboard" [disabled] [ref=e39]:
+            - img [ref=e40]
+        - navigation [ref=e43]:
+          - link "Home" [ref=e44] [cursor=pointer]:
+            - /url: /
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]: Organization
+          - combobox "Organization" [ref=e48]:
+            - option "ACME Corporation" [selected]
+            - option "General Data Authority"
+            - option "Al-Mutamayzeen Charity"
+        - generic [ref=e49]:
+          - img [ref=e50]
+          - generic [ref=e52]: Role
+          - combobox "Role" [ref=e53]:
+            - option "Consultant" [selected]
+            - option "Organization Admin"
+            - option "HR Manager"
+            - option "Supervisor"
+            - option "Candidate"
+            - option "Viewer"
+        - button "Arabic" [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+        - button "AI Advisor" [ref=e57] [cursor=pointer]:
+          - img [ref=e58]
+        - button "Notifications" [ref=e62] [cursor=pointer]:
+          - img [ref=e63]
+        - button "Log out" [ref=e66] [cursor=pointer]:
+          - img [ref=e67]
+    - main [ref=e70]:
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - heading "Organizations" [level=1] [ref=e74]
+            - paragraph [ref=e75]: Manage the organizations you advise.
+          - button "New organization" [ref=e77] [cursor=pointer]
+        - generic [ref=e78]:
+          - 'link "ACME Corporation Active Corporate · Technology 3 Critical functions Readiness: 33%" [ref=e79] [cursor=pointer]':
+            - /url: /organizations/org-acme
+            - generic [ref=e80]:
+              - heading "ACME Corporation" [level=2] [ref=e81]
+              - generic [ref=e82]: Active
+            - paragraph [ref=e83]: Corporate · Technology
+            - generic [ref=e84]:
+              - generic [ref=e85]: 3 Critical functions
+              - generic [ref=e86]: "Readiness: 33%"
+          - 'link "General Data Authority Active Government · Government 1 Critical functions Readiness: 0%" [ref=e87] [cursor=pointer]':
+            - /url: /organizations/org-gda
+            - generic [ref=e88]:
+              - heading "General Data Authority" [level=2] [ref=e89]
+              - generic [ref=e90]: Active
+            - paragraph [ref=e91]: Government · Government
+            - generic [ref=e92]:
+              - generic [ref=e93]: 1 Critical functions
+              - generic [ref=e94]: "Readiness: 0%"
+          - 'link "Al-Mutamayzeen Charity Active Charity · Charity 1 Critical functions Readiness: 0%" [ref=e95] [cursor=pointer]':
+            - /url: /organizations/org-mubarra
+            - generic [ref=e96]:
+              - heading "Al-Mutamayzeen Charity" [level=2] [ref=e97]
+              - generic [ref=e98]: Active
+            - paragraph [ref=e99]: Charity · Charity
+            - generic [ref=e100]:
+              - generic [ref=e101]: 1 Critical functions
+              - generic [ref=e102]: "Readiness: 0%"

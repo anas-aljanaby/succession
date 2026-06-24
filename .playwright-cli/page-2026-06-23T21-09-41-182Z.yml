@@ -1,0 +1,12 @@
+- generic [ref=e3]:
+  - button "العربية" [active] [ref=e16] [cursor=pointer]
+  - generic [ref=e6]:
+    - heading "Leadership Succession" [level=1] [ref=e17]
+    - paragraph [ref=e8]: Choose a role to continue
+    - generic [ref=e9]:
+      - button "Consultant" [ref=e18] [cursor=pointer]
+      - button "Organization Admin" [ref=e19] [cursor=pointer]
+      - button "HR Manager" [ref=e20] [cursor=pointer]
+      - button "Supervisor" [ref=e21] [cursor=pointer]
+      - button "Candidate" [ref=e22] [cursor=pointer]
+      - button "Viewer" [ref=e23] [cursor=pointer]

@@ -1,0 +1,238 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب القيادي
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e8] [cursor=pointer]:
+        - /url: /organizations
+      - link "الإعدادات" [ref=e9] [cursor=pointer]:
+        - /url: /settings
+    - navigation [ref=e10]:
+      - link "لوحة المعلومات" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e13] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "المزيد (قريباً)" [ref=e14] [cursor=pointer]:
+        - /url: /coming-soon
+        - text: المزيد
+        - generic [ref=e15]: (قريباً)
+  - generic [ref=e16]:
+    - banner [ref=e17]:
+      - generic [ref=e18]:
+        - navigation [ref=e19]:
+          - button "الجدول الزمني للرحلة (معاينة)" [ref=e20] [cursor=pointer]:
+            - img [ref=e21]
+          - button "لوحة القيم" [ref=e24] [cursor=pointer]:
+            - img [ref=e25]
+        - generic [ref=e27]:
+          - navigation [ref=e28]:
+            - link "الرئيسية" [ref=e29] [cursor=pointer]:
+              - /url: /
+            - generic [ref=e30]: /
+            - link "المؤسسات":
+              - /url: /organizations
+            - generic [ref=e32]: /
+            - link "شركة ACME":
+              - /url: /organizations/org-acme
+            - generic [ref=e34]: /
+            - link "المرشحون":
+              - /url: /organizations/org-acme/candidates
+            - generic [ref=e257]: /
+            - generic: خالد الغامدي
+          - generic [ref=e38]: خالد الغامدي
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: المؤسسة
+          - combobox "المؤسسة" [ref=e42]:
+            - option "شركة ACME" [selected]
+            - option "الهيئة العامة للبيانات"
+            - option "مبرة المتميزين"
+        - generic [ref=e43]:
+          - generic [ref=e44]: المرشح
+          - combobox "المرشح" [ref=e45]:
+            - option "اختر مرشحاً" [disabled]
+            - option "خالد الغامدي" [selected]
+            - option "سارة منصور"
+            - option "عمر عبد الله"
+        - generic [ref=e46]:
+          - img [ref=e47]
+          - generic [ref=e49]: الدور
+          - combobox "الدور" [ref=e50]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e51] [cursor=pointer]:
+          - img [ref=e52]
+        - button "المستشار الذكي" [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+        - button "الإشعارات" [ref=e59] [cursor=pointer]:
+          - img [ref=e60]
+        - button "تسجيل الخروج" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+    - main [ref=e67]:
+      - generic [ref=e68]:
+        - generic [ref=e70]:
+          - heading "خالد الغامدي" [level=1] [ref=e258]
+          - paragraph [ref=e72]: شركة ACME · مدير التكنولوجيا
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - heading "الملف الشخصي" [level=2] [ref=e75]
+            - generic [ref=e76]:
+              - generic [ref=e77]:
+                - term [ref=e78]: المنصب الحالي
+                - definition [ref=e79]: مطور أول
+              - generic [ref=e80]:
+                - term [ref=e81]: المنصب المستهدف
+                - definition [ref=e82]: مدير التكنولوجيا
+              - generic [ref=e83]:
+                - term [ref=e84]: الإدارة
+                - definition [ref=e85]: التكنولوجيا
+              - generic [ref=e86]:
+                - term [ref=e87]: الحالة
+                - definition [ref=e88]:
+                  - generic [ref=e89]: نشطة
+                  - generic [ref=e90]: جاهز
+          - generic [ref=e91]:
+            - heading "الجاهزية" [level=2] [ref=e92]
+            - generic [ref=e97]: 56%
+            - paragraph [ref=e98]: "حالة الوظيفة: جاهز"
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - heading "الدرجات" [level=2] [ref=e101]
+            - generic [ref=e102]: "المعايير: 5"
+          - generic [ref=e103]:
+            - generic [ref=e104]:
+              - generic [ref=e105]:
+                - heading "الكفاءة" [level=3] [ref=e106]
+                - paragraph [ref=e107]: "الوزن: 1"
+              - generic [ref=e108]:
+                - generic [ref=e109]: الدرجة
+                - spinbutton "الدرجة" [ref=e110]: "60"
+            - generic [ref=e111]:
+              - generic [ref=e112]:
+                - heading "القيادة" [level=3] [ref=e113]
+                - paragraph [ref=e114]: "الوزن: 1"
+              - generic [ref=e115]:
+                - generic [ref=e116]: الدرجة
+                - spinbutton "الدرجة" [ref=e117]: "50"
+            - generic [ref=e118]:
+              - generic [ref=e119]:
+                - heading "التفكير الاستراتيجي" [level=3] [ref=e120]
+                - paragraph [ref=e121]: "الوزن: 1"
+              - generic [ref=e122]:
+                - generic [ref=e123]: الدرجة
+                - spinbutton "الدرجة" [ref=e124]: "45"
+            - generic [ref=e125]:
+              - generic [ref=e126]:
+                - heading "التوافق مع القيم" [level=3] [ref=e127]
+                - paragraph [ref=e128]: "الوزن: 1"
+              - generic [ref=e129]:
+                - generic [ref=e130]: الدرجة
+                - spinbutton "الدرجة" [ref=e131]: "70"
+            - generic [ref=e132]:
+              - generic [ref=e133]:
+                - heading "مرونة التعلم" [level=3] [ref=e134]
+                - paragraph [ref=e135]: "الوزن: 1"
+              - generic [ref=e136]:
+                - generic [ref=e137]: الدرجة
+                - spinbutton "الدرجة" [ref=e138]: "55"
+        - generic [ref=e139]:
+          - generic [ref=e140]:
+            - generic [ref=e141]:
+              - heading "الرحلة" [level=2] [ref=e142]
+              - paragraph [ref=e143]: "التقدم العام: 27%"
+            - generic [ref=e147]: 27%
+          - generic [ref=e148]:
+            - generic [ref=e149]:
+              - generic [ref=e150]:
+                - generic [ref=e151]:
+                  - heading "التقييم والتخطيط" [level=3] [ref=e152]
+                  - paragraph [ref=e153]: "تقدم المرحلة: 3/3"
+                - generic [ref=e154]: STG1
+              - generic [ref=e158]: 100%
+              - generic [ref=e159]:
+                - generic [ref=e259]:
+                  - 'checkbox "وضع علامة مكتمل: مراجعة الهيكل القيادي الحالي" [checked] [ref=e260]'
+                  - generic [ref=e261]:
+                    - generic [ref=e262]: مراجعة الهيكل القيادي الحالي
+                    - generic [ref=e264]: مكتمل
+                - generic [ref=e265]:
+                  - 'checkbox "وضع علامة مكتمل: تحديد ملف المنصب المستهدف" [checked] [ref=e266]'
+                  - generic [ref=e267]:
+                    - generic [ref=e268]: تحديد ملف المنصب المستهدف
+                    - generic [ref=e270]: مكتمل
+                - generic [ref=e271]:
+                  - 'checkbox "وضع علامة مكتمل: الاتفاق على معايير الاختيار" [checked] [ref=e272]'
+                  - generic [ref=e273]:
+                    - generic [ref=e274]: الاتفاق على معايير الاختيار
+                    - generic [ref=e276]: مكتمل
+            - generic [ref=e178]:
+              - generic [ref=e179]:
+                - generic [ref=e180]:
+                  - heading "البناء والتطوير" [level=3] [ref=e181]
+                  - paragraph [ref=e182]: "تقدم المرحلة: 0/3"
+                - generic [ref=e183]: STG2
+              - generic [ref=e187]: 0%
+              - generic [ref=e188]:
+                - generic [ref=e277]:
+                  - 'checkbox "وضع علامة مكتمل: تنفيذ برنامج التأهيل" [ref=e278]'
+                  - generic [ref=e279]:
+                    - generic [ref=e280]: تنفيذ برنامج التأهيل
+                    - generic [ref=e282]: قيد التنفيذ
+                - generic [ref=e283]:
+                  - 'checkbox "وضع علامة مكتمل: تعيين مرشد" [ref=e284]'
+                  - generic [ref=e285]:
+                    - generic [ref=e286]: تعيين مرشد
+                    - generic [ref=e288]: لم يبدأ
+                - generic [ref=e289]:
+                  - 'checkbox "وضع علامة مكتمل: متابعة التقدم وفق الخطة" [ref=e290]'
+                  - generic [ref=e291]:
+                    - generic [ref=e292]: متابعة التقدم وفق الخطة
+                    - generic [ref=e294]: لم يبدأ
+            - generic [ref=e207]:
+              - generic [ref=e208]:
+                - generic [ref=e209]:
+                  - heading "التطبيق والتقويم" [level=3] [ref=e210]
+                  - paragraph [ref=e211]: "تقدم المرحلة: 0/3"
+                - generic [ref=e212]: STG3
+              - generic [ref=e215]: 0%
+              - generic [ref=e216]:
+                - generic [ref=e295]:
+                  - 'checkbox "وضع علامة مكتمل: قيادة مهمة تطويرية" [ref=e296]'
+                  - generic [ref=e297]:
+                    - generic [ref=e298]: قيادة مهمة تطويرية
+                    - generic [ref=e300]: لم يبدأ
+                - generic [ref=e301]:
+                  - 'checkbox "وضع علامة مكتمل: تقييم نتائج التطوير" [ref=e302]'
+                  - generic [ref=e303]:
+                    - generic [ref=e304]: تقييم نتائج التطوير
+                    - generic [ref=e306]: لم يبدأ
+                - generic [ref=e307]:
+                  - 'checkbox "وضع علامة مكتمل: تحسين الخطة" [ref=e308]'
+                  - generic [ref=e309]:
+                    - generic [ref=e310]: تحسين الخطة
+                    - generic [ref=e312]: لم يبدأ
+            - generic [ref=e235]:
+              - generic [ref=e236]:
+                - generic [ref=e237]:
+                  - heading "الاستدامة والتحسين" [level=3] [ref=e238]
+                  - paragraph [ref=e239]: "تقدم المرحلة: 0/2"
+                - generic [ref=e240]: STG4
+              - generic [ref=e243]: 0%
+              - generic [ref=e244]:
+                - generic [ref=e313]:
+                  - 'checkbox "وضع علامة مكتمل: المتابعة بعد الانتقال" [ref=e314]'
+                  - generic [ref=e315]:
+                    - generic [ref=e316]: المتابعة بعد الانتقال
+                    - generic [ref=e318]: لم يبدأ
+                - generic [ref=e319]:
+                  - 'checkbox "وضع علامة مكتمل: رصد الأثر المستدام" [ref=e320]'
+                  - generic [ref=e321]:
+                    - generic [ref=e322]: رصد الأثر المستدام
+                    - generic [ref=e324]: لم يبدأ

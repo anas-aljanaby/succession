@@ -1,0 +1,81 @@
+- generic [ref=e24]:
+  - complementary [ref=e25]:
+    - generic [ref=e26]: التعاقب القيادي
+    - navigation [ref=e27]:
+      - link "الرئيسية" [ref=e103] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e104] [cursor=pointer]:
+        - /url: /organizations
+      - link "الإعدادات" [ref=e105] [cursor=pointer]:
+        - /url: /settings
+  - generic [ref=e31]:
+    - banner [ref=e32]:
+      - generic [ref=e33]:
+        - navigation [ref=e34]:
+          - button "الجدول الزمني للرحلة (معاينة)" [disabled] [ref=e106]:
+            - img [ref=e36]
+          - button "لوحة القيم" [disabled] [ref=e107]:
+            - img [ref=e40]
+        - navigation [ref=e43]:
+          - link "الرئيسية" [ref=e108] [cursor=pointer]:
+            - /url: /
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]: المؤسسة
+          - combobox "المؤسسة" [ref=e109]:
+            - option "شركة ACME" [selected]
+            - option "الهيئة العامة للبيانات"
+            - option "مبرة المتميزين"
+        - generic [ref=e49]:
+          - img [ref=e50]
+          - generic [ref=e52]: الدور
+          - combobox "الدور" [ref=e110]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [active] [ref=e111] [cursor=pointer]:
+          - img [ref=e55]
+        - button "المستشار الذكي" [ref=e112] [cursor=pointer]:
+          - img [ref=e58]
+        - button "الإشعارات" [ref=e113] [cursor=pointer]:
+          - img [ref=e63]
+        - button "تسجيل الخروج" [ref=e114] [cursor=pointer]:
+          - img [ref=e67]
+    - main [ref=e70]:
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - heading "المؤسسات" [level=1] [ref=e115]
+            - paragraph [ref=e75]: إدارة المؤسسات التي تستشيرها.
+          - button "مؤسسة جديدة" [ref=e116] [cursor=pointer]
+        - generic [ref=e78]:
+          - 'link "شركة ACME نشطة شركات · التكنولوجيا 3 الوظائف الحرجة الجاهزية: 33%" [ref=e117] [cursor=pointer]':
+            - /url: /organizations/org-acme
+            - generic [ref=e80]:
+              - heading "شركة ACME" [level=2] [ref=e118]
+              - generic [ref=e82]: نشطة
+            - paragraph [ref=e83]: شركات · التكنولوجيا
+            - generic [ref=e84]:
+              - generic [ref=e85]: 3 الوظائف الحرجة
+              - generic [ref=e86]: "الجاهزية: 33%"
+          - 'link "الهيئة العامة للبيانات نشطة حكومي · القطاع الحكومي 1 الوظائف الحرجة الجاهزية: 0%" [ref=e119] [cursor=pointer]':
+            - /url: /organizations/org-gda
+            - generic [ref=e88]:
+              - heading "الهيئة العامة للبيانات" [level=2] [ref=e120]
+              - generic [ref=e90]: نشطة
+            - paragraph [ref=e91]: حكومي · القطاع الحكومي
+            - generic [ref=e92]:
+              - generic [ref=e93]: 1 الوظائف الحرجة
+              - generic [ref=e94]: "الجاهزية: 0%"
+          - 'link "مبرة المتميزين نشطة خيري · القطاع الخيري 1 الوظائف الحرجة الجاهزية: 0%" [ref=e121] [cursor=pointer]':
+            - /url: /organizations/org-mubarra
+            - generic [ref=e96]:
+              - heading "مبرة المتميزين" [level=2] [ref=e122]
+              - generic [ref=e98]: نشطة
+            - paragraph [ref=e99]: خيري · القطاع الخيري
+            - generic [ref=e100]:
+              - generic [ref=e101]: 1 الوظائف الحرجة
+              - generic [ref=e102]: "الجاهزية: 0%"

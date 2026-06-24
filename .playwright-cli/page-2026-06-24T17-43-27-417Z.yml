@@ -1,0 +1,119 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "المؤسسات" [ref=e8] [cursor=pointer]:
+        - /url: /organizations
+      - link "الإعدادات" [ref=e9] [cursor=pointer]:
+        - /url: /settings
+    - navigation [ref=e10]:
+      - link "لوحة المعلومات" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e13] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "المزيد (قريباً)" [ref=e14] [cursor=pointer]:
+        - /url: /coming-soon
+        - text: المزيد
+        - generic [ref=e15]: (قريباً)
+  - generic [ref=e16]:
+    - banner [ref=e17]:
+      - generic [ref=e18]:
+        - navigation [ref=e19]:
+          - button "الجدول الزمني للرحلة (معاينة)" [disabled] [ref=e20]:
+            - img [ref=e21]
+          - button "لوحة القيم" [disabled] [ref=e24]:
+            - img [ref=e25]
+        - navigation [ref=e28]:
+          - link "الرئيسية" [ref=e29] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e30]: /
+          - link "المؤسسات" [ref=e31] [cursor=pointer]:
+            - /url: /organizations
+          - generic [ref=e32]: /
+          - link "ACME Corporation" [ref=e33] [cursor=pointer]:
+            - /url: /organizations/org-acme
+          - generic [ref=e34]: /
+          - generic [ref=e35]: المرشحون
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]: المؤسسة
+          - combobox "المؤسسة" [ref=e39]:
+            - option "ACME Corporation" [selected]
+            - option "الهيئة العامة للبيانات"
+            - option "مبرة المتميزين"
+        - generic [ref=e40]:
+          - generic [ref=e41]: المرشح
+          - combobox "المرشح" [ref=e42]:
+            - option "اختر مرشحاً" [disabled] [selected]
+            - option "Khalid Al-Ghamdi"
+            - option "Sara Mansour"
+            - option "Omar Abdullah"
+        - generic [ref=e43]:
+          - img [ref=e44]
+          - generic [ref=e46]: الدور
+          - combobox "الدور" [ref=e47]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e48] [cursor=pointer]:
+          - img [ref=e49]
+        - button "المستشار الذكي" [ref=e51] [cursor=pointer]:
+          - img [ref=e52]
+        - button "الإشعارات" [ref=e56] [cursor=pointer]:
+          - img [ref=e57]
+        - button "تسجيل الخروج" [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+    - main [ref=e64]:
+      - generic [ref=e65]:
+        - generic [ref=e67]:
+          - heading "المرشحون" [level=1] [ref=e68]
+          - paragraph [ref=e69]: ACME Corporation · المرشحون عبر كل الوظائف الحرجة.
+        - table [ref=e72]:
+          - rowgroup [ref=e73]:
+            - row "المرشح الحالي إلى المستهدف الوظيفة الجاهزية الحالة" [ref=e74]:
+              - columnheader "المرشح" [ref=e75]
+              - columnheader "الحالي إلى المستهدف" [ref=e76]
+              - columnheader "الوظيفة" [ref=e77]
+              - columnheader "الجاهزية" [ref=e78]
+              - columnheader "الحالة" [ref=e79]
+          - rowgroup [ref=e80]:
+            - row "Khalid Al-Ghamdi Technology Senior DeveloperإلىChief Technology Officer Chief Technology Officer 56% نشطة" [ref=e81]:
+              - cell "Khalid Al-Ghamdi Technology" [ref=e82]:
+                - link "Khalid Al-Ghamdi" [ref=e83] [cursor=pointer]:
+                  - /url: /organizations/org-acme/candidates/cand-khalid
+                - paragraph [ref=e84]: Technology
+              - cell "Senior DeveloperإلىChief Technology Officer" [ref=e85]
+              - cell "Chief Technology Officer" [ref=e86]
+              - cell "56%" [ref=e87]:
+                - generic [ref=e91]: 56%
+              - cell "نشطة" [ref=e92]:
+                - generic [ref=e93]: نشطة
+            - row "Omar Abdullah Marketing Marketing ManagerإلىChief Marketing Officer Chief Marketing Officer 70% نشطة" [ref=e94]:
+              - cell "Omar Abdullah Marketing" [ref=e95]:
+                - link "Omar Abdullah" [ref=e96] [cursor=pointer]:
+                  - /url: /organizations/org-acme/candidates/cand-omar
+                - paragraph [ref=e97]: Marketing
+              - cell "Marketing ManagerإلىChief Marketing Officer" [ref=e98]
+              - cell "Chief Marketing Officer" [ref=e99]
+              - cell "70%" [ref=e100]:
+                - generic [ref=e104]: 70%
+              - cell "نشطة" [ref=e105]:
+                - generic [ref=e106]: نشطة
+            - row "Sara Mansour Technology Engineering LeadإلىChief Technology Officer Chief Technology Officer 88% نشطة" [ref=e107]:
+              - cell "Sara Mansour Technology" [ref=e108]:
+                - link "Sara Mansour" [ref=e109] [cursor=pointer]:
+                  - /url: /organizations/org-acme/candidates/cand-sara
+                - paragraph [ref=e110]: Technology
+              - cell "Engineering LeadإلىChief Technology Officer" [ref=e111]
+              - cell "Chief Technology Officer" [ref=e112]
+              - cell "88%" [ref=e113]:
+                - generic [ref=e117]: 88%
+              - cell "نشطة" [ref=e118]:
+                - generic [ref=e119]: نشطة

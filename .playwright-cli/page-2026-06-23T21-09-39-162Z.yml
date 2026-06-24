@@ -1,0 +1,12 @@
+- generic [ref=e3]:
+  - button "English" [ref=e5] [cursor=pointer]
+  - generic [ref=e6]:
+    - heading "التعاقب القيادي" [level=1] [ref=e7]
+    - paragraph [ref=e8]: اختر دوراً للمتابعة
+    - generic [ref=e9]:
+      - button "المستشار" [ref=e10] [cursor=pointer]
+      - button "مدير المؤسسة" [ref=e11] [cursor=pointer]
+      - button "مدير الموارد البشرية" [ref=e12] [cursor=pointer]
+      - button "المشرف" [ref=e13] [cursor=pointer]
+      - button "المرشح" [ref=e14] [cursor=pointer]
+      - button "مطّلع" [ref=e15] [cursor=pointer]

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Redesign — Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* ---- proposed semantic token layer (dark) ---- */
+      --bg: #0a0b10;
+      --bg-glow: rgba(99, 102, 241, 0.10);
+      --surface-1: #14161e;     /* cards */
+      --surface-2: #1b1e29;     /* inner wells / hover */
+      --surface-3: #232735;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text-1: #f4f5f8;        /* primary */
+      --text-2: #a6acbb;        /* secondary */
+      --text-3: #6b7180;        /* muted / labels */
+      --accent: #6366f1;        /* indigo-500 (identity) */
+      --accent-2: #818cf8;      /* indigo-400 */
+      --accent-soft: rgba(99, 102, 241, 0.14);
+      --accent-line: rgba(99, 102, 241, 0.35);
+      --success: #34d399; --success-soft: rgba(52,211,153,0.13);
+      --warning: #fbbf24; --warning-soft: rgba(251,191,36,0.13);
+      --danger:  #f87171; --danger-soft:  rgba(248,113,113,0.13);
+      --info:    #60a5fa; --info-soft:    rgba(96,165,250,0.13);
+      --radius: 14px;
+      --radius-sm: 10px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background:
+        radial-gradient(900px 420px at 78% -8%, var(--bg-glow), transparent 70%),
+        var(--bg);
+      color: var(--text-1);
+      -webkit-font-smoothing: antialiased;
+    }
+    .app { display: flex; min-height: 100vh; }
+
+    /* ---------- Sidebar ---------- */
+    .sidebar {
+      width: 248px; flex-shrink: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%), var(--surface-1);
+      border-inline-start: 1px solid var(--border);
+      padding: 22px 16px; display: flex; flex-direction: column; gap: 26px;
+    }
+    .brand { display: flex; align-items: center; gap: 11px; padding: 0 8px; }
+    .brand-mark {
+      width: 34px; height: 34px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), #00d3ee);
+      display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 15px;
+      box-shadow: 0 6px 18px rgba(99,102,241,0.35);
+    }
+    .brand b { font-size: 15px; font-weight: 700; }
+    .nav-group-label { font-size: 11px; color: var(--text-3); padding: 0 10px; margin-bottom: 8px; letter-spacing: .04em; }
+    .nav a {
+      display: flex; align-items: center; gap: 11px; padding: 10px 12px;
+      border-radius: var(--radius-sm); color: var(--text-2); text-decoration: none;
+      font-size: 14px; font-weight: 500; position: relative; transition: .15s;
+    }
+    .nav a:hover { background: var(--surface-2); color: var(--text-1); }
+    .nav a.active { background: var(--accent-soft); color: #fff; }
+    .nav a.active::before {
+      content: ''; position: absolute; inset-inline-start: -16px; top: 50%; transform: translateY(-50%);
+      width: 3px; height: 20px; border-radius: 3px; background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+    .nav .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: .55; }
+
+    /* ---------- Main ---------- */
+    .main { flex: 1; min-width: 0; }
+    .topbar {
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px; border-bottom: 1px solid var(--border);
+      background: rgba(10,11,16,0.6); backdrop-filter: blur(8px);
+    }
+    .topbar .pill-select {
+      background: var(--surface-2); border: 1px solid var(--border); color: var(--text-1);
+      padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 500;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .topbar .row { display: flex; align-items: center; gap: 10px; }
+    .icon-btn {
+      width: 38px; height: 38px; border-radius: 10px; background: var(--surface-2);
+      border: 1px solid var(--border); color: var(--text-2); display: grid; place-items: center; font-size: 16px;
+    }
+    .content { padding: 26px 28px 48px; max-width: 1180px; }
+
+    /* ---------- Page header ---------- */
+    .page-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 26px; }
+    .page-head h1 { font-size: 25px; font-weight: 700; letter-spacing: -.01em; }
+    .crumb { display: flex; align-items: center; gap: 8px; margin-top: 7px; font-size: 13px; color: var(--text-2); }
+    .crumb .sep { color: var(--text-3); }
+    .crumb .tag {
+      background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2);
+      padding: 3px 10px; border-radius: 20px; font-size: 12px;
+    }
+    .btn { padding: 9px 16px; border-radius: 10px; font-size: 13px; font-weight: 500; border: 1px solid var(--border-strong); background: var(--surface-2); color: var(--text-1); cursor: pointer; }
+    .btn.primary { background: var(--accent); border-color: transparent; color: #fff; box-shadow: 0 6px 18px rgba(99,102,241,0.32); }
+
+    /* ---------- Section ---------- */
+    .section-label { display: flex; align-items: center; gap: 9px; margin: 30px 2px 14px; }
+    .section-label::before { content: ''; width: 4px; height: 15px; border-radius: 3px; background: var(--accent); }
+    .section-label h2 { font-size: 14px; font-weight: 700; color: var(--text-1); }
+    .section-label span { font-size: 12px; color: var(--text-3); }
+
+    /* ---------- Cards ---------- */
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.022), transparent 30%), var(--surface-1);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 8px 24px rgba(0,0,0,0.28);
+    }
+    .pad { padding: 18px 20px; }
+
+    .overview { display: grid; grid-template-columns: 1.05fr 1.55fr; gap: 16px; }
+
+    /* hero readiness */
+    .hero { display: flex; align-items: center; gap: 22px; padding: 22px; position: relative; overflow: hidden; }
+    .hero::after {
+      content: ''; position: absolute; inset-inline-end: -60px; top: -60px; width: 180px; height: 180px;
+      background: radial-gradient(circle, var(--accent-soft), transparent 70%);
+    }
+    .ring { position: relative; width: 132px; height: 132px; flex-shrink: 0; }
+    .ring svg { transform: rotate(-90deg); }
+    .ring .mid { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+    .ring .mid b { font-size: 30px; font-weight: 800; }
+    .ring .mid small { font-size: 11px; color: var(--text-3); display: block; }
+    .hero-meta h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .hero-meta p { font-size: 13px; color: var(--text-2); line-height: 1.6; max-width: 240px; }
+    .hero-mini { display: flex; gap: 22px; margin-top: 16px; }
+    .hero-mini div small { font-size: 11px; color: var(--text-3); display: block; margin-bottom: 3px; }
+    .hero-mini div b { font-size: 18px; font-weight: 700; }
+
+    /* stat cards */
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .stat { padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+    .stat .top { display: flex; align-items: center; justify-content: space-between; }
+    .stat .label { font-size: 12.5px; color: var(--text-2); font-weight: 500; }
+    .chip { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; font-size: 15px; }
+    .chip.accent { background: var(--accent-soft); color: var(--accent-2); }
+    .chip.danger { background: var(--danger-soft); color: var(--danger); }
+    .chip.success { background: var(--success-soft); color: var(--success); }
+    .stat .val { font-size: 28px; font-weight: 800; line-height: 1; }
+    .badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px; width: fit-content; }
+    .badge.danger { background: var(--danger-soft); color: var(--danger); }
+    .badge.success { background: var(--success-soft); color: var(--success); }
+    .badge.warning { background: var(--warning-soft); color: var(--warning); }
+    .badge.accent { background: var(--accent-soft); color: var(--accent-2); }
+
+    /* candidates band */
+    .cand { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 20px; }
+    .cand .seg { display: flex; height: 8px; border-radius: 6px; overflow: hidden; width: 220px; background: var(--surface-2); }
+    .cand .seg i { display: block; height: 100%; }
+    .cand-stats { display: flex; gap: 26px; }
+    .cand-stats div { text-align: center; }
+    .cand-stats b { font-size: 22px; font-weight: 800; display: block; }
+    .cand-stats small { font-size: 11.5px; color: var(--text-3); }
+
+    /* insights */
+    .insights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .insight .ihead { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .insight .ihead .chip { width: 30px; height: 30px; border-radius: 8px; }
+    .insight h3 { font-size: 14px; font-weight: 700; }
+    .insight ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .insight li { font-size: 13px; color: var(--text-2); line-height: 1.6; display: flex; gap: 9px; }
+    .insight li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 7px; flex-shrink: 0; }
+    .insight li b { color: var(--text-1); font-weight: 700; }
+
+    /* table */
+    table { width: 100%; border-collapse: collapse; }
+    thead th { font-size: 11.5px; color: var(--text-3); font-weight: 700; text-align: start; padding: 12px 18px; border-bottom: 1px solid var(--border); }
+    tbody td { padding: 14px 18px; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: var(--surface-2); }
+    .who { display: flex; align-items: center; gap: 11px; }
+    .avatar { width: 32px; height: 32px; border-radius: 9px; background: var(--accent-soft); color: var(--accent-2); display: grid; place-items: center; font-size: 12.5px; font-weight: 700; }
+    .avatar.muted { background: var(--surface-2); color: var(--text-3); }
+    .prog { display: flex; align-items: center; gap: 10px; min-width: 180px; }
+    .prog .track { flex: 1; height: 7px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
+    .prog .fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+    .prog .fill.warn { background: linear-gradient(90deg, #b45309, var(--warning)); }
+    .prog .fill.zero { background: var(--surface-3); }
+    .prog .pct { font-size: 13px; font-weight: 700; width: 38px; }
+    .link-btn { background: var(--surface-2); border: 1px solid var(--border); color: var(--text-1); padding: 6px 13px; border-radius: 9px; font-size: 12.5px; font-weight: 500; cursor: pointer; }
+    .muted-txt { color: var(--text-3); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">ت</span><b>التعاقب القيادي</b></div>
+      <nav class="nav">
+        <div class="nav-group-label">القائمة</div>
+        <a href="#"><span class="dot"></span>الرئيسية</a>
+        <a href="#" class="active"><span class="dot"></span>لوحة المعلومات</a>
+        <a href="#"><span class="dot"></span>الوظائف الحرجة</a>
+        <a href="#"><span class="dot"></span>المرشحون</a>
+        <a href="#"><span class="dot"></span>الإعدادات</a>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+      <div class="topbar">
+        <div class="row">
+          <span class="pill-select">شركة ACME <span style="color:var(--text-3)">▾</span></span>
+          <span class="pill-select">المستشار <span style="color:var(--text-3)">▾</span></span>
+        </div>
+        <div class="row">
+          <span class="icon-btn">⌘</span>
+          <span class="icon-btn">🌐</span>
+          <span class="icon-btn">🔔</span>
+        </div>
+      </div>
+
+      <div class="content">
+        <!-- Page header -->
+        <div class="page-head">
+          <div>
+            <h1>لوحة التحكم</h1>
+            <div class="crumb">
+              <span>شركة ACME</span><span class="sep">·</span>
+              <span>التكنولوجيا</span><span class="sep">·</span>
+              <span class="tag">مستوى النضج: متطوّرة</span>
+            </div>
+          </div>
+          <div class="row" style="gap:10px">
+            <button class="btn">عرض المرشحين</button>
+            <button class="btn primary">تعديل المؤسسة</button>
+          </div>
+        </div>
+
+        <!-- Overview -->
+        <div class="section-label"><h2>نظرة عامة</h2><span>أداء التعاقب الحالي</span></div>
+        <div class="overview">
+          <!-- hero -->
+          <div class="card hero">
+            <div class="ring">
+              <svg width="132" height="132">
+                <circle cx="66" cy="66" r="58" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="11"/>
+                <circle cx="66" cy="66" r="58" fill="none" stroke="url(#g)" stroke-width="11" stroke-linecap="round"
+                        stroke-dasharray="364" stroke-dashoffset="106"/>
+                <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/>
+                </linearGradient></defs>
+              </svg>
+              <div class="mid"><b>71%</b><small>الجاهزية</small></div>
+            </div>
+            <div class="hero-meta">
+              <h3>متوسط مؤشر الجاهزية</h3>
+              <p>عبر <b style="color:var(--text-1)">3</b> وظائف حرجة، مع خليفة واحد جاهز للتعيين الفوري.</p>
+              <div class="hero-mini">
+                <div><small>نتيجة ORLS</small><b>33%</b></div>
+                <div><small>الوظائف الحرجة</small><b>3</b></div>
+                <div><small>الخلفاء الجاهزون</small><b style="color:var(--success)">1</b></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- stat grid -->
+          <div class="stats">
+            <div class="card stat">
+              <div class="top"><span class="label">الوظائف الحرجة</span><span class="chip accent">▣</span></div>
+              <span class="val">3</span>
+              <span class="badge accent">تتطلب خطة تعاقب</span>
+            </div>
+            <div class="card stat">
+              <div class="top"><span class="label">الخلفاء الجاهزون</span><span class="chip success">✓</span></div>
+              <span class="val">1</span>
+              <span class="badge success">جاهز الآن</span>
+            </div>
+            <div class="card stat">
+              <div class="top"><span class="label">متوسط مؤشر CRI</span><span class="chip danger">▲</span></div>
+              <span class="val" style="color:var(--danger)">65%</span>
+              <span class="badge danger">مخاطرة مرتفعة</span>
+            </div>
+            <div class="card stat">
+              <div class="top"><span class="label">متوسط مؤشر AEI</span><span class="chip success">↗</span></div>
+              <span class="val" style="color:var(--success)">30%</span>
+              <span class="badge warning">يحتاج إلى تطوير</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Candidates -->
+        <div class="card cand" style="margin-top:16px">
+          <div>
+            <h3 style="font-size:15px;font-weight:700;margin-bottom:4px">المرشحون</h3>
+            <p style="font-size:12.5px;color:var(--text-2)">نظرة عامة على المرشحين</p>
+            <div class="seg" style="margin-top:12px">
+              <i style="width:100%;background:var(--success)"></i>
+            </div>
+          </div>
+          <div class="cand-stats">
+            <div><b>3</b><small>الإجمالي</small></div>
+            <div><b style="color:var(--success)">3</b><small>النشطون</small></div>
+            <div><b style="color:var(--info)">0</b><small>المختارون</small></div>
+          </div>
+          <button class="btn">إدارة المرشحين</button>
+        </div>
+
+        <!-- Insights -->
+        <div class="section-label"><h2>الرؤى والتحليلات</h2><span>توصيات مبنية على البيانات</span></div>
+        <div class="insights">
+          <div class="card pad insight">
+            <div class="ihead"><span class="chip accent">◇</span><h3>أبرز محاور التحسين</h3></div>
+            <ul>
+              <li>التفكير الاستراتيجي <b>(مرشح واحد)</b></li>
+              <li>مرونة التعلّم <b>(مرشح واحد)</b></li>
+            </ul>
+          </div>
+          <div class="card pad insight">
+            <div class="ihead"><span class="chip success">↻</span><h3>حلقة التعلّم المستمر</h3></div>
+            <ul>
+              <li>تركيز التطوير على <b>خالد الغامدي</b> — 56% في مدير التكنولوجيا</li>
+              <li>تركيز التطوير على <b>عمر عبد الله</b> — 70% في مدير التسويق</li>
+            </ul>
+          </div>
+          <div class="card pad insight">
+            <div class="ihead"><span class="chip accent">★</span><h3>أحدث الرؤى</h3></div>
+            <ul>
+              <li>جاهزية <b>سارة منصور</b> لمدير التكنولوجيا عند 88%</li>
+              <li>جاهزية <b>عمر عبد الله</b> لمدير التسويق عند 70%</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Succession plans -->
+        <div class="section-label"><h2>خطط التعاقب</h2><span>أعلى مرشح لكل وظيفة حرجة</span></div>
+        <div class="card" style="overflow:hidden">
+          <table>
+            <thead>
+              <tr><th>الوظيفة</th><th>المرشح الأعلى</th><th>مؤشر الجاهزية</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:500">مدير التكنولوجيا</td>
+                <td><div class="who"><span class="avatar">س م</span>سارة منصور</div></td>
+                <td><div class="prog"><div class="track"><div class="fill" style="width:88%"></div></div><span class="pct">88%</span><span class="badge success">جاهز</span></div></td>
+                <td><button class="link-btn">عرض الخطة</button></td>
+              </tr>
+              <tr>
+                <td style="font-weight:500">مدير التسويق</td>
+                <td><div class="who"><span class="avatar">ع ع</span>عمر عبد الله</div></td>
+                <td><div class="prog"><div class="track"><div class="fill warn" style="width:70%"></div></div><span class="pct">70%</span><span class="badge warning">قريباً</span></div></td>
+                <td><button class="link-btn">عرض الخطة</button></td>
+              </tr>
+              <tr>
+                <td style="font-weight:500">نائب رئيس الهندسة</td>
+                <td><div class="who"><span class="avatar muted">—</span><span class="muted-txt">لا يوجد مرشح</span></div></td>
+                <td><div class="prog"><div class="track"><div class="fill zero" style="width:4%"></div></div><span class="pct muted-txt">0%</span><span class="badge danger">شاغر</span></div></td>
+                <td><button class="link-btn">عرض الخطة</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
