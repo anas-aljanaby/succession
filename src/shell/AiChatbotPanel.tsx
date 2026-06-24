@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const AiChatbotPanel: React.FC<Props> = ({ open, onClose }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -25,6 +25,14 @@ export const AiChatbotPanel: React.FC<Props> = ({ open, onClose }) => {
     },
   ]);
   const endRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMessages((current) =>
+      current.map((message) =>
+        message.id === 'welcome' ? { ...message, text: t('topbar.aiWelcome') } : message
+      )
+    );
+  }, [language, t]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });

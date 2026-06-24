@@ -12,7 +12,7 @@ import { ProgressBar } from '../ui/ProgressBar';
 export const CandidatesList: React.FC = () => {
   const { orgId } = useParams();
   const { state } = useApp();
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const activeRole = state.session.activeRole;
   const activeUser = state.users.find((user) => user.id === state.session.userId);
   const ownCandidate = activeUser?.candidateId
@@ -48,7 +48,7 @@ export const CandidatesList: React.FC = () => {
         readiness: fn ? computeReadiness(candidate, fn) : 0,
       };
     })
-    .sort((a, b) => a.candidate.name.localeCompare(b.candidate.name));
+    .sort((a, b) => a.candidate.name.localeCompare(b.candidate.name, locale));
 
   return (
     <section>
@@ -63,28 +63,31 @@ export const CandidatesList: React.FC = () => {
         <Card>
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
-              <thead className="border-b border-gray-800 text-gray-400">
+              <thead className="border-b border-gray-700 bg-gray-900/60">
                 <tr>
-                  <th className="px-2 py-3 text-start font-medium">
+                  <th className="px-2 py-3 text-start font-medium text-gray-300">
                     {t('functions.candidate')}
                   </th>
-                  <th className="px-2 py-3 text-start font-medium">
+                  <th className="px-2 py-3 text-start font-medium text-gray-300">
                     {t('candidates.currentToTarget')}
                   </th>
-                  <th className="px-2 py-3 text-start font-medium">
+                  <th className="px-2 py-3 text-start font-medium text-gray-300">
                     {t('candidates.function')}
                   </th>
-                  <th className="px-2 py-3 text-start font-medium">
+                  <th className="px-2 py-3 text-start font-medium text-gray-300">
                     {t('functions.readiness')}
                   </th>
-                  <th className="px-2 py-3 text-start font-medium">
+                  <th className="px-2 py-3 text-start font-medium text-gray-300">
                     {t('functions.status')}
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {candidates.map(({ candidate, fn, readiness }) => (
-                  <tr key={candidate.id} className="border-t border-gray-900">
+                  <tr
+                    key={candidate.id}
+                    className="border-b border-gray-700/70 last:border-b-0 hover:bg-gray-800/40"
+                  >
                     <td className="px-2 py-3 align-top">
                       <Link
                         to={`/organizations/${org.id}/candidates/${candidate.id}`}
@@ -92,7 +95,7 @@ export const CandidatesList: React.FC = () => {
                       >
                         {candidate.name}
                       </Link>
-                      <p className="mt-1 text-xs text-gray-500">{candidate.department}</p>
+                      <p className="mt-1 text-xs text-gray-400">{candidate.department}</p>
                     </td>
                     <td className="px-2 py-3 align-top text-gray-300">
                       {candidate.currentPosition}

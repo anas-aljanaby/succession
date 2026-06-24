@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
+import { notificationContent, pickLocalized } from '../lib/contentCatalog';
+import { useApp } from '../store/AppContext';
 
 export interface ShellNotification {
   id: string;
@@ -9,6 +11,13 @@ export interface ShellNotification {
   severity?: 'info' | 'success' | 'warning' | 'error';
 }
 
+interface NotificationMeta {
+  id: string;
+  createdAt: string;
+  read: boolean;
+  severity?: ShellNotification['severity'];
+}
+
 interface NotificationContextValue {
   notifications: ShellNotification[];
   unreadCount: number;
@@ -16,27 +25,21 @@ interface NotificationContextValue {
   markAllAsRead: () => void;
 }
 
-const seedNotifications: ShellNotification[] = [
+const seedNotificationMeta: NotificationMeta[] = [
   {
     id: 'notif-1',
-    title: 'Stage closure ready for review',
-    message: 'Khalid Al-Ghamdi — Development stage',
     createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
     read: false,
     severity: 'info',
   },
   {
     id: 'notif-2',
-    title: 'Readiness threshold reached',
-    message: 'Sara Mansour is now at 88% for CTO',
     createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
     read: false,
     severity: 'success',
   },
   {
     id: 'notif-3',
-    title: 'Survey reminder',
-    message: 'Mid-stage evaluation due this week',
     createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
     read: true,
     severity: 'warning',
@@ -45,10 +48,32 @@ const seedNotifications: ShellNotification[] = [
 
 const NotificationContext = createContext<NotificationContextValue | null>(null);
 
+function localizeNotifications(
+  meta: NotificationMeta[],
+  language: 'en' | 'ar'
+): ShellNotification[] {
+  return meta.map((item) => {
+    const content = notificationContent[item.id];
+    return {
+      ...item,
+      title: content
+        ? pickLocalized(content.title, language, item.id)
+        : item.id,
+      message: content ? pickLocalized(content.message, language, '') : undefined,
+    };
+  });
+}
+
 export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [notifications, setNotifications] = useState(seedNotifications);
+  const { state } = useApp();
+  const [meta, setMeta] = useState(seedNotificationMeta);
+
+  const notifications = useMemo(
+    () => localizeNotifications(meta, state.ui.language),
+    [meta, state.ui.language]
+  );
 
   const unreadCount = useMemo(
     () => notifications.filter((notification) => !notification.read).length,
@@ -56,7 +81,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   const markAsRead = (id: string) => {
-    setNotifications((current) =>
+    setMeta((current) =>
       current.map((notification) =>
         notification.id === id ? { ...notification, read: true } : notification
       )
@@ -64,9 +89,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const markAllAsRead = () => {
-    setNotifications((current) =>
-      current.map((notification) => ({ ...notification, read: true }))
-    );
+    setMeta((current) => current.map((notification) => ({ ...notification, read: true })));
   };
 
   return (

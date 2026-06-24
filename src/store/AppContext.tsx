@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import type { AppState, Language } from '../types';
 import { reducer, type Action } from './reducer';
+import { applyLanguageToState } from '../lib/localizeState';
 import { loadState, saveState } from './storage';
 import { seedState } from './seed';
 
@@ -16,7 +17,11 @@ interface AppContextValue {
 
 const AppContext = createContext<AppContextValue | null>(null);
 
-const init = (): AppState => loadState() ?? seedState();
+const init = (): AppState => {
+  const loaded = loadState();
+  if (loaded) return applyLanguageToState(loaded, loaded.ui.language);
+  return seedState();
+};
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, undefined, init);

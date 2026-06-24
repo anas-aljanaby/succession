@@ -67,11 +67,11 @@ export const OrganizationsList: React.FC = () => {
                     color={org.status === 'active' ? 'green' : 'gray'}
                   />
                 </div>
-                <p className="mt-1 text-sm text-gray-400">
+                <p className="mt-1 text-sm text-gray-300">
                   {t(`type.${org.type}`)} · {org.sector}
                 </p>
                 <div className="mt-4 flex items-center justify-between text-sm">
-                  <span className="text-gray-400">
+                  <span className="text-gray-300">
                     {fnCount} {t('orgs.functionsLabel')}
                   </span>
                   <span className="text-gray-300">

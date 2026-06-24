@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import type { CriticalFunction, Priority } from '../types';
 import { useApp } from '../store/AppContext';
-import { DEFAULT_CRITERIA } from '../lib/criteria';
+import { DEFAULT_CRITERIA, localizeCriteria } from '../lib/criteria';
 import { useLanguage } from '../lib/i18n';
 import { can } from '../lib/permissions';
 import { Button } from '../ui/Button';
@@ -18,7 +18,7 @@ const copyCriteria = (criteria: CriticalFunction['criteria']) =>
 export const FunctionForm: React.FC = () => {
   const { orgId, fnId } = useParams();
   const { state, dispatch } = useApp();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
   const activeRole = state.session.activeRole;
   const activeUser = state.users.find((user) => user.id === state.session.userId);
@@ -30,7 +30,7 @@ export const FunctionForm: React.FC = () => {
   const [department, setDepartment] = useState(existing?.department ?? '');
   const [priority, setPriority] = useState<Priority>(existing?.priority ?? 'high');
   const [criteria, setCriteria] = useState(
-    copyCriteria(existing?.criteria ?? DEFAULT_CRITERIA)
+    copyCriteria(existing?.criteria ?? localizeCriteria(DEFAULT_CRITERIA, language))
   );
 
   if (!org) return <Navigate to="/organizations" replace />;

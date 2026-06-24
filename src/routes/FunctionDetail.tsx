@@ -21,7 +21,7 @@ import { ProgressBar } from '../ui/ProgressBar';
 export const FunctionDetail: React.FC = () => {
   const { orgId, fnId } = useParams();
   const { state, dispatch } = useApp();
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const navigate = useNavigate();
   const activeRole = state.session.activeRole;
   const activeUser = state.users.find((user) => user.id === state.session.userId);
@@ -72,7 +72,7 @@ export const FunctionDetail: React.FC = () => {
     }))
     .sort(
       (a, b) =>
-        b.readiness - a.readiness || a.candidate.name.localeCompare(b.candidate.name)
+        b.readiness - a.readiness || a.candidate.name.localeCompare(b.candidate.name, locale)
     );
 
   const openAddCandidate = () => {
@@ -105,7 +105,7 @@ export const FunctionDetail: React.FC = () => {
       department: candidateForm.department.trim(),
       status: 'active',
       scores: [],
-      journey: defaultJourney(),
+      journey: defaultJourney([], org.type, state.ui.language),
     };
 
     dispatch({ type: 'ADD_CANDIDATE', candidate });
@@ -136,10 +136,10 @@ export const FunctionDetail: React.FC = () => {
       />
 
       <div className="flex flex-wrap items-center gap-3 text-sm">
-        <span className="text-gray-400">{fn.department}</span>
+        <span className="text-gray-300">{fn.department}</span>
         <Badge label={t(`priority.${fn.priority}`)} color={priorityColor(fn.priority)} />
         <Badge label={t(`fnStatus.${status}`)} color={statusColor(status)} />
-        <span className="text-gray-400">
+        <span className="text-gray-300">
           {t('functions.selectedSuccessor')}:{' '}
           <span className="text-gray-100">
             {selectedCandidate?.name ?? t('functions.noneSelected')}
@@ -149,17 +149,17 @@ export const FunctionDetail: React.FC = () => {
 
       <div className="space-y-6">
         <Card>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-400">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
             {t('functions.criteria')}
           </h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {fn.criteria.map((criterion) => (
               <div
                 key={criterion.key}
-                className="flex items-center gap-2 rounded-lg border border-gray-800 bg-gray-900/50 px-3 py-2"
+                className="flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-900/50 px-3 py-2"
               >
                 <span className="text-sm text-gray-200">{criterion.label}</span>
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-gray-400">
                   {t('functions.weight')}: {criterion.weight}
                 </span>
               </div>
@@ -169,10 +169,10 @@ export const FunctionDetail: React.FC = () => {
 
         <Card>
           <div className="mb-4 flex items-center justify-between gap-4">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-400">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
               {t('functions.pool')}
             </h2>
-            <span className="text-sm text-gray-400">
+            <span className="text-sm text-gray-300">
               {t('functions.poolSize')}: {rankedCandidates.length}
             </span>
           </div>
@@ -182,19 +182,19 @@ export const FunctionDetail: React.FC = () => {
           ) : (
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
-                <thead className="border-b border-gray-800 text-gray-400">
+                <thead className="border-b border-gray-700 bg-gray-900/60">
                   <tr>
-                    <th className="px-2 py-3 text-start font-medium">{t('functions.candidate')}</th>
-                    <th className="px-2 py-3 text-start font-medium">{t('functions.current')}</th>
-                    <th className="px-2 py-3 text-start font-medium">{t('functions.target')}</th>
+                    <th className="px-2 py-3 text-start font-medium text-gray-300">{t('functions.candidate')}</th>
+                    <th className="px-2 py-3 text-start font-medium text-gray-300">{t('functions.current')}</th>
+                    <th className="px-2 py-3 text-start font-medium text-gray-300">{t('functions.target')}</th>
                     {fn.criteria.map((criterion) => (
-                      <th key={criterion.key} className="px-2 py-3 text-start font-medium">
+                      <th key={criterion.key} className="px-2 py-3 text-start font-medium text-gray-300">
                         {criterion.label}
                       </th>
                     ))}
-                    <th className="px-2 py-3 text-start font-medium">{t('functions.readiness')}</th>
-                    <th className="px-2 py-3 text-start font-medium">{t('functions.status')}</th>
-                    <th className="px-2 py-3 text-start font-medium" />
+                    <th className="px-2 py-3 text-start font-medium text-gray-300">{t('functions.readiness')}</th>
+                    <th className="px-2 py-3 text-start font-medium text-gray-300">{t('functions.status')}</th>
+                    <th className="px-2 py-3 text-start font-medium text-gray-300" />
                   </tr>
                 </thead>
                 <tbody>
@@ -204,7 +204,9 @@ export const FunctionDetail: React.FC = () => {
                     return (
                       <tr
                         key={candidate.id}
-                        className={isSelected ? 'bg-primary-500/10' : 'border-t border-gray-900'}
+                        className={`border-b border-gray-700/70 last:border-b-0 hover:bg-gray-800/40${
+                          isSelected ? ' bg-primary-500/10' : ''
+                        }`}
                       >
                         <td className="px-2 py-3 align-top">
                           <Link

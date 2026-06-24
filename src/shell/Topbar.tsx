@@ -5,7 +5,7 @@ import { useLanguage } from '../lib/i18n';
 import { useApp } from '../store/AppContext';
 import { Breadcrumb } from './Breadcrumb';
 import { RoleSwitcher } from './RoleSwitcher';
-import { OrgSwitcher } from './OrgSwitcher';
+import { OrgMenu } from './OrgMenu';
 import { CandidateSwitcher } from './CandidateSwitcher';
 import { NavIconButton } from './NavIconButton';
 import { NotificationPanel } from './NotificationPanel';
@@ -50,7 +50,7 @@ export const Topbar: React.FC<Props> = ({ activeRole, onRoleChange }) => {
 
   const showNavIcons = ['ORGANIZATION_ADMIN', 'CONSULTANT', 'HR_MANAGER'].includes(activeRole);
   const hasJourneyContext = Boolean(routeCandidateId);
-  const showOrgSwitcher = activeRole === 'CONSULTANT';
+  const showOrgSwitcher = activeRole === 'CONSULTANT' && Boolean(routeOrgId);
   const showCandidateSwitcher = activeRole !== 'CANDIDATE' && Boolean(routeOrgId);
 
   const logout = () => {
@@ -107,7 +107,7 @@ export const Topbar: React.FC<Props> = ({ activeRole, onRoleChange }) => {
             </span>
           ) : null}
 
-          {showOrgSwitcher ? <OrgSwitcher /> : null}
+          {showOrgSwitcher ? <OrgMenu /> : null}
           {showCandidateSwitcher && routeOrgId ? (
             <CandidateSwitcher orgId={routeOrgId} />
           ) : null}

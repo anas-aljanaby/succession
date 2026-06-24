@@ -107,30 +107,30 @@ export const CandidateDetail: React.FC = () => {
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_360px]">
         <Card>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-400">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
             {t('candidates.profile')}
           </h2>
           <dl className="mt-4 grid gap-4 sm:grid-cols-2">
             <div>
-              <dt className="text-xs uppercase tracking-wide text-gray-500">
+              <dt className="text-xs uppercase tracking-wide text-gray-400">
                 {t('functions.current')}
               </dt>
               <dd className="mt-1 text-sm text-gray-100">{candidate.currentPosition}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase tracking-wide text-gray-500">
+              <dt className="text-xs uppercase tracking-wide text-gray-400">
                 {t('functions.target')}
               </dt>
               <dd className="mt-1 text-sm text-gray-100">{candidate.targetPosition}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase tracking-wide text-gray-500">
+              <dt className="text-xs uppercase tracking-wide text-gray-400">
                 {t('functions.department')}
               </dt>
               <dd className="mt-1 text-sm text-gray-100">{candidate.department}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase tracking-wide text-gray-500">
+              <dt className="text-xs uppercase tracking-wide text-gray-400">
                 {t('functions.status')}
               </dt>
               <dd className="mt-1 flex flex-wrap gap-2">
@@ -148,13 +148,13 @@ export const CandidateDetail: React.FC = () => {
         </Card>
 
         <Card>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-400">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
             {t('candidates.readiness')}
           </h2>
           <div className="mt-5">
             <ProgressBar value={readiness} />
           </div>
-          <p className="mt-3 text-sm text-gray-400">
+          <p className="mt-3 text-sm text-gray-300">
             {t('candidates.functionStatus')}: {t(`fnStatus.${functionStatus}`)}
           </p>
         </Card>
@@ -162,26 +162,26 @@ export const CandidateDetail: React.FC = () => {
 
       <Card>
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-400">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
             {t('candidates.scores')}
           </h2>
-          <span className="text-sm text-gray-400">
+          <span className="text-sm text-gray-300">
             {t('functions.criteria')}: {fn.criteria.length}
           </span>
         </div>
         {!canScore ? (
-          <p className="mb-4 text-sm text-gray-500">{t('permissions.readOnly')}</p>
+          <p className="mb-4 text-sm text-gray-400">{t('permissions.readOnly')}</p>
         ) : null}
 
         <div className="space-y-3">
           {fn.criteria.map((criterion) => (
             <div
               key={criterion.key}
-              className="grid gap-3 rounded-lg border border-gray-800 bg-gray-900/50 p-3 sm:grid-cols-[minmax(0,1fr)_160px]"
+              className="grid gap-3 rounded-lg border border-gray-700 bg-gray-900/50 p-3 sm:grid-cols-[minmax(0,1fr)_160px]"
             >
               <div>
                 <h3 className="font-medium text-gray-100">{criterion.label}</h3>
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-sm text-gray-400">
                   {t('functions.weight')}: {criterion.weight}
                 </p>
               </div>
@@ -201,7 +201,7 @@ export const CandidateDetail: React.FC = () => {
                   <span className="block mb-1 text-sm text-gray-300">
                     {t('candidates.score')}
                   </span>
-                  <span className="block rounded-md border border-gray-800 bg-gray-950/40 px-3 py-2 text-sm text-gray-200">
+                  <span className="block rounded-md border border-gray-700 bg-gray-950/40 px-3 py-2 text-sm text-gray-200">
                     {scoreFor(criterion.key)}
                   </span>
                 </div>
@@ -214,14 +214,14 @@ export const CandidateDetail: React.FC = () => {
       <Card id="journey">
         <div className="mb-5 grid gap-3 sm:grid-cols-[minmax(0,1fr)_280px]">
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-400">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
               {t('candidates.journey')}
             </h2>
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-gray-400">
               {t('candidates.overallProgress')}: {overallProgress}%
             </p>
             {!canManageJourney ? (
-              <p className="mt-2 text-sm text-gray-500">{t('permissions.readOnly')}</p>
+              <p className="mt-2 text-sm text-gray-400">{t('permissions.readOnly')}</p>
             ) : null}
           </div>
           <ProgressBar value={overallProgress} />
@@ -234,16 +234,16 @@ export const CandidateDetail: React.FC = () => {
             return (
               <div
                 key={stage.code}
-                className="rounded-lg border border-gray-800 bg-gray-900/50 p-4"
+                className="rounded-lg border border-gray-700 bg-gray-900/50 p-4"
               >
                 <div className="mb-4 flex items-start justify-between gap-3">
                   <div>
                     <h3 className="font-medium text-white">{stage.name}</h3>
-                    <p className="mt-1 text-sm text-gray-500">
+                    <p className="mt-1 text-sm text-gray-400">
                       {t('candidates.stageProgress')}: {counts.done}/{counts.total}
                     </p>
                   </div>
-                  <span className="text-xs font-medium text-gray-500">{stage.code}</span>
+                  <span className="text-xs font-medium text-gray-400">{stage.code}</span>
                 </div>
                 <ProgressBar value={counts.progress} />
 
@@ -251,7 +251,7 @@ export const CandidateDetail: React.FC = () => {
                   {stage.tasks.map((task) => (
                     <label
                       key={task.id}
-                      className="flex items-start gap-3 rounded-md border border-gray-800 bg-gray-950/40 p-3"
+                      className="flex items-start gap-3 rounded-md border border-gray-700 bg-gray-950/40 p-3"
                     >
                       <input
                         type="checkbox"

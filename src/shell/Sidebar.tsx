@@ -62,36 +62,33 @@ export const Sidebar: React.FC = () => {
       <div className="px-3 text-lg font-semibold text-white">{t('appName')}</div>
 
       <nav className="flex flex-col gap-1">
-        <NavLink to="/" end className={linkClass}>
-          {t('nav.home')}
-        </NavLink>
-        <NavLink to="/organizations" className={linkClass}>
-          {t('nav.organizations')}
-        </NavLink>
+        {orgId && canUseOrgNav ? (
+          <>
+            <NavLink to={`/organizations/${orgId}`} end className={linkClass}>
+              {t('org.dashboard.title')}
+            </NavLink>
+            {showFunctions ? (
+              <NavLink to={`/organizations/${orgId}/functions`} className={linkClass}>
+                {t('nav.functions')}
+              </NavLink>
+            ) : null}
+            <NavLink to={`/organizations/${orgId}/candidates`} className={linkClass}>
+              {t('nav.candidates')}
+            </NavLink>
+            <NavLink to="/coming-soon" className={linkClass}>
+              {t('nav.more')}{' '}
+              <span className="text-xs text-gray-500">({t('nav.soon')})</span>
+            </NavLink>
+          </>
+        ) : (
+          <NavLink to="/" end className={linkClass}>
+            {t('nav.home')}
+          </NavLink>
+        )}
         <NavLink to="/settings" className={linkClass}>
           {t('nav.settings')}
         </NavLink>
       </nav>
-
-      {orgId && canUseOrgNav && (
-        <nav className="flex flex-col gap-1 border-t border-gray-800 pt-4">
-          <NavLink to={`/organizations/${orgId}`} end className={linkClass}>
-            {t('nav.dashboard')}
-          </NavLink>
-          {showFunctions ? (
-            <NavLink to={`/organizations/${orgId}/functions`} className={linkClass}>
-              {t('nav.functions')}
-            </NavLink>
-          ) : null}
-          <NavLink to={`/organizations/${orgId}/candidates`} className={linkClass}>
-            {t('nav.candidates')}
-          </NavLink>
-          <NavLink to="/coming-soon" className={linkClass}>
-            {t('nav.more')}{' '}
-            <span className="text-xs text-gray-500">({t('nav.soon')})</span>
-          </NavLink>
-        </nav>
-      )}
     </aside>
   );
 };

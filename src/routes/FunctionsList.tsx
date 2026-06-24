@@ -62,7 +62,7 @@ export const FunctionsList: React.FC = () => {
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h2 className="font-semibold text-white">{fn.title}</h2>
-                    <p className="mt-1 text-sm text-gray-400">{fn.department}</p>
+                    <p className="mt-1 text-sm text-gray-300">{fn.department}</p>
                   </div>
                   <Badge label={t(`fnStatus.${status}`)} color={statusColor(status)} />
                 </div>
@@ -71,7 +71,7 @@ export const FunctionsList: React.FC = () => {
                     label={t(`priority.${fn.priority}`)}
                     color={priorityColor(fn.priority)}
                   />
-                  <span className="text-gray-400">
+                  <span className="text-gray-300">
                     {t('functions.poolSize')}: {poolSize}
                   </span>
                 </div>

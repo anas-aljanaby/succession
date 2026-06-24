@@ -7,6 +7,7 @@ import type {
   TaskStatus,
   UserRole,
 } from '../types';
+import { applyLanguageToState } from '../lib/localizeState';
 
 export type Action =
   | { type: 'SET_LANGUAGE'; language: Language }
@@ -40,7 +41,7 @@ const clampScore = (value: number) => Math.max(0, Math.min(100, value));
 export function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case 'SET_LANGUAGE':
-      return { ...state, ui: { ...state.ui, language: action.language } };
+      return applyLanguageToState(state, action.language);
     case 'LOGIN':
     case 'SET_ROLE':
       return {

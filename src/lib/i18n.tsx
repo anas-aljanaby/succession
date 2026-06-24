@@ -1,3 +1,4 @@
+import React, { useCallback } from 'react';
 import type { Language } from '../types';
 import { useApp } from '../store/AppContext';
 
@@ -39,6 +40,10 @@ const translations: Record<Language, Dict> = {
     'topbar.notifications': 'Notifications',
     'topbar.noNotifications': 'No new notifications.',
     'topbar.markAllRead': 'Mark all read',
+    'severity.info': 'Info',
+    'severity.success': 'Success',
+    'severity.warning': 'Warning',
+    'severity.error': 'Error',
     'role.CONSULTANT': 'Consultant',
     'role.ORGANIZATION_ADMIN': 'Organization Admin',
     'role.HR_MANAGER': 'HR Manager',
@@ -234,6 +239,10 @@ const translations: Record<Language, Dict> = {
     'topbar.notifications': 'الإشعارات',
     'topbar.noNotifications': 'لا توجد إشعارات جديدة.',
     'topbar.markAllRead': 'تعليم الكل كمقروء',
+    'severity.info': 'معلومة',
+    'severity.success': 'نجاح',
+    'severity.warning': 'تنبيه',
+    'severity.error': 'خطأ',
     'role.CONSULTANT': 'المستشار',
     'role.ORGANIZATION_ADMIN': 'مدير المؤسسة',
     'role.HR_MANAGER': 'مدير الموارد البشرية',
@@ -401,15 +410,21 @@ interface LanguageApi {
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
   dir: 'rtl' | 'ltr';
+  locale: 'ar-SA' | 'en-US';
 }
 
 export const useLanguage = (): LanguageApi => {
   const { state, dispatch } = useApp();
   const language = state.ui.language;
+  const t = useCallback(
+    (key: string) => translations[language][key] ?? key,
+    [language]
+  );
   return {
     language,
     setLanguage: (lang) => dispatch({ type: 'SET_LANGUAGE', language: lang }),
-    t: (key) => translations[language][key] ?? key,
+    t,
     dir: language === 'ar' ? 'rtl' : 'ltr',
+    locale: language === 'ar' ? 'ar-SA' : 'en-US',
   };
 };

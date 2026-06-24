@@ -11,7 +11,7 @@ const severityClass: Record<string, string> = {
 };
 
 export const NotificationPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const { notifications, unreadCount, markAsRead, markAllAsRead } = useShellNotifications();
 
   return (
@@ -47,14 +47,14 @@ export const NotificationPanel: React.FC<{ onClose: () => void }> = ({ onClose }
                   severityClass[notification.severity ?? 'info']
                 }`}
               >
-                {notification.severity ?? 'info'}
+                {t(`severity.${notification.severity ?? 'info'}`)}
               </p>
               <p className="font-semibold text-sm text-gray-100 mt-1">{notification.title}</p>
               {notification.message ? (
                 <p className="text-xs text-gray-400 mt-1">{notification.message}</p>
               ) : null}
               <p className="text-xs text-gray-500 mt-2">
-                {new Date(notification.createdAt).toLocaleString()}
+                {new Date(notification.createdAt).toLocaleString(locale)}
               </p>
             </button>
           ))
