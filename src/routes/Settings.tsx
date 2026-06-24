@@ -6,9 +6,11 @@ export const Settings: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section>
+    <section className="mx-auto max-w-[1180px]">
       <PageHeader title={t('nav.settings')} subtitle={t('settings.subtitle')} />
-      <p className="text-sm text-gray-400">{t('settings.body')}</p>
+      <div className="surface-card p-5">
+        <p className="text-sm text-[var(--text-faint)]">{t('settings.body')}</p>
+      </div>
     </section>
   );
 };
