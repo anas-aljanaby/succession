@@ -14,6 +14,10 @@ import {
 } from '../lib/orgDashboardMetrics';
 import { PageHeader } from '../ui/PageHeader';
 import { Button } from '../ui/Button';
+import { Chip } from '../ui/Chip';
+import { Pill } from '../ui/Pill';
+import { SectionLabel } from '../ui/SectionLabel';
+import { toneText, type Tone } from '../ui/tone';
 import { BriefcaseIcon } from '@/components/icons/BriefcaseIcon';
 import { CheckBadgeIcon } from '@/components/icons/CheckBadgeIcon';
 import { ExclamationTriangleIcon } from '@/components/icons/ExclamationTriangleIcon';
@@ -21,52 +25,6 @@ import { TrendingUpIcon } from '@/components/icons/TrendingUpIcon';
 import { LightBulbIcon } from '@/components/icons/LightBulbIcon';
 import { ArrowPathIcon } from '@/components/icons/ArrowPathIcon';
 import { SparklesIcon } from '@/components/icons/SparklesIcon';
-
-/* ── Design-system building blocks (reuse these patterns on other pages) ──
-   - Every panel is `.surface-card` (defined in index.html).
-   - Colors come from CSS-variable tokens only (--text, --card-2, --accent…).
-   - Semantic tone = accent | ok | warn | bad | info, mapped once below. */
-
-type Tone = 'accent' | 'ok' | 'warn' | 'bad' | 'info';
-
-const toneText: Record<Tone, string> = {
-  accent: 'text-[var(--accent-bright)]',
-  ok: 'text-[var(--ok)]',
-  warn: 'text-[var(--warn)]',
-  bad: 'text-[var(--bad)]',
-  info: 'text-[var(--info)]',
-};
-const toneFill: Record<Tone, string> = {
-  accent: 'bg-[var(--accent-soft)]',
-  ok: 'bg-[var(--ok-soft)]',
-  warn: 'bg-[var(--warn-soft)]',
-  bad: 'bg-[var(--bad-soft)]',
-  info: 'bg-[var(--info-soft)]',
-};
-
-const Chip: React.FC<{ tone: Tone; children: React.ReactNode }> = ({ tone, children }) => (
-  <span
-    className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg [&_svg]:!h-[18px] [&_svg]:!w-[18px] ${toneFill[tone]} ${toneText[tone]}`}
-  >
-    {children}
-  </span>
-);
-
-const Pill: React.FC<{ tone: Tone; children: React.ReactNode }> = ({ tone, children }) => (
-  <span
-    className={`inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ${toneFill[tone]} ${toneText[tone]}`}
-  >
-    {children}
-  </span>
-);
-
-const SectionLabel: React.FC<{ title: string; hint?: string }> = ({ title, hint }) => (
-  <div className="mb-4 mt-8 flex items-center gap-2.5">
-    <span className="h-3.5 w-1 rounded-full bg-[var(--accent)]" />
-    <h2 className="text-sm font-semibold text-[var(--text)]">{title}</h2>
-    {hint ? <span className="text-xs text-[var(--text-faint)]">{hint}</span> : null}
-  </div>
-);
 
 const StatCard: React.FC<{
   label: string;

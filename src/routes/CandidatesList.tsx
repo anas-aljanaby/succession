@@ -1,13 +1,21 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
+import type { CandidateStatus } from '../types';
 import { useApp } from '../store/AppContext';
 import { useLanguage } from '../lib/i18n';
 import { canAccessOrg, visibleCandidatesForOrg } from '../lib/permissions';
 import { computeReadiness } from '../lib/selectors';
-import { Badge, candidateStatusColor } from '../ui/Badge';
-import { Card } from '../ui/Card';
 import { PageHeader } from '../ui/PageHeader';
+import { Pill } from '../ui/Pill';
 import { ProgressBar } from '../ui/ProgressBar';
+import type { Tone } from '../ui/tone';
+
+const candidateStatusTone = (status: CandidateStatus): Tone => {
+  if (status === 'selected') return 'ok';
+  if (status === 'paused') return 'warn';
+  if (status === 'withdrawn') return 'bad';
+  return 'info';
+};
 
 export const CandidatesList: React.FC = () => {
   const { orgId } = useParams();
@@ -51,33 +59,39 @@ export const CandidatesList: React.FC = () => {
     .sort((a, b) => a.candidate.name.localeCompare(b.candidate.name, locale));
 
   return (
-    <section>
+    <section className="mx-auto max-w-[1180px]">
       <PageHeader
         title={t('candidates.title')}
-        subtitle={`${org.name} · ${t('candidates.subtitle')}`}
+        subtitle={
+          <>
+            <span className="text-[var(--text)]">{org.name}</span>
+            <span className="text-[var(--text-faint)]"> · </span>
+            <span>{t('candidates.subtitle')}</span>
+          </>
+        }
       />
 
       {candidates.length === 0 ? (
-        <p className="text-sm text-gray-400">{t('candidates.empty')}</p>
+        <p className="text-sm text-[var(--text-faint)]">{t('candidates.empty')}</p>
       ) : (
-        <Card>
+        <div className="surface-card overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
-              <thead className="border-b border-gray-700 bg-gray-900/60">
-                <tr>
-                  <th className="px-2 py-3 text-start font-medium text-gray-300">
+            <table className="w-full text-start text-sm">
+              <thead>
+                <tr className="border-b border-[var(--border)]">
+                  <th className="px-4 py-3 text-[11.5px] font-semibold text-[var(--text-faint)]">
                     {t('functions.candidate')}
                   </th>
-                  <th className="px-2 py-3 text-start font-medium text-gray-300">
+                  <th className="px-4 py-3 text-[11.5px] font-semibold text-[var(--text-faint)]">
                     {t('candidates.currentToTarget')}
                   </th>
-                  <th className="px-2 py-3 text-start font-medium text-gray-300">
+                  <th className="px-4 py-3 text-[11.5px] font-semibold text-[var(--text-faint)]">
                     {t('candidates.function')}
                   </th>
-                  <th className="px-2 py-3 text-start font-medium text-gray-300">
+                  <th className="min-w-[14rem] px-4 py-3 text-[11.5px] font-semibold text-[var(--text-faint)]">
                     {t('functions.readiness')}
                   </th>
-                  <th className="px-2 py-3 text-start font-medium text-gray-300">
+                  <th className="px-4 py-3 text-[11.5px] font-semibold text-[var(--text-faint)]">
                     {t('functions.status')}
                   </th>
                 </tr>
@@ -86,40 +100,39 @@ export const CandidatesList: React.FC = () => {
                 {candidates.map(({ candidate, fn, readiness }) => (
                   <tr
                     key={candidate.id}
-                    className="border-b border-gray-700/70 last:border-b-0 hover:bg-gray-800/40"
+                    className="border-b border-[var(--border)] transition-colors last:border-0 hover:bg-[var(--card-2)]"
                   >
-                    <td className="px-2 py-3 align-top">
+                    <td className="px-4 py-3.5 align-top">
                       <Link
                         to={`/organizations/${org.id}/candidates/${candidate.id}`}
-                        className="font-medium text-white transition-colors hover:text-primary-300"
+                        className="font-medium text-[var(--text)] transition-colors hover:text-[var(--accent-bright)]"
                       >
                         {candidate.name}
                       </Link>
-                      <p className="mt-1 text-xs text-gray-400">{candidate.department}</p>
+                      <p className="mt-1 text-xs text-[var(--text-faint)]">{candidate.department}</p>
                     </td>
-                    <td className="px-2 py-3 align-top text-gray-300">
+                    <td className="px-4 py-3.5 align-top text-[var(--text-muted)]">
                       {candidate.currentPosition}
-                      <span className="mx-2 text-gray-600">{t('candidates.to')}</span>
+                      <span className="mx-2 text-[var(--text-faint)]">{t('candidates.to')}</span>
                       {candidate.targetPosition}
                     </td>
-                    <td className="px-2 py-3 align-top text-gray-300">
+                    <td className="px-4 py-3.5 align-top text-[var(--text-muted)]">
                       {fn ? fn.title : t('candidates.noFunction')}
                     </td>
-                    <td className="min-w-36 px-2 py-3 align-top">
+                    <td className="px-4 py-3.5 align-top">
                       <ProgressBar value={readiness} />
                     </td>
-                    <td className="px-2 py-3 align-top">
-                      <Badge
-                        label={t(`status.${candidate.status}`)}
-                        color={candidateStatusColor(candidate.status)}
-                      />
+                    <td className="px-4 py-3.5 align-top">
+                      <Pill tone={candidateStatusTone(candidate.status)}>
+                        {t(`status.${candidate.status}`)}
+                      </Pill>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        </Card>
+        </div>
       )}
     </section>
   );
