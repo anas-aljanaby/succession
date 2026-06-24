@@ -86,6 +86,8 @@ const translations: Record<Language, Dict> = {
     'org.poolSize': 'Candidates',
 
     'org.dashboard.title': 'Dashboard',
+    'org.dashboard.overview': 'Overview',
+    'org.dashboard.insights': 'Insights & analytics',
     'org.dashboard.maturityLevel': 'Maturity level',
     'org.dashboard.kpiFunctions': 'Critical functions',
     'org.dashboard.kpiReady': 'Ready successors',
@@ -285,6 +287,8 @@ const translations: Record<Language, Dict> = {
     'org.poolSize': 'المرشحون',
 
     'org.dashboard.title': 'لوحة التحكم',
+    'org.dashboard.overview': 'نظرة عامة',
+    'org.dashboard.insights': 'الرؤى والتحليلات',
     'org.dashboard.maturityLevel': 'مستوى النضج',
     'org.dashboard.kpiFunctions': 'الوظائف الحرجة',
     'org.dashboard.kpiReady': 'الخلفاء الجاهزون',

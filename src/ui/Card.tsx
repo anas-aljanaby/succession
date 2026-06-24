@@ -9,7 +9,7 @@ interface Props {
 }
 
 const base =
-  'block rounded-lg border border-gray-800 bg-gray-800/40 p-4';
+  'block rounded-lg border border-gray-700 bg-gray-800/70 p-4 shadow-lg shadow-black/20';
 
 export const Card: React.FC<Props> = ({ children, className = '', to, id }) => {
   if (to) {

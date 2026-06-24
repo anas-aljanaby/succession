@@ -5,9 +5,9 @@ export const ProgressBar: React.FC<{ value: number }> = ({ value }) => {
 
   return (
     <div className="flex items-center gap-3">
-      <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-800">
+      <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-700">
         <div
-          className="h-full rounded-full bg-primary-500 transition-[width]"
+          className="h-full rounded-full bg-primary-400 transition-[width]"
           style={{ width: `${clamped}%` }}
         />
       </div>

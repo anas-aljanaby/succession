@@ -66,6 +66,42 @@
         --color-primary-600: 217 119 6;   /* amber-600 */
       }
 
+      /* ===== Semantic UI tokens (dark theme) — design system =====
+         Light mode later overrides these same names under a scope
+         (e.g. html.theme-light { ... }); components never hardcode grays. */
+      :root {
+        --bg: #0b0e17;            /* page background (deepest) */
+        --card: #151823;          /* card / panel surface */
+        --card-2: #1d212e;        /* inner wells, table row hover */
+        --card-3: #262b3a;        /* highest raised surface */
+        --border: rgba(255, 255, 255, 0.08);        /* default hairline */
+        --border-strong: rgba(255, 255, 255, 0.14); /* emphasis / hover */
+        --text: #f3f4f6;          /* primary text + titles */
+        --text-muted: #a6acbb;    /* secondary text, body */
+        --text-faint: #6b7180;    /* labels, captions, hints */
+        --accent: rgb(var(--color-primary-500));            /* theme accent */
+        --accent-bright: rgb(var(--color-primary-400));     /* accent on dark */
+        --accent-soft: rgb(var(--color-primary-500) / 0.14);/* tinted fill */
+        --accent-line: rgb(var(--color-primary-500) / 0.35);/* tinted border */
+        --ok: #34d399;   --ok-soft: rgba(52, 211, 153, 0.13);
+        --warn: #fbbf24; --warn-soft: rgba(251, 191, 36, 0.13);
+        --bad: #f87171;  --bad-soft: rgba(248, 113, 113, 0.13);
+        --info: #60a5fa; --info-soft: rgba(96, 165, 250, 0.13);
+      }
+
+      /* Elevated card surface: subtle top highlight + depth shadow.
+         Use `.surface-card` for every panel; pair with token utilities. */
+      .surface-card {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.022), transparent 30%),
+          var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.04) inset,
+          0 8px 24px rgba(0, 0, 0, 0.28);
+      }
+
       /* Neo-Tech Icons */
       .neo-tech-icon {
         position: relative;
