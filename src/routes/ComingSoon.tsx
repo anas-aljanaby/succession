@@ -1,27 +1,66 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { COMING_SOON_FEATURES } from '../lib/comingSoonFeatures';
+import { useResolvedOrgId } from '../lib/activeOrg';
+import { useApp } from '../store/AppContext';
 import { useLanguage } from '../lib/i18n';
-import { Card } from '../ui/Card';
+import { canAccessOrg } from '../lib/permissions';
+import { PageHeader } from '../ui/PageHeader';
+
+export const ComingSoonLegacyRedirect: React.FC = () => {
+  const { feature } = useParams();
+  const orgId = useResolvedOrgId();
+
+  if (!orgId) return <Navigate to="/" replace />;
+
+  const target = feature
+    ? `/organizations/${orgId}/more/${feature}`
+    : `/organizations/${orgId}/more`;
+
+  return <Navigate to={target} replace />;
+};
 
 export const ComingSoon: React.FC = () => {
+  const { orgId, feature } = useParams();
   const { t } = useLanguage();
-  const { feature } = useParams();
+  const { state } = useApp();
+
+  const activeRole = state.session.activeRole;
+  const activeUser = state.users.find((user) => user.id === state.session.userId);
+  const org = state.organizations.find((item) => item.id === orgId);
+
+  if (!org) return <Navigate to="/organizations" replace />;
+  if (!canAccessOrg(activeRole, { user: activeUser, orgId: org.id })) {
+    return <Navigate to="/" replace />;
+  }
+
+  const moreBase = `/organizations/${org.id}/more`;
 
   if (!feature) {
     return (
-      <section>
-        <h1 className="text-xl font-semibold text-white">{t('comingSoon.hubTitle')}</h1>
-        <p className="mt-2 text-sm text-gray-400">{t('comingSoon.hubSubtitle')}</p>
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+      <section className="mx-auto max-w-[1180px] space-y-6">
+        <PageHeader
+          title={t('comingSoon.hubTitle')}
+          subtitle={
+            <>
+              <span className="text-[var(--text)]">{org.name}</span>
+              <span className="text-[var(--text-faint)]"> · </span>
+              <span>{t('comingSoon.hubSubtitle')}</span>
+            </>
+          }
+        />
+        <ul className="grid gap-3 sm:grid-cols-2">
           {COMING_SOON_FEATURES.map((item) => (
             <li key={item}>
-              <Card to={`/coming-soon/${item}`}>
-                <span className="font-medium text-gray-100">
+              <Link
+                to={`${moreBase}/${item}`}
+                className="surface-card block p-4 transition-colors hover:border-[var(--border-strong)]"
+              >
+                <span className="font-medium text-[var(--text)]">
                   {t(`comingSoon.feature.${item}`)}
                 </span>
-                <span className="mt-1 block text-xs text-gray-500">{t('nav.soon')}</span>
-              </Card>
+                <span className="mt-1 block text-xs text-[var(--text-faint)]">{t('nav.soon')}</span>
+              </Link>
             </li>
           ))}
         </ul>
@@ -32,16 +71,15 @@ export const ComingSoon: React.FC = () => {
   const featureLabel = t(`comingSoon.feature.${feature}`);
 
   return (
-    <section className="flex flex-col items-center justify-center text-center py-24">
+    <section className="mx-auto max-w-[640px] space-y-6 py-12 text-center">
       <Link
-        to="/coming-soon"
-        className="mb-6 text-sm text-gray-500 hover:text-gray-300 transition-colors"
+        to={moreBase}
+        className="text-sm text-[var(--text-faint)] hover:text-[var(--text-muted)] transition-colors"
       >
         {t('comingSoon.backToHub')}
       </Link>
-      <h1 className="text-xl font-semibold text-white">{t('comingSoon.title')}</h1>
-      <p className="mt-2 text-sm font-medium text-gray-200">{featureLabel}</p>
-      <p className="mt-2 text-sm text-gray-400">{t('comingSoon.body')}</p>
+      <PageHeader title={t('comingSoon.title')} subtitle={featureLabel} />
+      <p className="text-sm text-[var(--text-muted)]">{t('comingSoon.body')}</p>
     </section>
   );
 };

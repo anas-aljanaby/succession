@@ -1,0 +1,60 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب القيادي
+    - navigation [ref=e6]:
+      - link "الرئيسية" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "الإعدادات" [ref=e8] [cursor=pointer]:
+        - /url: /settings
+  - generic [ref=e9]:
+    - banner [ref=e10]:
+      - generic [ref=e11]:
+        - navigation [ref=e12]:
+          - button "الجدول الزمني للرحلة (معاينة)" [disabled] [ref=e13]:
+            - img [ref=e14]
+          - button "لوحة القيم" [disabled] [ref=e17]:
+            - img [ref=e18]
+        - navigation [ref=e21]:
+          - link "الرئيسية" [ref=e22] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e23]: /
+          - link "المزيد" [ref=e70] [cursor=pointer]:
+            - /url: /coming-soon
+          - generic [ref=e71]: /
+          - generic [ref=e72]: رؤى الذكاء الاصطناعي
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - img [ref=e27]
+          - generic [ref=e29]: الدور
+          - combobox "الدور" [ref=e30]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e31] [cursor=pointer]:
+          - img [ref=e32]
+        - button "المستشار الذكي" [ref=e34] [cursor=pointer]:
+          - img [ref=e35]
+        - button "الإشعارات" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+        - button "تسجيل الخروج" [ref=e43] [cursor=pointer]:
+          - img [ref=e44]
+    - main [ref=e47]:
+      - generic [ref=e73]:
+        - generic [ref=e75]:
+          - heading "رؤى الذكاء الاصطناعي" [level=1] [ref=e76]
+          - generic [ref=e77]: اختر مؤسسة لعرض الرؤى.
+        - list [ref=e78]:
+          - listitem [ref=e79]:
+            - link "شركة ACME" [ref=e80] [cursor=pointer]:
+              - /url: /organizations/org-acme/ai-insights
+          - listitem [ref=e81]:
+            - link "الهيئة العامة للبيانات" [ref=e82] [cursor=pointer]:
+              - /url: /organizations/org-gda/ai-insights
+          - listitem [ref=e83]:
+            - link "مبرة المتميزين" [ref=e84] [cursor=pointer]:
+              - /url: /organizations/org-mubarra/ai-insights
+        - link "العودة إلى الكل" [ref=e85] [cursor=pointer]:
+          - /url: /coming-soon

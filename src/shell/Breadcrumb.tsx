@@ -21,12 +21,14 @@ export const Breadcrumb: React.FC = () => {
     if (seg === 'organizations') label = t('nav.organizations');
     else if (seg === 'functions') label = t('nav.functions');
     else if (seg === 'candidates') label = t('nav.candidates');
+    else if (seg === 'ai-insights') label = t('nav.aiInsights');
     else if (seg === 'journey-timeline') label = t('journeyTimeline.title');
     else if (seg === 'values-dashboard') label = t('values.title');
     else if (seg === 'settings') label = t('nav.settings');
+    else if (seg === 'more') label = t('nav.more');
     else if (seg === 'coming-soon') label = t('nav.more');
     else if (seg === 'new' || seg === 'edit') continue; // not a navigable crumb
-    else if (prev === 'coming-soon') label = t(`comingSoon.feature.${seg}`);
+    else if (prev === 'more' || prev === 'coming-soon') label = t(`comingSoon.feature.${seg}`);
     else if (prev === 'organizations')
       label = state.organizations.find((o) => o.id === seg)?.name ?? seg;
     else if (prev === 'functions')

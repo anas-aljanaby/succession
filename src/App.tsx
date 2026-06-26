@@ -14,7 +14,9 @@ import { CandidatesList } from './routes/CandidatesList';
 import { CandidateDetail } from './routes/CandidateDetail';
 import { CandidateJourneyTimeline } from './routes/CandidateJourneyTimeline';
 import { CandidateValuesDashboard } from './routes/CandidateValuesDashboard';
-import { ComingSoon } from './routes/ComingSoon';
+import { ComingSoon, ComingSoonLegacyRedirect } from './routes/ComingSoon';
+import { AiInsightsHub } from './routes/AiInsightsHub';
+import { OrgAiInsights } from './routes/OrgAiInsights';
 import { Settings } from './routes/Settings';
 
 export const App: React.FC = () => {
@@ -30,6 +32,9 @@ export const App: React.FC = () => {
             <Route path="/organizations" element={<OrganizationsList />} />
             <Route path="/organizations/new" element={<OrganizationForm />} />
             <Route path="/organizations/:orgId" element={<OrganizationDashboard />} />
+            <Route path="/organizations/:orgId/ai-insights" element={<OrgAiInsights />} />
+            <Route path="/organizations/:orgId/more" element={<ComingSoon />} />
+            <Route path="/organizations/:orgId/more/:feature" element={<ComingSoon />} />
             <Route path="/organizations/:orgId/edit" element={<OrganizationForm />} />
 
             <Route path="/organizations/:orgId/functions" element={<FunctionsList />} />
@@ -48,9 +53,11 @@ export const App: React.FC = () => {
               element={<CandidateValuesDashboard />}
             />
 
+            <Route path="/ai-insights" element={<AiInsightsHub />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/coming-soon" element={<ComingSoon />} />
-            <Route path="/coming-soon/:feature" element={<ComingSoon />} />
+            <Route path="/coming-soon" element={<ComingSoonLegacyRedirect />} />
+            <Route path="/coming-soon/ai-insights" element={<Navigate to="/ai-insights" replace />} />
+            <Route path="/coming-soon/:feature" element={<ComingSoonLegacyRedirect />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />

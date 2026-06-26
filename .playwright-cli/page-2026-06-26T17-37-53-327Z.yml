@@ -1,0 +1,100 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب القيادي
+    - navigation [ref=e6]:
+      - link "لوحة التحكم" [ref=e7] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e8] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e9] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "رؤى الذكاء الاصطناعي" [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme/ai-insights
+      - link "المزيد (قريباً)" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/more
+        - text: المزيد
+        - generic [ref=e12]: (قريباً)
+      - link "الإعدادات" [ref=e13] [cursor=pointer]:
+        - /url: /settings
+  - generic [ref=e14]:
+    - banner [ref=e15]:
+      - generic [ref=e16]:
+        - navigation [ref=e17]:
+          - button "الجدول الزمني للرحلة (معاينة)" [disabled] [ref=e18]:
+            - img [ref=e19]
+          - button "لوحة القيم" [disabled] [ref=e22]:
+            - img [ref=e23]
+        - navigation [ref=e26]:
+          - link "الرئيسية" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e28]: /
+          - link "المؤسسات" [ref=e29] [cursor=pointer]:
+            - /url: /organizations
+          - generic [ref=e30]: /
+          - link "شركة ACME" [ref=e31] [cursor=pointer]:
+            - /url: /organizations/org-acme
+          - generic [ref=e32]: /
+          - generic [ref=e33]: المزيد
+      - generic [ref=e34]:
+        - generic [ref=e36]:
+          - button "شركة ACME" [ref=e37] [cursor=pointer]:
+            - img [ref=e38]
+            - generic [ref=e40]: شركة ACME
+          - button "المؤسسة" [ref=e41] [cursor=pointer]:
+            - img [ref=e42]
+        - generic [ref=e44]:
+          - generic [ref=e45]: المرشح
+          - combobox "المرشح" [ref=e46]:
+            - option "اختر مرشحاً" [disabled] [selected]
+            - option "خالد الغامدي"
+            - option "سارة منصور"
+            - option "عمر عبد الله"
+        - generic [ref=e47]:
+          - img [ref=e48]
+          - generic [ref=e50]: الدور
+          - combobox "الدور" [ref=e51]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e52] [cursor=pointer]:
+          - img [ref=e53]
+        - button "المستشار الذكي" [ref=e55] [cursor=pointer]:
+          - img [ref=e56]
+        - button "الإشعارات" [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+        - button "تسجيل الخروج" [ref=e64] [cursor=pointer]:
+          - img [ref=e65]
+    - main [ref=e68]:
+      - generic [ref=e69]:
+        - generic [ref=e71]:
+          - heading "المزيد" [level=1] [ref=e72]
+          - generic [ref=e73]: شركة ACME · أدوات إضافية مخطط إطلاقها لاحقاً.
+        - list [ref=e74]:
+          - listitem [ref=e75]:
+            - link "التقارير والتحليلات قريباً" [ref=e76] [cursor=pointer]:
+              - /url: /organizations/org-acme/more/reports
+              - text: التقارير والتحليلات
+              - generic [ref=e77]: قريباً
+          - listitem [ref=e78]:
+            - link "سجلات التأمل قريباً" [ref=e79] [cursor=pointer]:
+              - /url: /organizations/org-acme/more/reflection-logs
+              - text: سجلات التأمل
+              - generic [ref=e80]: قريباً
+          - listitem [ref=e81]:
+            - link "الاستبيانات قريباً" [ref=e82] [cursor=pointer]:
+              - /url: /organizations/org-acme/more/surveys
+              - text: الاستبيانات
+              - generic [ref=e83]: قريباً
+          - listitem [ref=e84]:
+            - link "إغلاق المرحلة قريباً" [ref=e85] [cursor=pointer]:
+              - /url: /organizations/org-acme/more/stage-closure
+              - text: إغلاق المرحلة
+              - generic [ref=e86]: قريباً
+          - listitem [ref=e87]:
+            - link "مرآة القيم قريباً" [ref=e88] [cursor=pointer]:
+              - /url: /organizations/org-acme/more/value-mirror
+              - text: مرآة القيم
+              - generic [ref=e89]: قريباً

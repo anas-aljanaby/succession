@@ -75,15 +75,25 @@ export const Sidebar: React.FC = () => {
             <NavLink to={`/organizations/${orgId}/candidates`} className={linkClass}>
               {t('nav.candidates')}
             </NavLink>
-            <NavLink to="/coming-soon" className={linkClass}>
+            <NavLink to={`/organizations/${orgId}/ai-insights`} className={linkClass}>
+              {t('nav.aiInsights')}
+            </NavLink>
+            <NavLink to={`/organizations/${orgId}/more`} className={linkClass}>
               {t('nav.more')}{' '}
               <span className="text-xs text-gray-500">({t('nav.soon')})</span>
             </NavLink>
           </>
         ) : (
-          <NavLink to="/" end className={linkClass}>
-            {t('nav.home')}
-          </NavLink>
+          <>
+            <NavLink to="/" end className={linkClass}>
+              {t('nav.home')}
+            </NavLink>
+            {activeRole === 'CONSULTANT' ? (
+              <NavLink to="/ai-insights" className={linkClass}>
+                {t('nav.aiInsights')}
+              </NavLink>
+            ) : null}
+          </>
         )}
         <NavLink to="/settings" className={linkClass}>
           {t('nav.settings')}

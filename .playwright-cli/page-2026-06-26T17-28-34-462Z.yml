@@ -1,0 +1,99 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب القيادي
+    - navigation [ref=e6]:
+      - link "لوحة التحكم" [ref=e7] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e8] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e9] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "المزيد (قريباً)" [ref=e10] [cursor=pointer]:
+        - /url: /coming-soon
+        - text: المزيد
+        - generic [ref=e11]: (قريباً)
+      - link "الإعدادات" [ref=e12] [cursor=pointer]:
+        - /url: /settings
+  - generic [ref=e13]:
+    - banner [ref=e14]:
+      - generic [ref=e15]:
+        - navigation [ref=e16]:
+          - button "الجدول الزمني للرحلة (معاينة)" [disabled] [ref=e17]:
+            - img [ref=e18]
+          - button "لوحة القيم" [disabled] [ref=e21]:
+            - img [ref=e22]
+        - navigation [ref=e25]:
+          - link "الرئيسية" [ref=e26] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e27]: /
+          - link "المؤسسات" [ref=e28] [cursor=pointer]:
+            - /url: /organizations
+          - generic [ref=e29]: /
+          - link "شركة ACME" [ref=e30] [cursor=pointer]:
+            - /url: /organizations/org-acme
+          - generic [ref=e31]: /
+          - generic [ref=e32]: رؤى الذكاء الاصطناعي
+      - generic [ref=e33]:
+        - generic [ref=e35]:
+          - button "شركة ACME" [ref=e36] [cursor=pointer]:
+            - img [ref=e37]
+            - generic [ref=e39]: شركة ACME
+          - button "المؤسسة" [ref=e40] [cursor=pointer]:
+            - img [ref=e41]
+        - generic [ref=e43]:
+          - generic [ref=e44]: المرشح
+          - combobox "المرشح" [ref=e45]:
+            - option "اختر مرشحاً" [disabled] [selected]
+            - option "خالد الغامدي"
+            - option "سارة منصور"
+            - option "عمر عبد الله"
+        - generic [ref=e46]:
+          - img [ref=e47]
+          - generic [ref=e49]: الدور
+          - combobox "الدور" [ref=e50]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e51] [cursor=pointer]:
+          - img [ref=e52]
+        - button "المستشار الذكي" [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+        - button "الإشعارات" [ref=e59] [cursor=pointer]:
+          - img [ref=e60]
+        - button "تسجيل الخروج" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+    - main [ref=e67]:
+      - generic [ref=e68]:
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - heading "رؤى الذكاء الاصطناعي" [level=1] [ref=e71]
+            - generic [ref=e72]: شركة ACME
+          - button "العودة إلى لوحة التحكم" [ref=e74] [cursor=pointer]:
+            - generic [ref=e75]:
+              - img [ref=e76]
+              - text: العودة إلى لوحة التحكم
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - heading "أحدث الرؤى" [level=3] [ref=e80]
+            - list [ref=e82]:
+              - listitem [ref=e83]:
+                - img [ref=e85]
+                - paragraph [ref=e87]: Khalid Al-Ghamdi's readiness for the CTO role has now reached 45%.
+              - listitem [ref=e88]:
+                - img [ref=e90]
+                - paragraph [ref=e92]: The Adoption & Engagement Index for 'Building & Development' has been updated to 55%.
+          - generic [ref=e93]:
+            - heading "حلقة التعلم المستمر" [level=3] [ref=e94]
+            - list [ref=e96]:
+              - listitem [ref=e97]:
+                - img [ref=e99]
+                - paragraph [ref=e101]: Candidate LRI scores have plateaued despite milestone completions. Suggest introducing more cross-functional projects to boost 'Competence'.
+              - listitem [ref=e102]:
+                - img [ref=e104]
+                - paragraph [ref=e106]: Reflection log sentiment has declined recently. Recommend targeted check-ins with candidates to address potential roadblocks.
+              - listitem [ref=e107]:
+                - img [ref=e109]
+                - paragraph [ref=e111]: Excellent momentum in LRI scores and positive reflections. Recommend identifying high-performers for advanced mentorship opportunities.

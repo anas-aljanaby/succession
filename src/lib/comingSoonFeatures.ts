@@ -3,7 +3,6 @@ export const COMING_SOON_FEATURES = [
   'reflection-logs',
   'surveys',
   'stage-closure',
-  'ai-insights',
   'value-mirror',
 ] as const;
 
