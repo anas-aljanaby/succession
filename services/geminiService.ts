@@ -7,7 +7,7 @@ if (!API_KEY) {
   console.warn("API_KEY environment variable not set. AI features will be disabled.");
 }
 
-const ai = new GoogleGenAI({ apiKey: API_KEY! });
+const ai = API_KEY ? new GoogleGenAI({ apiKey: API_KEY }) : null as any;
 
 export const generateSuccessionPlan = async (
   role: string,
