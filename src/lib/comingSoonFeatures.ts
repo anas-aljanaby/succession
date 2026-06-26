@@ -1,6 +1,5 @@
 export const COMING_SOON_FEATURES = [
   'reports',
-  'reflection-logs',
   'surveys',
   'stage-closure',
   'value-mirror',

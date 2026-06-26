@@ -22,6 +22,7 @@ export const Breadcrumb: React.FC = () => {
     else if (seg === 'functions') label = t('nav.functions');
     else if (seg === 'candidates') label = t('nav.candidates');
     else if (seg === 'ai-insights') label = t('nav.aiInsights');
+    else if (seg === 'reflection-logs') label = t('nav.reflectionLogs');
     else if (seg === 'journey-timeline') label = t('journeyTimeline.title');
     else if (seg === 'values-dashboard') label = t('values.title');
     else if (seg === 'settings') label = t('nav.settings');

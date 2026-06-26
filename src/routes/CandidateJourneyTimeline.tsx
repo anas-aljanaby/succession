@@ -49,41 +49,62 @@ const ProgressRing: React.FC<{ progress: number; status: StageStatus }> = ({ pro
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (progress / 100) * circumference;
 
-  const colorClasses: Record<StageStatus, string> = {
+  const arcClasses: Record<StageStatus, string> = {
     completed: 'text-[var(--ok)]',
     inProgress: 'text-[var(--accent-bright)]',
-    notStarted: 'text-[var(--text-faint)]',
+    notStarted: 'text-[var(--text-muted)]',
   };
 
   return (
-    <div className="relative" style={{ width: size, height: size }}>
+    <div
+      className={`relative rounded-full ${
+        status === 'notStarted'
+          ? 'bg-[var(--card-2)]'
+          : status === 'inProgress'
+            ? 'bg-[var(--accent-soft)]/30 ring-1 ring-[var(--accent)]/40'
+            : ''
+      }`}
+      style={{ width: size, height: size }}
+    >
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90">
         <circle
           cx={size / 2}
           cy={size / 2}
           r={radius}
           strokeWidth={strokeWidth}
-          className="stroke-current text-[var(--card-3)]"
+          className="stroke-current text-[var(--border-strong)]"
           fill="transparent"
         />
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          strokeWidth={strokeWidth}
-          className={`stroke-current ${colorClasses[status]}`}
-          fill="transparent"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          strokeLinecap="round"
-          style={{ transition: 'stroke-dashoffset 0.8s ease-out' }}
-        />
+        {status !== 'notStarted' && (
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            strokeWidth={strokeWidth}
+            className={`stroke-current ${arcClasses[status]}`}
+            fill="transparent"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            strokeLinecap="round"
+            style={{ transition: 'stroke-dashoffset 0.8s ease-out' }}
+          />
+        )}
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        {status === 'completed' ? <CheckCircleIcon className="h-10 w-10" /> : null}
+        {status === 'completed' ? (
+          <CheckCircleIcon className="h-10 w-10 text-[var(--ok)]" />
+        ) : status === 'inProgress' ? (
+          <span className="text-sm font-bold text-[var(--accent-bright)]">{progress}%</span>
+        ) : null}
       </div>
     </div>
   );
+};
+
+const stageColumnClass: Record<StageStatus, string> = {
+  completed: 'border border-transparent',
+  inProgress: 'border border-[var(--accent)]/35 bg-[var(--accent-soft)]/15',
+  notStarted: 'border border-[var(--border-strong)] bg-[var(--card-2)]/50',
 };
 
 export const CandidateJourneyTimeline: React.FC = () => {
@@ -141,6 +162,8 @@ export const CandidateJourneyTimeline: React.FC = () => {
           name: journeyStage.name,
           status,
           percentage,
+          cri: def.cri,
+          aei: def.aei,
           estimatedDuration: calculateStageDuration(def, orlsScore, candidateReadiness),
         };
       })
@@ -199,27 +222,51 @@ export const CandidateJourneyTimeline: React.FC = () => {
       </div>
 
       <div className="surface-card overflow-x-auto p-4">
-        <div className="flex min-w-max items-start">
+        <div className="flex w-full min-w-[700px] items-start justify-between gap-2">
           {stageData.map((stage, index) =>
             stage ? (
               <React.Fragment key={stage.code}>
                 <Link
                   to={`${backToCandidate}#journey`}
-                  className="flex w-60 shrink-0 flex-col items-center rounded-lg px-4 py-2 transition-colors hover:bg-[var(--card-2)]"
+                  className={`flex flex-1 flex-col items-center rounded-lg px-2 py-2 transition-colors hover:bg-[var(--card-2)] ${stageColumnClass[stage.status]}`}
                   aria-label={`${t('journeyTimeline.viewStage')}: ${stage.name}`}
                 >
                   <ProgressRing progress={stage.percentage} status={stage.status} />
-                  <h3 className="mt-4 flex h-12 items-center text-center font-semibold text-[var(--text)]">
+                  <h3
+                    className={`mt-4 flex h-12 items-center text-center font-semibold ${
+                      stage.status === 'notStarted'
+                        ? 'text-[var(--text-muted)]'
+                        : 'text-[var(--text)]'
+                    }`}
+                  >
                     {stage.name}
                   </h3>
-                  <div className="mt-2 w-full space-y-1 text-center text-xs text-[var(--text-muted)]">
+                  <div
+                    className={`mt-2 w-full space-y-1 text-center text-xs ${
+                      stage.status === 'notStarted'
+                        ? 'text-[var(--text-faint)]'
+                        : 'text-[var(--text-muted)]'
+                    }`}
+                  >
                     <div className="flex justify-between">
                       <span>{t('journeyTimeline.cri')}:</span>
-                      <span className="font-medium text-[var(--bad)]">{stage.cri}%</span>
+                      <span
+                        className={`font-medium ${
+                          stage.status === 'notStarted' ? 'text-[var(--text-muted)]' : 'text-[var(--bad)]'
+                        }`}
+                      >
+                        {stage.cri}%
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span>{t('journeyTimeline.aei')}:</span>
-                      <span className="font-medium text-[var(--ok)]">{stage.aei}%</span>
+                      <span
+                        className={`font-medium ${
+                          stage.status === 'notStarted' ? 'text-[var(--text-muted)]' : 'text-[var(--ok)]'
+                        }`}
+                      >
+                        {stage.aei}%
+                      </span>
                     </div>
                     <div className="mt-2 flex items-center justify-center gap-1 border-t border-[var(--border)] pt-2">
                       <ClockIcon className="h-3 w-3 text-cyan-400" />
@@ -231,7 +278,7 @@ export const CandidateJourneyTimeline: React.FC = () => {
                   </div>
                 </Link>
                 {index < stageData.length - 1 ? (
-                  <div className="mt-10 h-px min-w-16 flex-grow bg-[var(--border)]" />
+                  <div className="mt-10 h-px w-4 flex-shrink-0 sm:w-8 md:w-12 lg:w-16 bg-[var(--border)]" />
                 ) : null}
               </React.Fragment>
             ) : null

@@ -1,0 +1,167 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب القيادي
+    - navigation [ref=e6]:
+      - link "لوحة التحكم" [ref=e7] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e8] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e9] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "رؤى الذكاء الاصطناعي" [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme/ai-insights
+      - link "المزيد (قريباً)" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/more
+        - text: المزيد
+        - generic [ref=e12]: (قريباً)
+      - link "الإعدادات" [ref=e13] [cursor=pointer]:
+        - /url: /organizations/org-acme/settings
+  - generic [ref=e14]:
+    - banner [ref=e15]:
+      - generic [ref=e16]:
+        - navigation [ref=e17]:
+          - button "الجدول الزمني للرحلة (معاينة)" [ref=e18] [cursor=pointer]:
+            - img [ref=e19]
+          - button "لوحة القيم" [ref=e22] [cursor=pointer]:
+            - img [ref=e23]
+        - generic [ref=e25]:
+          - navigation [ref=e26]:
+            - link "الرئيسية" [ref=e27] [cursor=pointer]:
+              - /url: /
+            - generic [ref=e28]: /
+            - link "المؤسسات" [ref=e29] [cursor=pointer]:
+              - /url: /organizations
+            - generic [ref=e30]: /
+            - link "شركة ACME" [ref=e31] [cursor=pointer]:
+              - /url: /organizations/org-acme
+            - generic [ref=e32]: /
+            - link "المرشحون" [ref=e33] [cursor=pointer]:
+              - /url: /organizations/org-acme/candidates
+            - generic [ref=e34]: /
+            - link "خالد الغامدي" [ref=e35] [cursor=pointer]:
+              - /url: /organizations/org-acme/candidates/cand-khalid
+            - generic [ref=e36]: /
+            - generic [ref=e37]: الجدول الزمني للرحلة (معاينة)
+          - generic [ref=e38]: خالد الغامدي
+      - generic [ref=e39]:
+        - generic [ref=e41]:
+          - button "شركة ACME" [ref=e42] [cursor=pointer]:
+            - img [ref=e43]
+            - generic [ref=e45]: شركة ACME
+          - button "المؤسسة" [ref=e46] [cursor=pointer]:
+            - img [ref=e47]
+        - generic [ref=e49]:
+          - generic [ref=e50]: المرشح
+          - combobox "المرشح" [ref=e51]:
+            - option "اختر مرشحاً" [disabled]
+            - option "خالد الغامدي" [selected]
+            - option "سارة منصور"
+            - option "عمر عبد الله"
+        - generic [ref=e52]:
+          - img [ref=e53]
+          - generic [ref=e55]: الدور
+          - combobox "الدور" [ref=e56]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e57] [cursor=pointer]:
+          - img [ref=e58]
+        - button "المستشار الذكي" [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+        - button "الإشعارات" [ref=e65] [cursor=pointer]:
+          - img [ref=e66]
+        - button "تسجيل الخروج" [ref=e69] [cursor=pointer]:
+          - img [ref=e70]
+    - main [ref=e73]:
+      - generic [ref=e74]:
+        - generic [ref=e75]:
+          - generic [ref=e76]:
+            - heading "الجدول الزمني للرحلة (معاينة)" [level=1] [ref=e77]
+            - generic [ref=e78]: مدير التكنولوجيا · خالد الغامدي
+          - button "العودة إلى المرشح" [ref=e80] [cursor=pointer]:
+            - generic [ref=e81]:
+              - img [ref=e82]
+              - text: العودة إلى المرشح
+        - generic [ref=e84]:
+          - heading "ملخص الجاهزية" [level=2] [ref=e85]
+          - generic [ref=e86]:
+            - generic [ref=e87]:
+              - paragraph [ref=e88]: جاهزية المؤسسة
+              - paragraph [ref=e89]: 33%
+              - paragraph [ref=e90]: نتيجة ORLS
+            - generic [ref=e91]:
+              - paragraph [ref=e92]: جاهزية المرشح
+              - paragraph [ref=e93]: 56%
+              - paragraph [ref=e94]: مؤشر الجاهزية
+        - generic [ref=e96]:
+          - 'link "عرض المرحلة: التقييم والتخطيط" [ref=e97] [cursor=pointer]':
+            - /url: /organizations/org-acme/candidates/cand-khalid#journey
+            - generic [ref=e98]:
+              - img [ref=e99]
+              - img [ref=e103]
+            - heading "التقييم والتخطيط" [level=3] [ref=e105]
+            - generic [ref=e106]:
+              - generic [ref=e107]:
+                - generic [ref=e108]: "CRI:"
+                - generic [ref=e109]: 65%
+              - generic [ref=e110]:
+                - generic [ref=e111]: "AEI:"
+                - generic [ref=e112]: 30%
+              - generic [ref=e113]:
+                - img [ref=e114]
+                - generic [ref=e116]: "المدة التقديرية:"
+                - generic [ref=e117]: 54 يوم
+          - 'link "عرض المرحلة: البناء والتطوير" [ref=e119] [cursor=pointer]':
+            - /url: /organizations/org-acme/candidates/cand-khalid#journey
+            - generic [ref=e120]:
+              - img [ref=e121]
+              - generic [ref=e125]: 0%
+            - heading "البناء والتطوير" [level=3] [ref=e126]
+            - generic [ref=e127]:
+              - generic [ref=e128]:
+                - generic [ref=e129]: "CRI:"
+                - generic [ref=e130]: 45%
+              - generic [ref=e131]:
+                - generic [ref=e132]: "AEI:"
+                - generic [ref=e133]: 55%
+              - generic [ref=e134]:
+                - img [ref=e135]
+                - generic [ref=e137]: "المدة التقديرية:"
+                - generic [ref=e138]: 162 يوم
+          - 'link "عرض المرحلة: التطبيق والتقويم" [ref=e140] [cursor=pointer]':
+            - /url: /organizations/org-acme/candidates/cand-khalid#journey
+            - generic [ref=e141]:
+              - img [ref=e142]
+              - img [ref=e146]
+            - heading "التطبيق والتقويم" [level=3] [ref=e148]
+            - generic [ref=e149]:
+              - generic [ref=e150]:
+                - generic [ref=e151]: "CRI:"
+                - generic [ref=e152]: 25%
+              - generic [ref=e153]:
+                - generic [ref=e154]: "AEI:"
+                - generic [ref=e155]: 75%
+              - generic [ref=e156]:
+                - img [ref=e157]
+                - generic [ref=e159]: "المدة التقديرية:"
+                - generic [ref=e160]: 162 يوم
+          - 'link "عرض المرحلة: الاستدامة والتحسين" [ref=e162] [cursor=pointer]':
+            - /url: /organizations/org-acme/candidates/cand-khalid#journey
+            - generic [ref=e163]:
+              - img [ref=e164]
+              - img [ref=e168]
+            - heading "الاستدامة والتحسين" [level=3] [ref=e170]
+            - generic [ref=e171]:
+              - generic [ref=e172]:
+                - generic [ref=e173]: "CRI:"
+                - generic [ref=e174]: 15%
+              - generic [ref=e175]:
+                - generic [ref=e176]: "AEI:"
+                - generic [ref=e177]: 85%
+              - generic [ref=e178]:
+                - img [ref=e179]
+                - generic [ref=e181]: "المدة التقديرية:"
+                - generic [ref=e182]: 108 يوم

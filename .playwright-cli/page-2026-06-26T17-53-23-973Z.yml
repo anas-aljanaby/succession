@@ -1,0 +1,126 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب القيادي
+    - navigation [ref=e6]:
+      - link "لوحة التحكم" [ref=e7] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e8] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e9] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "رؤى الذكاء الاصطناعي" [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme/ai-insights
+      - link "سجلات التأمل" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/reflection-logs
+      - link "المزيد (قريباً)" [ref=e12] [cursor=pointer]:
+        - /url: /organizations/org-acme/more
+        - text: المزيد
+        - generic [ref=e13]: (قريباً)
+      - link "الإعدادات" [ref=e14] [cursor=pointer]:
+        - /url: /organizations/org-acme/settings
+  - generic [ref=e15]:
+    - banner [ref=e16]:
+      - generic [ref=e17]:
+        - navigation [ref=e18]:
+          - button "الجدول الزمني للرحلة (معاينة)" [disabled] [ref=e19]:
+            - img [ref=e20]
+          - button "لوحة القيم" [disabled] [ref=e23]:
+            - img [ref=e24]
+        - navigation [ref=e27]:
+          - link "الرئيسية" [ref=e28] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e29]: /
+          - link "المؤسسات" [ref=e30] [cursor=pointer]:
+            - /url: /organizations
+          - generic [ref=e31]: /
+          - link "شركة ACME" [ref=e32] [cursor=pointer]:
+            - /url: /organizations/org-acme
+          - generic [ref=e33]: /
+          - generic [ref=e34]: سجلات التأمل
+      - generic [ref=e35]:
+        - generic [ref=e37]:
+          - button "شركة ACME" [ref=e38] [cursor=pointer]:
+            - img [ref=e39]
+            - generic [ref=e41]: شركة ACME
+          - button "المؤسسة" [ref=e42] [cursor=pointer]:
+            - img [ref=e43]
+        - generic [ref=e45]:
+          - generic [ref=e46]: المرشح
+          - combobox "المرشح" [ref=e47]:
+            - option "اختر مرشحاً" [disabled] [selected]
+            - option "خالد الغامدي"
+            - option "سارة منصور"
+            - option "عمر عبد الله"
+        - generic [ref=e48]:
+          - img [ref=e49]
+          - generic [ref=e51]: الدور
+          - combobox "الدور" [ref=e52]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e53] [cursor=pointer]:
+          - img [ref=e54]
+        - button "المستشار الذكي" [ref=e56] [cursor=pointer]:
+          - img [ref=e57]
+        - button "الإشعارات" [ref=e61] [cursor=pointer]:
+          - img [ref=e62]
+        - button "تسجيل الخروج" [ref=e65] [cursor=pointer]:
+          - img [ref=e66]
+    - main [ref=e69]:
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - heading "سجلات التأمل" [level=1] [ref=e73]
+            - generic [ref=e74]: شركة ACME · تأملات المراحل وملاحظات المشاعر
+          - button "العودة إلى لوحة التحكم" [ref=e76] [cursor=pointer]
+        - generic [ref=e77]:
+          - paragraph [ref=e78]: مرحلة الرحلة
+          - generic [ref=e79]:
+            - button "التقييم والتخطيط STG1 · 2" [ref=e80] [cursor=pointer]:
+              - text: التقييم والتخطيط
+              - generic [ref=e81]: STG1 · 2
+            - button "البناء والتطوير STG2 · 1" [ref=e82] [cursor=pointer]:
+              - text: البناء والتطوير
+              - generic [ref=e83]: STG2 · 1
+            - button "التطبيق والتقويم STG3" [ref=e84] [cursor=pointer]:
+              - text: التطبيق والتقويم
+              - generic [ref=e85]: STG3
+            - button "الاستدامة والتحسين STG4" [ref=e86] [cursor=pointer]:
+              - text: الاستدامة والتحسين
+              - generic [ref=e87]: STG4
+        - generic [ref=e88]:
+          - generic [ref=e89]:
+            - generic [ref=e90]: STG1
+            - generic [ref=e91]: التقييم والتخطيط
+          - generic [ref=e92]:
+            - generic [ref=e93]:
+              - heading "سجل التأملات" [level=4] [ref=e94]
+              - button "تلخيص التأملات" [ref=e95] [cursor=pointer]
+            - generic [ref=e96]:
+              - generic [ref=e97]:
+                - img [ref=e99]
+                - generic [ref=e101]:
+                  - paragraph [ref=e102]: كانت جلسة التخطيط ثاقبة للغاية. لديّ الآن فهم أوضح لتوقعات منصب مدير التكنولوجيا.
+                  - paragraph [ref=e103]: "- خالد الغامدي on 6/24/2026"
+              - generic [ref=e104]:
+                - img [ref=e106]
+                - generic [ref=e108]:
+                  - paragraph [ref=e109]: يبدو أن خالداً منخرطاً، لكننا بحاجة إلى العمل على مرونته التعلمية في جوانب القيادة التقنية.
+                  - paragraph [ref=e110]: "- فاطمة المرزوق on 6/23/2026"
+            - generic [ref=e111]:
+              - heading "إضافة تأمل" [level=5] [ref=e112]
+              - textbox "ملاحظتك…" [ref=e113]
+              - generic [ref=e114]:
+                - generic [ref=e115]:
+                  - generic [ref=e116]: "المشاعر:"
+                  - generic [ref=e117]:
+                    - button [ref=e118] [cursor=pointer]:
+                      - img [ref=e119]
+                    - button [ref=e121] [cursor=pointer]:
+                      - img [ref=e122]
+                    - button [ref=e124] [cursor=pointer]:
+                      - img [ref=e125]
+                - button "إضافة ملاحظة" [disabled] [ref=e127]

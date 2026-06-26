@@ -1,0 +1,126 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: Leadership Succession
+    - navigation [ref=e6]:
+      - link "Dashboard" [ref=e128] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "Critical Functions" [ref=e129] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "Candidates" [ref=e130] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "AI insights" [ref=e131] [cursor=pointer]:
+        - /url: /organizations/org-acme/ai-insights
+      - link "Reflection logs" [ref=e132] [cursor=pointer]:
+        - /url: /organizations/org-acme/reflection-logs
+      - link "More (soon)" [ref=e133] [cursor=pointer]:
+        - /url: /organizations/org-acme/more
+        - text: More
+        - generic [ref=e13]: (soon)
+      - link "Settings" [ref=e134] [cursor=pointer]:
+        - /url: /organizations/org-acme/settings
+  - generic [ref=e15]:
+    - banner [ref=e16]:
+      - generic [ref=e17]:
+        - navigation [ref=e18]:
+          - button "Journey Timeline (Preview)" [disabled] [ref=e135]:
+            - img [ref=e20]
+          - button "Values Dashboard" [disabled] [ref=e136]:
+            - img [ref=e24]
+        - navigation [ref=e27]:
+          - link "Home" [ref=e137] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e29]: /
+          - link "Organizations":
+            - /url: /organizations
+          - generic [ref=e31]: /
+          - link "ACME Corporation":
+            - /url: /organizations/org-acme
+          - generic [ref=e33]: /
+          - generic: Reflection logs
+      - generic [ref=e35]:
+        - generic [ref=e37]:
+          - button "ACME Corporation" [ref=e138] [cursor=pointer]:
+            - img [ref=e39]
+            - generic [ref=e41]: ACME Corporation
+          - button "Organization" [ref=e139] [cursor=pointer]:
+            - img [ref=e43]
+        - generic [ref=e45]:
+          - generic [ref=e46]: Candidate
+          - combobox "Candidate" [ref=e140]:
+            - option "Select candidate" [disabled] [selected]
+            - option "Khalid Al-Ghamdi"
+            - option "Sara Mansour"
+            - option "Omar Abdullah"
+        - generic [ref=e48]:
+          - img [ref=e49]
+          - generic [ref=e51]: Role
+          - combobox "Role" [ref=e141]:
+            - option "Consultant" [selected]
+            - option "Organization Admin"
+            - option "HR Manager"
+            - option "Supervisor"
+            - option "Candidate"
+            - option "Viewer"
+        - button "Arabic" [active] [ref=e142] [cursor=pointer]:
+          - img [ref=e54]
+        - button "AI Advisor" [ref=e143] [cursor=pointer]:
+          - img [ref=e57]
+        - button "Notifications" [ref=e144] [cursor=pointer]:
+          - img [ref=e62]
+        - button "Log out" [ref=e145] [cursor=pointer]:
+          - img [ref=e66]
+    - main [ref=e69]:
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - heading "Reflection logs" [level=1] [ref=e146]
+            - generic [ref=e74]: ACME Corporation · Stage reflections and sentiment notes
+          - button "Back to dashboard" [ref=e147] [cursor=pointer]
+        - generic [ref=e77]:
+          - paragraph [ref=e78]: Journey stage
+          - generic [ref=e79]:
+            - button "Assessment & Planning STG1 · 2" [ref=e148] [cursor=pointer]:
+              - text: Assessment & Planning
+              - generic [ref=e81]: STG1 · 2
+            - button "Building & Development STG2 · 1" [ref=e149] [cursor=pointer]:
+              - text: Building & Development
+              - generic [ref=e83]: STG2 · 1
+            - button "Application & Evaluation STG3" [ref=e150] [cursor=pointer]:
+              - text: Application & Evaluation
+              - generic [ref=e85]: STG3
+            - button "Sustainability & Improvement STG4" [ref=e151] [cursor=pointer]:
+              - text: Sustainability & Improvement
+              - generic [ref=e87]: STG4
+        - generic [ref=e88]:
+          - generic [ref=e89]:
+            - generic [ref=e90]: STG1
+            - generic [ref=e91]: Assessment & Planning
+          - generic [ref=e92]:
+            - generic [ref=e93]:
+              - heading "Reflection log" [level=4] [ref=e152]
+              - button "Summarize reflections" [ref=e153] [cursor=pointer]
+            - generic [ref=e96]:
+              - generic [ref=e97]:
+                - img [ref=e99]
+                - generic [ref=e101]:
+                  - paragraph [ref=e102]: The planning session was very insightful. I have a clearer understanding of the expectations for the CTO role.
+                  - paragraph [ref=e103]: "- Khalid Al-Ghamdi on 6/24/2026"
+              - generic [ref=e104]:
+                - img [ref=e106]
+                - generic [ref=e108]:
+                  - paragraph [ref=e109]: Khalid seems engaged, but we need to work on his learning agility for the technical leadership aspects.
+                  - paragraph [ref=e110]: "- Fatima Al-Marzouq on 6/23/2026"
+            - generic [ref=e111]:
+              - heading "Add reflection" [level=5] [ref=e154]
+              - textbox "Your note…" [ref=e155]
+              - generic [ref=e114]:
+                - generic [ref=e115]:
+                  - generic [ref=e116]: "Sentiment:"
+                  - generic [ref=e117]:
+                    - button [ref=e118] [cursor=pointer]:
+                      - img [ref=e119]
+                    - button [ref=e121] [cursor=pointer]:
+                      - img [ref=e122]
+                    - button [ref=e124] [cursor=pointer]:
+                      - img [ref=e125]
+                - button "Add note" [disabled] [ref=e156]

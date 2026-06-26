@@ -1,13 +1,26 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeftIcon } from '@/components/icons/ArrowLeftIcon';
+import ReflectionLogView from '@/components/ReflectionLogView';
+import type { ReflectionLog } from '../../types';
 import type { BehavioralIndicatorKey, BehavioralIndicators } from '../lib/valuesData';
 import { behavioralIndicatorsFor, valueMirrorFor } from '../lib/valuesData';
+import {
+  currentJourneyStage,
+  legacyOrgId,
+  legacyUserForSession,
+  legacyUserIdForSession,
+  legacyUsersForOrg,
+  reflectionLogsForOrg,
+  reflectionTranslations,
+  toLegacyStage,
+} from '../lib/reflectionLogsData';
 import { useApp } from '../store/AppContext';
 import { useLanguage } from '../lib/i18n';
 import { can } from '../lib/permissions';
 import { computeReadiness, journeyProgress } from '../lib/selectors';
 import { Button } from '../ui/Button';
+import { Chip } from '../ui/Chip';
 import { PageHeader } from '../ui/PageHeader';
 import { ProgressBar } from '../ui/ProgressBar';
 
@@ -121,12 +134,64 @@ export const CandidateValuesDashboard: React.FC = () => {
     : undefined;
 
   const org = state.organizations.find((item) => item.id === orgId);
-  if (!org) return <Navigate to="/organizations" replace />;
-
   const candidate = state.candidates.find((item) => item.id === candId);
   const fn = candidate
     ? state.functions.find((item) => item.id === candidate.criticalFunctionId)
     : undefined;
+
+  const [addedLogs, setAddedLogs] = useState<ReflectionLog[]>([]);
+  const seedLogs = useMemo(
+    () => (org ? reflectionLogsForOrg(org.id, language) : []),
+    [org, language]
+  );
+  const logs = useMemo(() => [...addedLogs, ...seedLogs], [addedLogs, seedLogs]);
+  const currentStage = useMemo(
+    () => (candidate ? currentJourneyStage(candidate) : undefined),
+    [candidate]
+  );
+  const stageLogs = useMemo(
+    () => (currentStage ? logs.filter((log) => log.stage_code === currentStage.code) : []),
+    [logs, currentStage]
+  );
+  const allUsers = useMemo(
+    () => (org ? legacyUsersForOrg(org.id, language) : []),
+    [org, language]
+  );
+  const currentUser = useMemo(
+    () => legacyUserForSession(state.session.userId, language) ?? allUsers[0],
+    [state.session.userId, language, allUsers]
+  );
+  const legacyT = useMemo(() => reflectionTranslations(t), [t]);
+  const legacyOrg = org ? legacyOrgId(org.id) : undefined;
+
+  const onAddLog = useCallback(
+    (log: Omit<ReflectionLog, 'id' | 'timestamp'>) => {
+      const newLog: ReflectionLog = {
+        ...log,
+        id: Date.now(),
+        timestamp: new Date().toISOString(),
+        user_id: legacyUserIdForSession(state.session.userId),
+        org_id: legacyOrg ?? log.org_id,
+      };
+      setAddedLogs((prev) => [newLog, ...prev]);
+    },
+    [legacyOrg, state.session.userId]
+  );
+
+  const readiness = candidate && fn ? computeReadiness(candidate, fn) : 0;
+  const progress = candidate ? journeyProgress(candidate) : 0;
+  const valuesAlignment =
+    candidate?.scores.find((score) => score.criterionKey === 'values_alignment')?.value ?? 0;
+  const indicators = useMemo(
+    () => behavioralIndicatorsFor(candidate?.id ?? ''),
+    [candidate?.id]
+  );
+  const valueMirror = useMemo(
+    () => valueMirrorFor(progress, language),
+    [progress, language]
+  );
+
+  if (!org) return <Navigate to="/organizations" replace />;
 
   if (!candidate || candidate.organizationId !== org.id || !fn) {
     return <Navigate to={`/organizations/${org.id}/candidates`} replace />;
@@ -144,13 +209,7 @@ export const CandidateValuesDashboard: React.FC = () => {
   }
 
   const backToCandidate = `/organizations/${org.id}/candidates/${candidate.id}`;
-  const readiness = computeReadiness(candidate, fn);
-  const progress = journeyProgress(candidate);
-  const valuesAlignment =
-    candidate.scores.find((score) => score.criterionKey === 'values_alignment')?.value ?? 0;
-
-  const indicators = useMemo(() => behavioralIndicatorsFor(candidate.id), [candidate.id]);
-  const valueMirror = useMemo(() => valueMirrorFor(progress, language), [progress, language]);
+  const readOnly = activeRole === 'VIEWER';
 
   const labels: Record<BehavioralIndicatorKey, string> = {
     honesty: t('values.honesty'),
@@ -229,7 +288,31 @@ export const CandidateValuesDashboard: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {currentStage && legacyOrg !== undefined ? (
+          <div className="surface-card overflow-hidden p-1 lg:col-span-2">
+            <div className="mb-3 flex items-center gap-2 px-4 pt-4">
+              <Chip tone="info">{currentStage.code}</Chip>
+              <span className="text-sm font-medium text-[var(--text)]">{currentStage.name}</span>
+            </div>
+            <ReflectionLogView
+              stage={toLegacyStage(currentStage)}
+              logs={stageLogs}
+              allUsers={allUsers}
+              currentUser={currentUser}
+              orgId={legacyOrg}
+              onAddLog={onAddLog}
+              t={legacyT}
+              language={language}
+              disabled={readOnly}
+            />
+          </div>
+        ) : null}
       </div>
+
+      {readOnly ? (
+        <p className="text-center text-sm text-[var(--text-faint)]">{t('permissions.readOnly')}</p>
+      ) : null}
     </section>
   );
 };

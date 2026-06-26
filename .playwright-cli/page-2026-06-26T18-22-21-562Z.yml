@@ -1,0 +1,141 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب القيادي
+    - navigation [ref=e6]:
+      - link "لوحة التحكم" [ref=e7] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e8] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e9] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "رؤى الذكاء الاصطناعي" [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme/ai-insights
+      - link "المزيد (قريباً)" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/more
+        - text: المزيد
+        - generic [ref=e12]: (قريباً)
+      - link "الإعدادات" [ref=e13] [cursor=pointer]:
+        - /url: /organizations/org-acme/settings
+  - generic [ref=e14]:
+    - banner [ref=e15]:
+      - generic [ref=e16]:
+        - navigation [ref=e17]:
+          - button "الجدول الزمني للرحلة (معاينة)" [ref=e18] [cursor=pointer]:
+            - img [ref=e19]
+          - button "لوحة القيم" [ref=e22] [cursor=pointer]:
+            - img [ref=e23]
+        - generic [ref=e25]:
+          - navigation [ref=e26]:
+            - link "الرئيسية" [ref=e27] [cursor=pointer]:
+              - /url: /
+            - generic [ref=e28]: /
+            - link "المؤسسات" [ref=e29] [cursor=pointer]:
+              - /url: /organizations
+            - generic [ref=e30]: /
+            - link "شركة ACME" [ref=e31] [cursor=pointer]:
+              - /url: /organizations/org-acme
+            - generic [ref=e32]: /
+            - link "المرشحون" [ref=e33] [cursor=pointer]:
+              - /url: /organizations/org-acme/candidates
+            - generic [ref=e34]: /
+            - link "خالد الغامدي" [ref=e35] [cursor=pointer]:
+              - /url: /organizations/org-acme/candidates/cand-khalid
+            - generic [ref=e36]: /
+            - generic [ref=e37]: لوحة القيم
+          - generic [ref=e38]: خالد الغامدي
+      - generic [ref=e39]:
+        - generic [ref=e41]:
+          - button "شركة ACME" [ref=e42] [cursor=pointer]:
+            - img [ref=e43]
+            - generic [ref=e45]: شركة ACME
+          - button "المؤسسة" [ref=e46] [cursor=pointer]:
+            - img [ref=e47]
+        - generic [ref=e49]:
+          - generic [ref=e50]: المرشح
+          - combobox "المرشح" [ref=e51]:
+            - option "اختر مرشحاً" [disabled]
+            - option "خالد الغامدي" [selected]
+            - option "سارة منصور"
+            - option "عمر عبد الله"
+        - generic [ref=e52]:
+          - img [ref=e53]
+          - generic [ref=e55]: الدور
+          - combobox "الدور" [ref=e56]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e57] [cursor=pointer]:
+          - img [ref=e58]
+        - button "المستشار الذكي" [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+        - button "الإشعارات" [ref=e65] [cursor=pointer]:
+          - img [ref=e66]
+        - button "تسجيل الخروج" [ref=e69] [cursor=pointer]:
+          - img [ref=e70]
+    - main [ref=e73]:
+      - generic [ref=e74]:
+        - generic [ref=e75]:
+          - generic [ref=e76]:
+            - heading "لوحة القيم" [level=1] [ref=e77]
+            - generic [ref=e78]: مدير التكنولوجيا · خالد الغامدي
+          - button "العودة إلى المرشح" [ref=e80] [cursor=pointer]:
+            - generic [ref=e81]:
+              - img [ref=e82]
+              - text: العودة إلى المرشح
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - heading "المؤشرات السلوكية" [level=2] [ref=e86]
+            - img [ref=e88]:
+              - generic [ref=e100]: الأمانة
+              - generic [ref=e102]: الاحترام
+              - generic [ref=e104]: الابتكار
+              - generic [ref=e106]: التعاون
+              - generic [ref=e108]: المسؤولية
+          - generic [ref=e109]:
+            - generic [ref=e110]:
+              - heading "مرآة القيم" [level=2] [ref=e111]
+              - generic [ref=e112]:
+                - img "feedback emoji" [ref=e113]: 🌿
+                - paragraph [ref=e114]: “روح التعاون تنمو.”
+            - paragraph [ref=e115]: السجلات الأخيرة تبرز العمل الجماعي القوي والدعم المتبادل.
+          - generic [ref=e116]:
+            - heading "ملخص التوافق مع القيم" [level=2] [ref=e117]
+            - generic [ref=e118]:
+              - generic [ref=e119]:
+                - paragraph [ref=e120]: درجة التوافق مع القيم
+                - generic [ref=e125]: 70%
+                - paragraph [ref=e126]: 70%
+              - generic [ref=e127]:
+                - paragraph [ref=e128]: الجاهزية العامة
+                - generic [ref=e133]: 56%
+                - paragraph [ref=e134]: 56%
+          - generic [ref=e135]:
+            - generic [ref=e136]:
+              - generic [ref=e137]: STG2
+              - generic [ref=e138]: البناء والتطوير
+            - generic [ref=e139]:
+              - generic [ref=e140]:
+                - heading "سجل التأملات" [level=4] [ref=e141]
+                - button "تلخيص التأملات" [ref=e142] [cursor=pointer]
+              - generic [ref=e144]:
+                - img [ref=e146]
+                - generic [ref=e148]:
+                  - paragraph [ref=e149]: أواجه بعض الصعوبة في دورة هندسة السحابة، فهي أكثر تعقيداً مما توقعت.
+                  - paragraph [ref=e150]: "- خالد الغامدي on 6/25/2026"
+              - generic [ref=e151]:
+                - heading "إضافة تأمل" [level=5] [ref=e152]
+                - textbox "ملاحظتك…" [ref=e153]
+                - generic [ref=e154]:
+                  - generic [ref=e155]:
+                    - generic [ref=e156]: "المشاعر:"
+                    - generic [ref=e157]:
+                      - button [ref=e158] [cursor=pointer]:
+                        - img [ref=e159]
+                      - button [ref=e161] [cursor=pointer]:
+                        - img [ref=e162]
+                      - button [ref=e164] [cursor=pointer]:
+                        - img [ref=e165]
+                  - button "إضافة ملاحظة" [disabled] [ref=e167]

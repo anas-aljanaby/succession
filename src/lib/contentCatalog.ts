@@ -118,6 +118,63 @@ export const candidateContent: Record<
   },
 };
 
+export const reflectionLogContent: Record<number, { note: LocalizedText }> = {
+  1: {
+    note: {
+      en: 'The planning session was very insightful. I have a clearer understanding of the expectations for the CTO role.',
+      ar: 'كانت جلسة التخطيط ثاقبة للغاية. لديّ الآن فهم أوضح لتوقعات منصب مدير التكنولوجيا.',
+    },
+  },
+  2: {
+    note: {
+      en: "Khalid seems engaged, but we need to work on his learning agility for the technical leadership aspects.",
+      ar: 'يبدو أن خالداً منخرطاً، لكننا بحاجة إلى العمل على مرونته التعلمية في جوانب القيادة التقنية.',
+    },
+  },
+  3: {
+    note: {
+      en: 'The workshop was excellent and added a lot to my understanding of government policies.',
+      ar: 'ورشة العمل كانت ممتازة وأضافت لي الكثير في فهم السياسات الحكومية.',
+    },
+  },
+  4: {
+    note: {
+      en: 'Layla demonstrated strong analytical ability while drafting the new policy.',
+      ar: 'أظهرت ليلى قدرة عالية على التحليل أثناء صياغة السياسة الجديدة.',
+    },
+  },
+  5: {
+    note: {
+      en: "Struggling a bit with the cloud architecture course, it's more complex than I anticipated.",
+      ar: 'أواجه بعض الصعوبة في دورة هندسة السحابة، فهي أكثر تعقيداً مما توقعت.',
+    },
+  },
+  6: {
+    note: {
+      en: 'The initial planning meeting was productive; I look forward to starting the building and development phase.',
+      ar: 'اجتماع التخطيط الأولي كان مثمراً، أتطلع لبدء مرحلة البناء والتطوير.',
+    },
+  },
+  7: {
+    note: {
+      en: 'Abdullatif shows great enthusiasm but needs more focus on the financial side of leading non-profit organizations.',
+      ar: 'يُظهر عبد اللطيف حماساً كبيراً، لكنه بحاجة إلى تركيز أكبر على الجانب المالي في قيادة المنظمات غير الربحية.',
+    },
+  },
+};
+
+export const legacyUserContent: Record<string, { name: LocalizedText }> = {
+  '1': { name: { en: 'Dana Al-Mutairi', ar: 'دانا المطيري' } },
+  '2': { name: { en: 'Ahmed Al-Fahad', ar: 'أحمد الفهد' } },
+  '3': { name: { en: 'Fatima Al-Marzouq', ar: 'فاطمة المرزوق' } },
+  '4': { name: { en: 'Khalid Al-Ghamdi', ar: 'خالد الغامدي' } },
+  '5': { name: { en: 'Sultan Al-Otaibi', ar: 'سلطان العتيبي' } },
+  '6': { name: { en: 'Layla Al-Qahtani', ar: 'ليلى القحطاني' } },
+  '7': { name: { en: 'Nasser Al-Jasser', ar: 'ناصر الجاسر' } },
+  '8': { name: { en: 'Samira Adel', ar: 'سميرة عادل' } },
+  '9': { name: { en: 'Abdullatif Al-Kandari', ar: 'عبد اللطيف الكندري' } },
+};
+
 export const userContent: Record<string, { name: LocalizedText }> = {
   'u-consultant': { name: { en: 'Dana Al-Mutairi', ar: 'دانا المطيري' } },
   'u-admin': { name: { en: 'Ahmed Al-Fahad', ar: 'أحمد الفهد' } },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { AppProvider } from './store/AppContext';
 import { AppShell } from './shell/AppShell';
 import { Login } from './routes/Login';
@@ -20,6 +20,12 @@ import { OrgAiInsights } from './routes/OrgAiInsights';
 import { OrgSettings } from './routes/OrgSettings';
 import { SettingsLegacyRedirect } from './routes/Settings';
 
+const ReflectionLogsRedirect: React.FC = () => {
+  const { orgId } = useParams();
+  if (!orgId) return <Navigate to="/" replace />;
+  return <Navigate to={`/organizations/${orgId}/candidates`} replace />;
+};
+
 export const App: React.FC = () => {
   return (
     <AppProvider>
@@ -34,6 +40,11 @@ export const App: React.FC = () => {
             <Route path="/organizations/new" element={<OrganizationForm />} />
             <Route path="/organizations/:orgId" element={<OrganizationDashboard />} />
             <Route path="/organizations/:orgId/ai-insights" element={<OrgAiInsights />} />
+            <Route path="/organizations/:orgId/reflection-logs" element={<ReflectionLogsRedirect />} />
+            <Route
+              path="/organizations/:orgId/more/reflection-logs"
+              element={<ReflectionLogsRedirect />}
+            />
             <Route path="/organizations/:orgId/more" element={<ComingSoon />} />
             <Route path="/organizations/:orgId/more/:feature" element={<ComingSoon />} />
             <Route path="/organizations/:orgId/settings" element={<OrgSettings />} />
