@@ -17,7 +17,8 @@ import { CandidateValuesDashboard } from './routes/CandidateValuesDashboard';
 import { ComingSoon, ComingSoonLegacyRedirect } from './routes/ComingSoon';
 import { AiInsightsHub } from './routes/AiInsightsHub';
 import { OrgAiInsights } from './routes/OrgAiInsights';
-import { Settings } from './routes/Settings';
+import { OrgSettings } from './routes/OrgSettings';
+import { SettingsLegacyRedirect } from './routes/Settings';
 
 export const App: React.FC = () => {
   return (
@@ -35,6 +36,7 @@ export const App: React.FC = () => {
             <Route path="/organizations/:orgId/ai-insights" element={<OrgAiInsights />} />
             <Route path="/organizations/:orgId/more" element={<ComingSoon />} />
             <Route path="/organizations/:orgId/more/:feature" element={<ComingSoon />} />
+            <Route path="/organizations/:orgId/settings" element={<OrgSettings />} />
             <Route path="/organizations/:orgId/edit" element={<OrganizationForm />} />
 
             <Route path="/organizations/:orgId/functions" element={<FunctionsList />} />
@@ -54,7 +56,7 @@ export const App: React.FC = () => {
             />
 
             <Route path="/ai-insights" element={<AiInsightsHub />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/settings" element={<SettingsLegacyRedirect />} />
             <Route path="/coming-soon" element={<ComingSoonLegacyRedirect />} />
             <Route path="/coming-soon/ai-insights" element={<Navigate to="/ai-insights" replace />} />
             <Route path="/coming-soon/:feature" element={<ComingSoonLegacyRedirect />} />

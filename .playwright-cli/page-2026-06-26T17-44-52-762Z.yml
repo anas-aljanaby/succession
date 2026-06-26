@@ -1,0 +1,155 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]: التعاقب القيادي
+    - navigation [ref=e6]:
+      - link "لوحة التحكم" [ref=e7] [cursor=pointer]:
+        - /url: /organizations/org-acme
+      - link "الوظائف الحرجة" [ref=e8] [cursor=pointer]:
+        - /url: /organizations/org-acme/functions
+      - link "المرشحون" [ref=e9] [cursor=pointer]:
+        - /url: /organizations/org-acme/candidates
+      - link "رؤى الذكاء الاصطناعي" [ref=e10] [cursor=pointer]:
+        - /url: /organizations/org-acme/ai-insights
+      - link "المزيد (قريباً)" [ref=e11] [cursor=pointer]:
+        - /url: /organizations/org-acme/more
+        - text: المزيد
+        - generic [ref=e12]: (قريباً)
+      - link "الإعدادات" [ref=e13] [cursor=pointer]:
+        - /url: /organizations/org-acme/settings
+  - generic [ref=e14]:
+    - banner [ref=e15]:
+      - generic [ref=e16]:
+        - navigation [ref=e17]:
+          - button "الجدول الزمني للرحلة (معاينة)" [disabled] [ref=e18]:
+            - img [ref=e19]
+          - button "لوحة القيم" [disabled] [ref=e22]:
+            - img [ref=e23]
+        - navigation [ref=e26]:
+          - link "الرئيسية" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e28]: /
+          - link "المؤسسات" [ref=e29] [cursor=pointer]:
+            - /url: /organizations
+          - generic [ref=e30]: /
+          - link "شركة ACME" [ref=e31] [cursor=pointer]:
+            - /url: /organizations/org-acme
+          - generic [ref=e32]: /
+          - generic [ref=e33]: الإعدادات
+      - generic [ref=e34]:
+        - generic [ref=e36]:
+          - button "شركة ACME" [ref=e37] [cursor=pointer]:
+            - img [ref=e38]
+            - generic [ref=e40]: شركة ACME
+          - button "المؤسسة" [ref=e41] [cursor=pointer]:
+            - img [ref=e42]
+        - generic [ref=e44]:
+          - generic [ref=e45]: المرشح
+          - combobox "المرشح" [ref=e46]:
+            - option "اختر مرشحاً" [disabled] [selected]
+            - option "خالد الغامدي"
+            - option "سارة منصور"
+            - option "عمر عبد الله"
+        - generic [ref=e47]:
+          - img [ref=e48]
+          - generic [ref=e50]: الدور
+          - combobox "الدور" [ref=e51]:
+            - option "المستشار" [selected]
+            - option "مدير المؤسسة"
+            - option "مدير الموارد البشرية"
+            - option "المشرف"
+            - option "المرشح"
+            - option "مطّلع"
+        - button "English" [ref=e52] [cursor=pointer]:
+          - img [ref=e53]
+        - button "المستشار الذكي" [ref=e55] [cursor=pointer]:
+          - img [ref=e56]
+        - button "الإشعارات" [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+        - button "تسجيل الخروج" [ref=e64] [cursor=pointer]:
+          - img [ref=e65]
+    - main [ref=e68]:
+      - generic [ref=e69]:
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - heading "الإعدادات" [level=1] [ref=e72]
+            - generic [ref=e73]: شركة ACME · تفضيلات وإعدادات المؤسسة
+          - button "تعديل المؤسسة" [ref=e75] [cursor=pointer]
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - heading "ملف المؤسسة" [level=2] [ref=e78]
+            - generic [ref=e79]:
+              - generic [ref=e80]:
+                - term [ref=e81]: الاسم
+                - definition [ref=e82]: شركة ACME
+              - generic [ref=e83]:
+                - term [ref=e84]: القطاع
+                - definition [ref=e85]: التكنولوجيا
+              - generic [ref=e86]:
+                - term [ref=e87]: النوع
+                - definition [ref=e88]: شركات
+              - generic [ref=e89]:
+                - term [ref=e90]: مستوى النضج
+                - definition [ref=e91]: متطورة
+              - generic [ref=e92]:
+                - term [ref=e93]: الحالة
+                - definition [ref=e94]:
+                  - generic [ref=e95]: نشطة
+              - generic [ref=e96]:
+                - term [ref=e97]: تاريخ الإنشاء
+                - definition [ref=e98]: ١٨ مارس ٢٠٢٦
+            - generic [ref=e100]:
+              - term [ref=e101]: الوصف
+              - definition [ref=e102]: رائدة في حلول السحابة والبرمجيات المؤسسية.
+          - generic [ref=e103]:
+            - heading "معلومات الاتصال" [level=2] [ref=e104]
+            - generic [ref=e105]:
+              - generic [ref=e106]:
+                - term [ref=e107]: البريد الإلكتروني
+                - definition [ref=e108]: contact@acme.com
+              - generic [ref=e109]:
+                - term [ref=e110]: الهاتف
+                - definition [ref=e111]: +1-202-555-0149
+              - generic [ref=e112]:
+                - term [ref=e113]: العنوان
+                - definition [ref=e114]: 123 Tech Way, CA
+          - generic [ref=e115]:
+            - heading "برنامج التعاقب" [level=2] [ref=e116]
+            - generic [ref=e117]:
+              - generic [ref=e118]:
+                - term [ref=e119]: اللغة الافتراضية
+                - definition [ref=e120]: الإنجليزية
+              - generic [ref=e121]:
+                - term [ref=e122]: قالب الرحلة
+                - definition [ref=e123]: شركات
+              - generic [ref=e124]:
+                - term [ref=e125]: عتبة الجاهزية
+                - definition [ref=e126]: 85%
+              - generic [ref=e127]:
+                - term [ref=e128]: الافتراضي للمنصة
+                - definition [ref=e129]: 85%
+              - generic [ref=e130]:
+                - term [ref=e131]: الوظائف الحرجة
+                - definition [ref=e132]: "3"
+              - generic [ref=e133]:
+                - term [ref=e134]: المرشحون في المجموعة
+                - definition [ref=e135]: "3"
+              - generic [ref=e136]:
+                - term [ref=e137]: جاهزية المؤسسة
+                - definition [ref=e138]: 33%
+            - paragraph [ref=e139]: العتبة وقالب الرحلة قيم معاينة حسب نوع المؤسسة.
+          - generic [ref=e140]:
+            - heading "الإشعارات" [level=2] [ref=e141]
+            - generic [ref=e142]:
+              - generic [ref=e143]:
+                - term [ref=e144]: ملخص بريد أسبوعي
+                - definition [ref=e145]:
+                  - generic [ref=e146]: مفعّل
+              - generic [ref=e147]:
+                - term [ref=e148]: تذكيرات انتقال المراحل
+                - definition [ref=e149]:
+                  - generic [ref=e150]: مفعّل
+              - generic [ref=e151]:
+                - term [ref=e152]: مراجعة المستشار مطلوبة
+                - definition [ref=e153]:
+                  - generic [ref=e154]: معطّل
+            - paragraph [ref=e155]: تفضيلات الإشعارات معروضة للمعاينة. التعديل غير مفعّل بعد.

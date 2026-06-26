@@ -49,9 +49,14 @@ export const Sidebar: React.FC = () => {
               {t('nav.myJourney')}
             </NavLink>
           ) : null}
-          <NavLink to="/settings" className={linkClass}>
-            {t('nav.settings')}
-          </NavLink>
+          {ownCandidate ? (
+            <NavLink
+              to={`/organizations/${ownCandidate.organizationId}/settings`}
+              className={linkClass}
+            >
+              {t('nav.settings')}
+            </NavLink>
+          ) : null}
         </nav>
       </aside>
     );
@@ -82,6 +87,9 @@ export const Sidebar: React.FC = () => {
               {t('nav.more')}{' '}
               <span className="text-xs text-gray-500">({t('nav.soon')})</span>
             </NavLink>
+            <NavLink to={`/organizations/${orgId}/settings`} className={linkClass}>
+              {t('nav.settings')}
+            </NavLink>
           </>
         ) : (
           <>
@@ -89,15 +97,17 @@ export const Sidebar: React.FC = () => {
               {t('nav.home')}
             </NavLink>
             {activeRole === 'CONSULTANT' ? (
-              <NavLink to="/ai-insights" className={linkClass}>
-                {t('nav.aiInsights')}
-              </NavLink>
+              <>
+                <NavLink to="/ai-insights" className={linkClass}>
+                  {t('nav.aiInsights')}
+                </NavLink>
+                <NavLink to="/settings" className={linkClass}>
+                  {t('nav.settings')}
+                </NavLink>
+              </>
             ) : null}
           </>
         )}
-        <NavLink to="/settings" className={linkClass}>
-          {t('nav.settings')}
-        </NavLink>
       </nav>
     </aside>
   );
