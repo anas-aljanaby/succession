@@ -12,6 +12,8 @@ import { FunctionForm } from './routes/FunctionForm';
 import { FunctionDetail } from './routes/FunctionDetail';
 import { CandidatesList } from './routes/CandidatesList';
 import { CandidateDetail } from './routes/CandidateDetail';
+import { CandidateJourneyTimeline } from './routes/CandidateJourneyTimeline';
+import { CandidateValuesDashboard } from './routes/CandidateValuesDashboard';
 import { ComingSoon } from './routes/ComingSoon';
 import { Settings } from './routes/Settings';
 
@@ -37,6 +39,14 @@ export const App: React.FC = () => {
 
             <Route path="/organizations/:orgId/candidates" element={<CandidatesList />} />
             <Route path="/organizations/:orgId/candidates/:candId" element={<CandidateDetail />} />
+            <Route
+              path="/organizations/:orgId/candidates/:candId/journey-timeline"
+              element={<CandidateJourneyTimeline />}
+            />
+            <Route
+              path="/organizations/:orgId/candidates/:candId/values-dashboard"
+              element={<CandidateValuesDashboard />}
+            />
 
             <Route path="/settings" element={<Settings />} />
             <Route path="/coming-soon" element={<ComingSoon />} />

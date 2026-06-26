@@ -60,12 +60,16 @@ export const Topbar: React.FC<Props> = ({ activeRole, onRoleChange }) => {
 
   const openJourneyTimeline = () => {
     if (!routeOrgId || !routeCandidateId) return;
-    navigate(`/organizations/${routeOrgId}/candidates/${routeCandidateId}#journey`);
+    navigate(
+      `/organizations/${routeOrgId}/candidates/${routeCandidateId}/journey-timeline`
+    );
   };
 
   const openValuesDashboard = () => {
-    if (!hasJourneyContext) return;
-    navigate('/coming-soon/value-mirror');
+    if (!routeOrgId || !routeCandidateId) return;
+    navigate(
+      `/organizations/${routeOrgId}/candidates/${routeCandidateId}/values-dashboard`
+    );
   };
 
   return (
